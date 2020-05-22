@@ -1,5 +1,5 @@
 <template>
   <nav>
-    <h1>Navigation</h1>
+    <h1>Navigation is this</h1>
   </nav>
 </template>
