@@ -8,7 +8,20 @@
 <script>
 import Navigation from "./components/Navigation";
 export default {
-  components: { Navigation }
+  components: { Navigation },
+  computed: {
+    my_store: function() {
+      return this.$store.state;
+    }
+  },
+  watch: {
+    my_store: {
+      handler() {
+        localStorage.setItem("my_store", JSON.stringify(this.my_store));
+      },
+      deep: true
+    }
+  }
 };
 </script>
 
