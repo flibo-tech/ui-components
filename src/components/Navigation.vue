@@ -15,6 +15,12 @@
     <h4 @click="store.component = 'disliked'">
       Dislike Button
     </h4>
+    <h4 @click="store.component = 'back'">
+      Back Button
+    </h4>
+    <h4 @click="store.component = 'flibo'">
+      FLIBO
+    </h4>
     <br />
     <h1>Molecules</h1>
     <h4 @click="store.component = 'TwoButtons'">

@@ -1,26 +1,22 @@
 <template>
-  <button class="btn" :class="{ 'btn-dislikedd': disliked }" @click="myAction">
+  <button
+    class="btn"
+    :class="{ 'btn-disliked': isDisliked }"
+    @click="myAction()"
+  >
     <img src="./../../assets/icons/dislike-icon-white.svg" />
   </button>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 export default {
-  data() {
-    return {
-      disliked: false
-    };
+  computed: {
+    ...mapGetters(["isDisliked"])
   },
   methods: {
-    myAction() {
-      this.disliked = true;
-      setTimeout(() => {
-        this.reset();
-      }, 1000);
-    },
-    reset() {
-      this.disliked = false;
-    }
+    ...mapMutations(["myAction"])
   }
 };
 </script>
@@ -31,7 +27,7 @@ export default {
   border-radius: 50%;
   border: none;
 }
-.btn-dislikedd {
+.btn-disliked {
   animation-name: disliked-btn;
   animation-duration: 0.75s;
 }

@@ -1,26 +1,18 @@
 <template>
-  <button class="btn" :class="{ 'btn-liked': like }" @click="myAction">
+  <button class="btn" :class="{ 'btn-liked': isLiked }" @click="myAction()">
     <img src="./../../assets/icons/like-icon-white.svg" alt="" />
   </button>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 export default {
-  data() {
-    return {
-      like: false
-    };
+  computed: {
+    ...mapGetters(["isLiked"])
   },
   methods: {
-    myAction() {
-      this.like = true;
-      setTimeout(() => {
-        this.reset();
-      }, 1000);
-    },
-    reset() {
-      this.like = false;
-    }
+    ...mapMutations(["myAction"])
   }
 };
 </script>

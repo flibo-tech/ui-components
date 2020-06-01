@@ -1,26 +1,18 @@
 <template>
-  <button class="btn" :class="{ 'btn-loved': love }" @click="myAction">
+  <button class="btn" :class="{ 'btn-loved': isLoved }" @click="myAction()">
     <img src="./../../assets/icons/love-icon-white.svg" alt="" />
   </button>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 export default {
-  data() {
-    return {
-      love: false
-    };
+  computed: {
+    ...mapGetters(["isLoved"])
   },
   methods: {
-    myAction() {
-      this.love = true;
-      setTimeout(() => {
-        this.reset();
-      }, 1000);
-    },
-    reset() {
-      this.love = false;
-    }
+    ...mapMutations(["myAction"])
   }
 };
 </script>
