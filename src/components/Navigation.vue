@@ -6,6 +6,15 @@
     <h4 @click="store.component = 'Button'">
       Button
     </h4>
+    <h4 @click="store.component = 'liked'">
+      Like Button
+    </h4>
+    <h4 @click="store.component = 'loved'">
+      Love Button
+    </h4>
+    <h4 @click="store.component = 'disliked'">
+      Dislike Button
+    </h4>
     <br />
     <h1>Molecules</h1>
     <h4 @click="store.component = 'TwoButtons'">
@@ -24,3 +33,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+nav {
+  border: 1px solid slateblue;
+  margin-right: 20px;
+  padding: 3%;
+}
+</style>
