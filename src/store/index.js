@@ -21,6 +21,9 @@ export default new Vuex.Store({
     isDisliked: state => {
       if (state.component === "disliked") return state.active;
     },
+    isSeen: state => {
+      if (state.component === "notSeen") return state.active;
+    },
     back: state => {
       if (state.component === "back") return state.active;
     }
@@ -34,13 +37,14 @@ export default new Vuex.Store({
         state.active = !state.active;
       } else if (myAction === "disliked" && !state.active) {
         state.active = !state.active;
+      } else if (myAction === "notSeen" && !state.active) {
+        state.active = !state.active;
+      } else if (myAction === "back" && !state.active) {
+        state.active = !state.active;
       }
       setTimeout(() => {
         state.active = !state.active;
       }, 1000);
-    },
-    goBack: state => {
-      console.log(state.component);
     }
   },
   actions: {},

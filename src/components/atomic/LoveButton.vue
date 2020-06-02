@@ -1,6 +1,25 @@
 <template>
   <button class="btn" :class="{ 'btn-loved': isLoved }" @click="myAction()">
-    <img src="./../../assets/icons/love-icon-white.svg" alt="" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="50"
+      height="50"
+      viewBox="0 0 31.975 27.792"
+    >
+      <g
+        id="Group_184"
+        data-name="Group 184"
+        transform="translate(-439.125 -363.998)"
+        opacity="0.8"
+      >
+        <path
+          id="Path_180"
+          data-name="Path 180"
+          d="M455.118,391.79a.926.926,0,0,1-.625-.242L442.571,380.68c-4.864-4.864-4.065-10.722-.777-14.01,3.14-3.14,8.626-4.011,13.324.131,4.688-4.127,10.166-3.253,13.306-.112,3.288,3.287,4.093,9.139-.73,13.961l-.031.03-11.921,10.867A.923.923,0,0,1,455.118,391.79Zm-6.887-25.953a7.272,7.272,0,0,0-5.126,2.145c-2.555,2.555-3.411,7.2.746,11.358l11.267,10.268L466.4,379.325c4.13-4.143,3.267-8.773.715-11.325s-7.194-3.417-11.34.729a.926.926,0,0,1-1.311,0A8.818,8.818,0,0,0,448.231,365.837ZM467.039,380h0Z"
+          fill="#fff"
+        />
+      </g>
+    </svg>
   </button>
 </template>
 
@@ -31,11 +50,15 @@ export default {
 @keyframes love-btn {
   from {
     background-color: white;
-    transform: rotate(-45deg);
+    /* transform: rotate(-45deg); */
+    transform: translate(0px, 0px);
+    opacity: 0;
   }
   to {
     background-color: rgb(80, 82, 228);
-    transform: rotate(360deg);
+    /* transform: rotate(360deg); */
+    transform: translate(0px, 10px);
+    opacity: 0.75;
   }
 }
 </style>
