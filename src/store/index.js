@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     component: my_store ? my_store.component : null,
     // for dynamic CSS Animation
-    active: false
+    active: false,
+    default: false
   },
   getters: {
     isLiked: state => {

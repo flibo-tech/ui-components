@@ -40,6 +40,7 @@ export default {
   padding: 10px;
   border-radius: 50%;
   border: none;
+  background-color: rgba(107, 107, 107, 0.1);
 }
 .btn-disliked {
   animation-name: disliked-btn;
@@ -49,12 +50,10 @@ export default {
 @keyframes disliked-btn {
   from {
     transform: translate(0px, 0px);
-    opacity: 0;
   }
   to {
-    background-color: rgb(243, 98, 98);
-
     transform: translate(10px, -5px);
+    background-color: rgb(243, 98, 98);
     opacity: 0.75;
   }
 }

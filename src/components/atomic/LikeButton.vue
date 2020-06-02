@@ -36,6 +36,7 @@ export default {
   padding: 10px;
   border-radius: 50%;
   border: none;
+  background-color: rgba(107, 107, 107, 0.1);
 }
 .btn-liked {
   animation-name: like-btn;
@@ -44,9 +45,7 @@ export default {
 
 @keyframes like-btn {
   from {
-    background-color: white;
     transform: translate(0px, 0px);
-    opacity: 0;
   }
   to {
     background-color: lightgreen;

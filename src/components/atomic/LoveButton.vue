@@ -41,6 +41,7 @@ export default {
   padding: 10px;
   border-radius: 50%;
   border: none;
+  background-color: rgba(107, 107, 107, 0.1);
 }
 .btn-loved {
   animation-name: love-btn;
@@ -49,16 +50,12 @@ export default {
 
 @keyframes love-btn {
   from {
-    background-color: white;
-    /* transform: rotate(-45deg); */
     transform: translate(0px, 0px);
-    opacity: 0;
   }
   to {
-    background-color: rgb(80, 82, 228);
-    /* transform: rotate(360deg); */
     transform: translate(0px, 10px);
     opacity: 0.75;
+    background-color: rgb(80, 82, 228);
   }
 }
 </style>

@@ -25,7 +25,8 @@ export default {
   background-color: rgb(172, 172, 172);
   border-radius: 25px;
   border: none;
-  color: #fff;
+  background-color: rgba(107, 107, 107, 0.1);
+  color: rgba(255, 255, 255, 0.1);
 }
 
 .btn-seen {
@@ -36,15 +37,11 @@ export default {
 @keyframes seen-btn {
   from {
     transform: translateY(0px);
-    opacity: 0;
   }
   to {
-    background-color: rgb(102, 102, 102);
-
-    color: rgb(207, 207, 207);
     transform: translateY(-10px);
-
-    opacity: 0.75;
+    background-color: rgba(102, 102, 102, 0.75);
+    color: rgba(207, 207, 207, 0.75);
   }
 }
 </style>
