@@ -1,9 +1,9 @@
 <template>
-  <button class="btn" :class="{ 'btn-loved': isLoved }" @click="myAction()">
+  <button class="btn" :class="{ 'btn-loved': isLoved }" @click="myAction">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="50"
-      height="50"
+      width="27.4"
+      height="23.8"
       viewBox="0 0 31.975 27.792"
     >
       <g
@@ -42,6 +42,8 @@ export default {
   border-radius: 50%;
   border: none;
   background-color: rgba(107, 107, 107, 0.1);
+  width: 56px;
+  height: 56px;
 }
 .btn-loved {
   animation-name: love-btn;
@@ -54,8 +56,7 @@ export default {
   }
   to {
     transform: translate(0px, 10px);
-    opacity: 0.75;
-    background-color: rgb(80, 82, 228);
+    background-color: #7352ff;
   }
 }
 </style>

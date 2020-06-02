@@ -4,29 +4,35 @@
     <br />
     <hr />
     <h1>ATOMICS</h1>
-    <h4 class="tab" @click="store.component = 'notSeen'">
-      Haven't Seen
+    <h4 class="nav-item" @click="store.component = 'start'">
+      Start Rating
     </h4>
-    <h4 class="tab" @click="store.component = 'liked'">
+    <h4 class="nav-item" @click="store.component = 'progressBar'">
+      Progress Bar
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'liked'">
       Like Button
     </h4>
-    <h4 class="tab" @click="store.component = 'loved'">
+    <h4 class="nav-item" @click="store.component = 'loved'">
       Love Button
     </h4>
-    <h4 class="tab" @click="store.component = 'disliked'">
+    <h4 class="nav-item" @click="store.component = 'disliked'">
       Dislike Button
     </h4>
-    <h4 class="tab" @click="store.component = 'back'">
+    <h4 class="nav-item" @click="store.component = 'back'">
       Back Button
     </h4>
-    <h4 class="tab" @click="store.component = 'flibo'">
+    <h4 class="nav-item" @click="store.component = 'notSeen'">
+      Haven't Seen
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'flibo'">
       FLIBO
     </h4>
     <br />
     <hr />
     <h1>MOLECUES</h1>
-    <h4 class="tab" @click="store.component = 'TwoButtons'">
-      TwoButtons
+    <h4 class="nav-item" @click="store.component = 'Card'">
+      Card
     </h4>
   </nav>
 </template>
@@ -50,7 +56,7 @@ nav {
   padding: 3%;
 }
 
-.tab {
+.nav-item {
   padding: 5px 5px;
   margin: 5px;
   height: 25px;

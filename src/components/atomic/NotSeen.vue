@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="{ 'btn-seen': isSeen }" @click="myAction()">
+  <button class="btn" :class="{ 'btn-seen': isSeen }" @click="myAction">
     HAVEN'T SEEN
   </button>
 </template>
@@ -20,13 +20,15 @@ export default {
 
 <style scoped>
 .btn {
-  width: 150px;
+  width: 140px;
+  height: 50px;
   padding: 7%;
-  background-color: rgb(172, 172, 172);
+  background-color: #585a65;
   border-radius: 25px;
   border: none;
-  background-color: rgba(107, 107, 107, 0.1);
-  color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  opacity: 0.8;
+  font-size: 13px;
 }
 
 .btn-seen {
@@ -40,8 +42,8 @@ export default {
   }
   to {
     transform: translateY(-10px);
-    background-color: rgba(102, 102, 102, 0.75);
-    color: rgba(207, 207, 207, 0.75);
+    background-color: #585a65;
+    opacity: 1;
   }
 }
 </style>

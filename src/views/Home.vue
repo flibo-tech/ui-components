@@ -4,35 +4,41 @@
       This website contains all the components (atomic &amp; molecular) used in
       FLIBO.
     </div>
-    <FLIBO class="atomic" v-if="store.component == 'flibo'" />
-    <NotSeen class="atomic" v-if="store.component == 'notSeen'" />
+    <StartRating class="atomic" v-if="store.component == 'start'" />
+    <ProgressBar class="atomic" v-if="store.component == 'progressBar'" />
     <LikeButton class="atomic" v-if="store.component == 'liked'" />
     <LoveButton class="atomic" v-if="store.component == 'loved'" />
     <DislikeButton class="atomic" v-if="store.component == 'disliked'" />
     <BackButton class="atomic" v-if="store.component == 'back'" />
-    <TwoButtons class="atomic" v-if="store.component == 'TwoButtons'" />
+    <NotSeen class="atomic" v-if="store.component == 'notSeen'" />
+    <FLIBO class="atomic" v-if="store.component == 'flibo'" />
+    <Card class="atomic" v-if="store.component == 'Card'" />
   </div>
 </template>
 
 <script>
+import StartRating from "./../components/atomic/StartRating";
 import FLIBO from "./../components/atomic/FliboLogo";
-import NotSeen from "./../components/atomic/NotSeen";
 import LikeButton from "./../components/atomic/LikeButton";
 import LoveButton from "./../components/atomic/LoveButton";
 import DislikeButton from "./../components/atomic/DislikeButton";
+import NotSeen from "./../components/atomic/NotSeen";
 import BackButton from "./../components/atomic/BackButton";
-import TwoButtons from "./../components/molecular/TwoButtons";
+import ProgressBar from "./../components/atomic/ProgressBar";
+import Card from "./../components/molecular/Card";
 
 export default {
   name: "Home",
   components: {
+    StartRating,
     FLIBO,
-    NotSeen,
     LikeButton,
     LoveButton,
     DislikeButton,
     BackButton,
-    TwoButtons
+    NotSeen,
+    Card,
+    ProgressBar
   },
   data() {
     return {

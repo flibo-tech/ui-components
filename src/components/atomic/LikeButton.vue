@@ -1,9 +1,9 @@
 <template>
-  <button class="btn" :class="{ 'btn-liked': isLiked }" @click="myAction()">
+  <button class="btn" :class="{ 'btn-liked': isLiked }" @click="myAction">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="50"
-      height="50"
+      width="27"
+      height="27"
       viewBox="0 0 30.53 30.5"
     >
       <path
@@ -22,6 +22,7 @@
 import { mapGetters } from "vuex";
 import { mapMutations } from "vuex";
 export default {
+  name: "LikeButton",
   computed: {
     ...mapGetters(["isLiked"])
   },
@@ -37,6 +38,8 @@ export default {
   border-radius: 50%;
   border: none;
   background-color: rgba(107, 107, 107, 0.1);
+  width: 56px;
+  height: 56px;
 }
 .btn-liked {
   animation-name: like-btn;
@@ -48,9 +51,8 @@ export default {
     transform: translate(0px, 0px);
   }
   to {
-    background-color: lightgreen;
+    background-color: #7aa86c;
     transform: translate(-10px, -5px);
-    opacity: 0.75;
   }
 }
 </style>

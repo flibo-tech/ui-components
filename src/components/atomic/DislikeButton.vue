@@ -1,13 +1,9 @@
 <template>
-  <button
-    class="btn"
-    :class="{ 'btn-disliked': isDisliked }"
-    @click="myAction()"
-  >
+  <button class="btn" :class="{ 'btn-disliked': isDisliked }" @click="myAction">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="50"
-      height="50"
+      width="27"
+      height="27"
       viewBox="0 0 30.53 30.5"
     >
       <path
@@ -41,6 +37,8 @@ export default {
   border-radius: 50%;
   border: none;
   background-color: rgba(107, 107, 107, 0.1);
+  width: 56px;
+  height: 56px;
 }
 .btn-disliked {
   animation-name: disliked-btn;
@@ -53,8 +51,7 @@ export default {
   }
   to {
     transform: translate(10px, -5px);
-    background-color: rgb(243, 98, 98);
-    opacity: 0.75;
+    background-color: #d65050;
   }
 }
 </style>
