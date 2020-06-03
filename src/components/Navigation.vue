@@ -5,7 +5,10 @@
     <hr />
     <h1>ATOMICS</h1>
     <h4 class="nav-item" @click="store.component = 'start'">
-      Start Rating
+      Start Rating Button
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'rating'">
+      Rating
     </h4>
     <h4 class="nav-item" @click="store.component = 'progressBar'">
       Progress Bar

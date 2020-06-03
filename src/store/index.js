@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import counter from "./modules/counter";
+
 Vue.use(Vuex);
 
 var my_store = JSON.parse(localStorage.getItem("my_store"));
@@ -76,5 +78,8 @@ export default new Vuex.Store({
     direction: ({ commit }, payload) => {
       commit("cardAction", payload);
     }
+  },
+  modules: {
+    counter
   }
 });

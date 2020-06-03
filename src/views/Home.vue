@@ -5,6 +5,7 @@
       FLIBO.
     </div>
     <StartRating class="atomic" v-if="store.component == 'start'" />
+    <Rated class="atomic" v-if="store.component == 'rating'" />
     <ProgressBar class="atomic" v-if="store.component == 'progressBar'" />
     <LikeButton class="atomic" v-if="store.component == 'liked'" />
     <LoveButton class="atomic" v-if="store.component == 'loved'" />
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+import Rated from "./../components/atomic/Rated";
 import StartRating from "./../components/atomic/StartRating";
 import FLIBO from "./../components/atomic/FliboLogo";
 import LikeButton from "./../components/atomic/LikeButton";
@@ -38,6 +40,7 @@ export default {
     BackButton,
     NotSeen,
     Card,
+    Rated,
     ProgressBar
   },
   data() {
@@ -49,8 +52,8 @@ export default {
 </script>
 
 <style scoped>
-.home {
+/* .home {
   margin: auto;
   text-align: center;
-}
+} */
 </style>
