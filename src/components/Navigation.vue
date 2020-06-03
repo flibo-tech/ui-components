@@ -4,7 +4,13 @@
     <br />
     <hr />
     <h1>ATOMICS</h1>
-    <h4 class="nav-item" @click="store.component = 'start'">
+    <h4 class="nav-item" @click="store.component = 'googleButton'">
+      Google SignIn
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'facebookButton'">
+      FaceBook SignIn
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'startButton'">
       Start Rating Button
     </h4>
     <h4 class="nav-item" @click="store.component = 'rating'">
@@ -27,6 +33,9 @@
     </h4>
     <h4 class="nav-item" @click="store.component = 'notSeen'">
       Haven't Seen
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'card'">
+      Card Default
     </h4>
     <h4 class="nav-item" @click="store.component = 'flibo'">
       FLIBO
@@ -53,6 +62,7 @@ export default {
 
 <style scoped>
 nav {
+  width: 200px;
   text-align: center;
   border-right: 2px solid rgb(235, 142, 75);
   margin-right: 20px;
@@ -62,10 +72,10 @@ nav {
 .nav-item {
   padding: 5px 5px;
   margin: 5px;
-  height: 25px;
+  height: 15px;
   border: none;
   border-radius: 10px;
-  background-color: rgb(240, 158, 158);
+  background-color: rgb(241, 228, 228);
   color: rgb(73, 55, 55);
 }
 

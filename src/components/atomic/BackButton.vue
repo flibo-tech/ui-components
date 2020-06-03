@@ -2,8 +2,8 @@
   <button class="btn" :class="{ 'btn-back': back }" @click="myAction()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="50"
-      height="50"
+      width="20"
+      height="15"
       viewBox="0 0 492 492"
     >
       <path
@@ -34,9 +34,9 @@ svg {
   fill: rgb(172, 172, 172);
 }
 .btn {
-  padding: 10px;
+  padding: 5px 5px;
   border-radius: 50%;
-  background-color: rgb(46, 46, 46);
+  background-color: rgba(107, 107, 107, 0.1);
   border: none;
 }
 

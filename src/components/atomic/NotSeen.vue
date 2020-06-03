@@ -21,9 +21,9 @@ export default {
 <style scoped>
 .btn {
   width: 140px;
-  height: 50px;
-  padding: 7%;
-  background-color: #585a65;
+  height: 35px;
+  padding: 3px;
+  background-color: rgba(107, 107, 107, 0.1);
   border-radius: 25px;
   border: none;
   color: #fff;

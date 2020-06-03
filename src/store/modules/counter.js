@@ -1,6 +1,5 @@
 const state = {
-  counter: 5,
-  min_rating_completed: false
+  counter: 5
 };
 
 const getters = {
@@ -13,9 +12,6 @@ const mutations = {
   increase: state => {
     if (state.counter < 25) {
       state.counter += 1;
-    }
-    if (state.counter > 5) {
-      state.min_rating_completed = true;
     }
   }
 };
