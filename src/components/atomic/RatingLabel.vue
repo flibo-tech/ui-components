@@ -1,9 +1,8 @@
 <template>
-    <div :class="checkRating(randomRating, randomStatus)">
+    <div :class="checkRating(rating, active)">
 <!-- Text will be shown instead of SVG icon for Haven't Seen button -->
-      <p v-if="randomRating === 'hseen'"> Haven't Seen </p>    
+      <p v-if="rating === 'haventSeen'"> Haven't Seen </p>    
     </div>
-    
 </template>
 
 <script>
@@ -12,39 +11,39 @@ export default {
 
   methods: {
 // To check which css class will be binded with div
-//randomRating and randomStatus are props given by SwipeTest.vue
-    checkRating(randomRating, randomStatus) {
+//rating and active are props given by SwipeTest.vue
+    checkRating(rating, active) {
       let ratingClass = ''
-      if (randomRating === 'liked') {
-        if (randomStatus === true) {
+      if (rating === 'liked') {
+        if (active === true) {
           ratingClass = 'liked-swiped'
         }
         else {
           ratingClass = 'liked'
         }
       }
-      else if (randomRating === 'disliked') {
-        if (randomStatus === true) {
+      else if (rating === 'disliked') {
+        if (active === true) {
           ratingClass = 'disliked-swiped'
         }
         else {
           ratingClass = 'disliked'
         }
       }
-      if (randomRating === 'loved') {
-        if (randomStatus === true) {
+      if (rating === 'loved') {
+        if (active === true) {
           ratingClass = 'loved-swiped'
         }
         else {
           ratingClass = 'loved'
         }
       }
-      if (randomRating === 'hseen') {
-        if (randomStatus === true) {
-          ratingClass = 'hseen-swiped'
+      if (rating === 'haventSeen') {
+        if (active === true) {
+          ratingClass = 'haventSeen-swiped'
         }
         else {
-          ratingClass = 'hseen'
+          ratingClass = 'haventSeen'
         }
       }
       return ratingClass;
@@ -52,11 +51,11 @@ export default {
   },
 
   props: {
-    randomRating: {
-      //Both types should be defined because in the intial stage randomRating was an array which was then parsed into String
+    rating: {
+      //Both types should be defined because in the intial stage rating was an array which was then parsed into String
       type: [Array, String]
     },
-    randomStatus: {
+    active: {
       type: Boolean,
       default: false
     }
@@ -146,7 +145,7 @@ div p {
 }
 
 /* Haven't Seen + Haven't Seen active */
-.hseen {
+.haventSeen {
   border-radius: 15px;
   background-color: black;
   color: white;
@@ -155,7 +154,7 @@ div p {
   height: 30px;
   background-size: 30px 30px;
 }
-.hseen-swiped {
+.haventSeen-swiped {
   border-radius: 15px;
   background-color: rgb(0, 0, 0);
   opacity: 0.8;

@@ -1,8 +1,8 @@
 <template>
       <div>
             <RatingLabel 
-                  :randomRating="randomRating"
-                  :randomStatus="randomStatus"
+                  :rating="randomRating"
+                  :active="randomStatus"
                   
             />
       </div>
