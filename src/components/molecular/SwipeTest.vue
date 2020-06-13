@@ -2,6 +2,8 @@
       <div>
             <RatingLabel 
                   :randomRating="randomRating"
+                  :randomStatus="randomStatus"
+                  
             />
       </div>
 </template>
@@ -18,11 +20,14 @@ export default {
       data() {
             return {
                   randomRating: [],
+                  randomStatus: null,
             }
       },
 
       mounted() {
-                  this.randomRating = this.rating[Math.floor(Math.random()* 4)] 
+// For preview purpose. Rating and Status are being randomize
+                  this.randomRating = this.rating[Math.floor(Math.random()* 4)]
+                  this.randomStatus = Math.random() >= 0.5;
       },
 
       computed: mapState(['rating'])

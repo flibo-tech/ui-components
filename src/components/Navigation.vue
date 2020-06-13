@@ -6,17 +6,14 @@
     <h4 class="nav-item" @click="store.component = 'Button'" >
       Button
     </h4>
-     <h4 class="nav-item" @click="store.component = 'RatingLabel'" >
-      Raing Label
+     <h4 class="nav-item" @click="store.component = 'SwipeTest'">
+      Swipe Test
     </h4>
     
     <br />
     <h1>Molecules</h1>
-    <h4 @click="store.component = 'TwoButtons'">
+    <h4 class="nav-item" @click="store.component = 'TwoButtons'">
       TwoButtons
-    </h4>
-    <h4 @click="store.component = 'SwipeTest'">
-      Swipe Test
     </h4>
     
   </nav>
