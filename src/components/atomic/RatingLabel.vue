@@ -52,8 +52,7 @@ export default {
 
   props: {
     rating: {
-      //Both types should be defined because in the intial stage rating was an array which was then parsed into String
-      type: [Array, String]
+      type: String
     },
     active: {
       type: Boolean,
@@ -70,6 +69,12 @@ div p {
   text-align: center;
   padding-top: 0.3rem;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+  transition-property: background-color, opacity, border-radius;
+  transition-timing-function: linear;
+  transition-duration: 0.5s;
 }
 
 /* Liked + Liked-active */
@@ -155,7 +160,7 @@ div p {
   background-size: 30px 30px;
 }
 .haventSeen-swiped {
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: rgb(0, 0, 0);
   opacity: 0.8;
   width: 120px;

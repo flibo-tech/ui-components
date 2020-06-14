@@ -6,20 +6,22 @@
     </div>
     <Button v-if="store.component == 'Button'" />
     <RatingLabel v-if="store.component == 'RatingLabel'" />
-    <TwoButtons v-if="store.component == 'TwoButtons'" />
+    <ButtonTest v-if="store.component == 'ButtonTest'" />
     <SwipeTest v-if="store.component == 'SwipeTest'" />
+    <SwipeTestPreview v-if="store.component == 'SwipeTestPreview'" />
   </div>
 </template>
 
 <script>
 import Button from "./../components/atomic/Button";
 import RatingLabel from "./../components/atomic/RatingLabel";
-import TwoButtons from "./../components/molecular/TwoButtons";
+import ButtonTest from "./../components/molecular/ButtonTest";
 import SwipeTest from "./../components/molecular/SwipeTest";
+import SwipeTestPreview from "./../components/molecular/SwipeTestPreview";
 
 export default {
   name: "Home",
-  components: { Button, TwoButtons, RatingLabel, SwipeTest },
+  components: { Button, ButtonTest, RatingLabel, SwipeTest, SwipeTestPreview },
   data() {
     return {
       store: this.$store.state

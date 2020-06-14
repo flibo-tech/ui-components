@@ -9,11 +9,14 @@
      <h4 class="nav-item" @click="store.component = 'SwipeTest'">
       Swipe Test
     </h4>
+    <h4 class="nav-item" @click="store.component = 'ButtonTest'">
+      Button Test
+    </h4>
     
     <br />
     <h1>Molecules</h1>
-    <h4 class="nav-item" @click="store.component = 'TwoButtons'">
-      TwoButtons
+    <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">
+      Swipe Test Preview
     </h4>
     
   </nav>
