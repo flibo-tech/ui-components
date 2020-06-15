@@ -5,6 +5,7 @@
       :buttonType="buttonType"
       :loading="loading"
       :disabled="disabled"
+      v-on:clicked="buttonClicked"
       />
 </template>
 
@@ -20,8 +21,14 @@ export default {
                   text: "Let's Discover",
                   icon: "",
                   buttonType: "primary",
-                  loading: false,
-                  disabled: false,     
+                  loading: true,
+                  disabled: false,   
+            }
+      },
+
+      methods: {
+            buttonClicked() {
+                  alert('Button Clicked')
             }
       }
 }
