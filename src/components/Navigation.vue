@@ -18,7 +18,9 @@
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">
       Swipe Test Preview
     </h4>
-    
+    <h4 class="nav-item" @click="store.component = 'ButtonTestPreview'">
+      Button Test Preview
+    </h4>
   </nav>
 </template>
 

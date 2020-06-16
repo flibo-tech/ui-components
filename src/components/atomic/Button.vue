@@ -1,6 +1,6 @@
 <template>
   <button 
-    :class="[checkType(buttonType), checkIcon(icon), checkDisabled(buttonType, disabled)]"
+    :class="[checkType(buttonType), checkIcon(icon)]"
     :disabled="disabled"
     @click="$emit('clicked'); buttonClicked();"
   >
@@ -79,51 +79,70 @@ export default {
       }
     },
 
-    checkDisabled(buttonType, disabled) {
-      let disabledClass = '';
-      if (buttonType === 'primary' && disabled) {
-        disabledClass = 'primaryDisabled'
-      }
-      else if (buttonType === 'secondary' && disabled) {
-        disabledClass = 'secondaryDisabled'
-      }
-      else if (buttonType === 'textOnly' && disabled) {
-        disabledClass = 'textOnlyDisabled'
-      }
-      else if (buttonType === 'iconOnly' && disabled) {
-        disabledClass = 'iconOnlyDisabled'
-      }
-      return disabledClass;
-    }
+    // checkDisabled(buttonType, disabled) {
+    //   let disabledClass = '';
+    //   if (buttonType === 'primary' && disabled) {
+    //     disabledClass = 'primaryDisabled'
+    //   }
+    //   else if (buttonType === 'secondary' && disabled) {
+    //     disabledClass = 'secondaryDisabled'
+    //   }
+    //   else if (buttonType === 'textOnly' && disabled) {
+    //     disabledClass = 'textOnlyDisabled'
+    //   }
+    //   else if (buttonType === 'iconOnly' && disabled) {
+    //     disabledClass = 'iconOnlyDisabled'
+    //   }
+    //   return disabledClass;
+    // }
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$border-radius: 5px;
+$primary-color: #7352ff;
+$textOnly-color: #adadad;
+
+button {
+  font-family: 'Roboto', sans-serif; 
+  font-weight: medium;
+}
 .primary {
   border: none;
-  border-radius: 15px;
+  border-radius: $border-radius;
   width: 300px;
-  height: 40px;
+  height: 48px;
   color: white;
-  background-color: blueviolet;
+  font-size: 14px;
+  min-width: 100px;
+  background-color: $primary-color;
   cursor: pointer;
+  transition-property: background-color;
+  transition-timing-function:ease-out;
+  transition-duration: 0.5s;
 }
-.primaryDisabled {
+.primary:active {
+  background-color: #3c20b8;
+}
+.primary:disabled {
   cursor: auto;
   background-color: grey;
 }
 
 .secondary {
-  border: 2px solid rgb(31, 18, 105);
-  border-radius: 15px;
+  font-family: 'Roboto', sans-serif; 
+  font-weight: medium;
+  border: 2px solid $primary-color;
+  border-radius: $border-radius;
+  font-size: 14px;
+  min-width: 100px;
   width: 300px;
-  height: 40px;
-  background-color: rgb(105, 190, 216);
-  color: blueviolet;
+  height: 48px;
+  color: $primary-color;
   cursor: pointer;
 }
-.secondaryDisabled {
+.secondary:disabled {
   cursor: auto;
   color: white;
   border-color: rgb(36, 36, 36);
@@ -132,10 +151,18 @@ export default {
 
 .textOnly {
   border: none;
-  color: blueviolet;
+  background-color: Transparent;
+  font-size: 13px;
+  color: $textOnly-color;
   cursor: pointer;
+  transition-property: color;
+  transition-timing-function:ease-out;
+  transition-duration: 0.5s;
 }
-.textOnlyDisabled {
+.textOnly:active {
+  color: white;
+}
+.textOnly:disabled {
   cursor: auto;
   color: grey;
 }
@@ -146,7 +173,7 @@ export default {
   height: 25px;
   cursor: pointer;
 }
-.iconOnlyDisabled {
+.iconOnly:disabled {
   cursor: auto;
 }
 

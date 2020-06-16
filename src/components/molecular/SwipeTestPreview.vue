@@ -1,9 +1,15 @@
 <template>
-  <div style="width:300px; margin: auto;">
+  <div style="width:300px;">
     <RatingLabel :rating="rating[0]" :active="activeLiked" style="margin: auto;" />
     <RatingLabel :rating="rating[1]" :active="activeDisliked" style="float: right;" />
     <RatingLabel :rating="rating[2]" :active="activeLoved" />
     <RatingLabel :rating="rating[3]" :active="activehaventSeen" style="margin: auto;" />
+
+    <h3>Props/Events</h3>
+    <pre>
+1. rating - liked / disliked / loved / haventSeen
+2. active - true / false
+    </pre>
   </div>
 </template>
 

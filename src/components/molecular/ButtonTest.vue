@@ -18,17 +18,17 @@ export default {
 
       data() {
             return {
-                  text: "Let's Discover",
+                  text: "Start Rating",
                   icon: "",
-                  buttonType: "primary",
-                  loading: true,
+                  buttonType: "textOnly",
+                  loading: false,
                   disabled: false,   
             }
       },
 
       methods: {
             buttonClicked() {
-                  alert('Button Clicked')
+                  console.log('Button Clicked')
             }
       }
 }

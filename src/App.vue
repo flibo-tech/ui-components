@@ -29,8 +29,12 @@ export default {
 .f-container {
   display: grid;
   grid-template-columns: 300px 1fr;
-  color: rgb(85, 60, 6);
-  border: 5px solid rgb(235, 142, 75);
-  background-color: #f1f1f1;
+  color: rgb(255, 255, 255);
+  border: 5px solid rgb(0, 0, 0);
+  background-color: #272431;
 }
+</style>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 </style>

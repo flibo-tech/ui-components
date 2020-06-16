@@ -8,6 +8,15 @@
 <script>
 export default {
   name: "RatingLabel",
+   props: {
+    rating: {
+      type: String
+    },
+    active: {
+      type: Boolean,
+      default: false
+    }
+  },
 
   methods: {
 // To check which css class will be binded with div
@@ -50,15 +59,7 @@ export default {
     },
   },
 
-  props: {
-    rating: {
-      type: String
-    },
-    active: {
-      type: Boolean,
-      default: false
-    }
-  }
+ 
 };
 </script>
 
@@ -72,7 +73,7 @@ div p {
 }
 
 div {
-  transition-property: background-color, opacity, border-radius;
+  transition-property: background-color, border-radius;
   transition-timing-function: linear;
   transition-duration: 0.5s;
 }
@@ -80,8 +81,7 @@ div {
 /* Liked + Liked-active */
 .liked {
   border-radius: 100%;
-  background-color: black;
-  opacity: 0.2;
+  background-color: rgba(0, 0, 0, 0.2);
   background-image: url("../../assets/Icons/like-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -91,8 +91,7 @@ div {
 }
 .liked-swiped {
   border-radius: 100%;
-  background-color:rgb(150, 221, 109);
-  opacity: 0.8;
+  background-color: rgba(122, 168, 108, 1);
   background-image: url("../../assets/Icons/like-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -104,8 +103,7 @@ div {
 /* Disliked + Disliked active */
 .disliked {
   border-radius: 100%;
-  background-color: black;
-  opacity: 0.2;
+  background-color: rgba(0, 0, 0, 0.2);
   background-image: url("../../assets/Icons/dislike-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -115,8 +113,7 @@ div {
 }
 .disliked-swiped {
   border-radius: 100%;
-  background-color:rgb(207, 70, 66);
-  opacity: 0.8;
+  background-color: rgba(214, 80, 80, 1);
   background-image: url("../../assets/Icons/dislike-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -128,8 +125,7 @@ div {
 /* Loved + Loved active*/
 .loved {
   border-radius: 100%;
-  background-color: black;
-  opacity: 0.2;
+  background-color: rgba(0, 0, 0, 0.2);
   background-image: url("../../assets/Icons/love-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -139,8 +135,7 @@ div {
 }
 .loved-swiped {
   border-radius: 100%;
-  background-color:rgb(185, 56, 179);
-  opacity: 0.8;
+  background-color:rgba(115, 82, 255, 1);
   background-image: url("../../assets/Icons/love-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -151,18 +146,19 @@ div {
 
 /* Haven't Seen + Haven't Seen active */
 .haventSeen {
-  border-radius: 15px;
-  background-color: black;
+  border-radius: 28px;
+  background-color: rgba(0, 0, 0, 0.2);
   color: white;
-  opacity: 0.2;
   width: 120px;
   height: 30px;
   background-size: 30px 30px;
 }
+.haventSeen p {
+  text-align: center;
+}
 .haventSeen-swiped {
-  border-radius: 10px;
-  background-color: rgb(0, 0, 0);
-  opacity: 0.8;
+  border-radius: 28px;
+  background-color: rgba(88, 90, 101, 1);
   width: 120px;
   height: 30px;
   background-size: 30px 30px;

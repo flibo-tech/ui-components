@@ -9,6 +9,7 @@
     <ButtonTest v-if="store.component == 'ButtonTest'" />
     <SwipeTest v-if="store.component == 'SwipeTest'" />
     <SwipeTestPreview v-if="store.component == 'SwipeTestPreview'" />
+    <ButtonTestPreview v-if="store.component == 'ButtonTestPreview'" />
   </div>
 </template>
 
@@ -18,10 +19,11 @@ import RatingLabel from "./../components/atomic/RatingLabel";
 import ButtonTest from "./../components/molecular/ButtonTest";
 import SwipeTest from "./../components/molecular/SwipeTest";
 import SwipeTestPreview from "./../components/molecular/SwipeTestPreview";
+import ButtonTestPreview from "./../components/molecular/ButtonTestPreview";
 
 export default {
   name: "Home",
-  components: { Button, ButtonTest, RatingLabel, SwipeTest, SwipeTestPreview },
+  components: { Button, ButtonTest, RatingLabel, SwipeTest, SwipeTestPreview, ButtonTestPreview },
   data() {
     return {
       store: this.$store.state
@@ -29,3 +31,6 @@ export default {
   }
 };
 </script>
+
+<style>
+</style>
