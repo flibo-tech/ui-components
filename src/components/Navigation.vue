@@ -1,16 +1,22 @@
 <template>
   <nav>
-    <h1 @click="store.component = null">Home</h1>
+    <h1 @click="store.component = null">List of Atoms</h1>
+    <ul style="text-align: left;">
+      <li>Button</li>
+      <li>ProgressBar</li>
+      <li>Rate</li>
+      <li>RatingLabel</li>
+    </ul>
     <br />
     <h1>Atoms</h1>
-    <h4 class="nav-item" @click="store.component = 'Button'" >
-      Button
-    </h4>
      <h4 class="nav-item" @click="store.component = 'SwipeTest'">
       Swipe Test
     </h4>
     <h4 class="nav-item" @click="store.component = 'ButtonTest'">
       Button Test
+    </h4>
+     <h4 class="nav-item" @click="store.component = 'RateProgress'">
+      RateProgress
     </h4>
     
     <br />

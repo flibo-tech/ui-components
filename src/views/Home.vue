@@ -10,6 +10,7 @@
     <SwipeTest v-if="store.component == 'SwipeTest'" />
     <SwipeTestPreview v-if="store.component == 'SwipeTestPreview'" />
     <ButtonTestPreview v-if="store.component == 'ButtonTestPreview'" />
+    <RateProgress v-if="store.component == 'RateProgress'" />
   </div>
 </template>
 
@@ -20,10 +21,11 @@ import ButtonTest from "./../components/molecular/ButtonTest";
 import SwipeTest from "./../components/molecular/SwipeTest";
 import SwipeTestPreview from "./../components/molecular/SwipeTestPreview";
 import ButtonTestPreview from "./../components/molecular/ButtonTestPreview";
+import RateProgress from "./../components/molecular/RateProgress";
 
 export default {
   name: "Home",
-  components: { Button, ButtonTest, RatingLabel, SwipeTest, SwipeTestPreview, ButtonTestPreview },
+  components: { Button, ButtonTest, RatingLabel, SwipeTest, SwipeTestPreview, ButtonTestPreview, RateProgress },
   data() {
     return {
       store: this.$store.state
