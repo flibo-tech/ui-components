@@ -2,6 +2,7 @@
   <div>
     <Rate :value="value" :maxValue="maxValue" />
     <ProgressBar :value="value" :maxValue="maxValue"/>
+    <button @click="add()">Click</button>
     <h3>Props/Events</h3>
     <pre>
 value - 0 to maxValue (Number)
@@ -22,8 +23,17 @@ export default {
 
    data() {
       return {
-        value: 20,
+        value: 0,
         maxValue: 25,
+      }
+    },
+
+    methods: {
+      add() {
+        if(this.value < this.maxValue)
+        {
+        this.value++
+        }
       }
     },
 };

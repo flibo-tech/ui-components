@@ -78,23 +78,6 @@ export default {
           iconClass = '';
       }
     },
-
-    // checkDisabled(buttonType, disabled) {
-    //   let disabledClass = '';
-    //   if (buttonType === 'primary' && disabled) {
-    //     disabledClass = 'primaryDisabled'
-    //   }
-    //   else if (buttonType === 'secondary' && disabled) {
-    //     disabledClass = 'secondaryDisabled'
-    //   }
-    //   else if (buttonType === 'textOnly' && disabled) {
-    //     disabledClass = 'textOnlyDisabled'
-    //   }
-    //   else if (buttonType === 'iconOnly' && disabled) {
-    //     disabledClass = 'iconOnlyDisabled'
-    //   }
-    //   return disabledClass;
-    // }
   }
 };
 </script>
