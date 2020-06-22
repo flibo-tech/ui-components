@@ -1,7 +1,7 @@
 <template>
     <div :class="checkRating(rating, active)">
 <!-- Text will be shown instead of SVG icon for Haven't Seen button -->
-      <p v-if="rating === 'haventSeen'"> Haven't Seen </p>    
+      <p v-if="rating === 'haventSeen'"> HAVEN'T WATCHED </p>    
     </div>
 </template>
 
@@ -68,14 +68,14 @@ export default {
 div p {
   color: white;
   text-align: center;
-  padding-top: 0.3rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif; 
+  font-weight: medium;
+  font-size: 13px;
 }
-
 div {
   transition-property: background-color, border-radius;
   transition-timing-function: linear;
-  transition-duration: 0.5s;
+  transition-duration: 0.38s;
 }
 
 /* Liked + Liked-active */
@@ -85,9 +85,9 @@ div {
   background-image: url("../../assets/Icons/like-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  width: 50px;
-  height: 50px;
-  background-size: 30px 30px;
+  width: 56px;
+  height: 56px;
+  background-size: 27px;
 }
 .liked-swiped {
   border-radius: 100%;
@@ -95,9 +95,9 @@ div {
   background-image: url("../../assets/Icons/like-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  width: 50px;
-  height: 50px;
-  background-size: 30px 30px;
+  width: 56px;
+  height: 56px;
+  background-size: 27px;;
 }
 
 /* Disliked + Disliked active */
@@ -107,9 +107,9 @@ div {
   background-image: url("../../assets/Icons/dislike-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  width: 50px;
-  height: 50px;
-  background-size: 30px 30px;
+  width: 56px;
+  height: 56px;
+  background-size: 27px;
 }
 .disliked-swiped {
   border-radius: 100%;
@@ -117,9 +117,9 @@ div {
   background-image: url("../../assets/Icons/dislike-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  width: 50px;
-  height: 50px;
-  background-size: 30px 30px;
+  width: 56px;
+  height: 56px;
+  background-size: 27px;
 }
 
 /* Loved + Loved active*/
@@ -129,9 +129,9 @@ div {
   background-image: url("../../assets/Icons/love-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  width: 50px;
-  height: 50px;
-  background-size: 30px 30px;
+  width: 56px;
+  height: 56px;
+  background-size: 27px;
 }
 .loved-swiped {
   border-radius: 100%;
@@ -139,28 +139,34 @@ div {
   background-image: url("../../assets/Icons/love-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  width: 50px;
-  height: 50px;
-  background-size: 30px 30px;
+  width: 56px;
+  height: 56px;
+  background-size: 27px;
 }
 
 /* Haven't Seen + Haven't Seen active */
 .haventSeen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 28px;
   background-color: rgba(0, 0, 0, 0.2);
   color: white;
-  width: 120px;
-  height: 30px;
-  background-size: 30px 30px;
+  width: 160px;
+  height: 56px;
+  background-size: 27px;
 }
 .haventSeen p {
   text-align: center;
 }
 .haventSeen-swiped {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 28px;
   background-color: rgba(88, 90, 101, 1);
-  width: 120px;
-  height: 30px;
+  width: 160px;
+  height: 56px;
   background-size: 30px 30px;
 }
 </style>
