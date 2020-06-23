@@ -18,6 +18,9 @@
      <h4 class="nav-item" @click="store.component = 'RateProgress'">
       RateProgress
     </h4>
+    <h4 class="nav-item" @click="store.component = 'JsonAnimation'">
+      JSON Animation
+    </h4>
     
     <br />
     <h1>Molecules</h1>
