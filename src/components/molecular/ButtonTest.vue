@@ -3,8 +3,8 @@
       :text="text"
       :icon="icon"
       :buttonType="buttonType"
-      :loading="loading"
       :disabled="disabled"
+      :loading="loading"
       v-on:clicked="buttonClicked"
       />
 </template>

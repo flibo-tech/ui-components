@@ -3,43 +3,11 @@
             <Button class="grid-item-1"
             text="Start Rating"
             buttonType="primary"
-            :loading="false"
-            :disabled="false"
-            v-on:clicked="buttonClicked"/>
-
-            <Button class="grid-item-2"
-            text="Start Rating"
-            buttonType="primary"
-            :loading="false"
-            :disabled="true"
-            v-on:clicked="buttonClicked"/>
-
-            <Button class="grid-item-3"
-            text="Let's Discover"
-            buttonType="primary"
-            :loading="true"
-            :disabled="false"
             v-on:clicked="buttonClicked"/>
 
             <Button class="grid-item-4"
             text="Start Rating"
             buttonType="textOnly"
-            :loading="false"
-            :disabled="false"
-            v-on:clicked="buttonClicked"/>
-
-            <Button class="grid-item-5"
-            text="Start Rating"
-            buttonType="textOnly"
-            :loading="false"
-            :disabled="true"
-            v-on:clicked="buttonClicked"/>
-
-            <Button class="grid-item-6"
-            text="Start Rating"
-            buttonType="textOnly"
-            :loading="true"
-            :disabled="false"
             v-on:clicked="buttonClicked"/>
 
             <div class="grid-item-7">

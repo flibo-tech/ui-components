@@ -82,7 +82,7 @@ div {
 .liked {
   border-radius: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-  background-image: url("../../assets/Icons/like-icon-white.svg");
+  background-image: url("../../assets/icons/like-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 56px;
@@ -92,7 +92,7 @@ div {
 .liked-swiped {
   border-radius: 100%;
   background-color: rgba(122, 168, 108, 1);
-  background-image: url("../../assets/Icons/like-icon-white.svg");
+  background-image: url("../../assets/icons/like-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 56px;
@@ -104,7 +104,7 @@ div {
 .disliked {
   border-radius: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-  background-image: url("../../assets/Icons/dislike-icon-white.svg");
+  background-image: url("../../assets/icons/dislike-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 56px;
@@ -114,7 +114,7 @@ div {
 .disliked-swiped {
   border-radius: 100%;
   background-color: rgba(214, 80, 80, 1);
-  background-image: url("../../assets/Icons/dislike-icon-white.svg");
+  background-image: url("../../assets/icons/dislike-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 56px;
@@ -126,7 +126,7 @@ div {
 .loved {
   border-radius: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-  background-image: url("../../assets/Icons/love-icon-white.svg");
+  background-image: url("../../assets/icons/love-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 56px;
@@ -136,7 +136,7 @@ div {
 .loved-swiped {
   border-radius: 100%;
   background-color:rgba(115, 82, 255, 1);
-  background-image: url("../../assets/Icons/love-icon-white.svg");
+  background-image: url("../../assets/icons/love-icon-white.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 56px;
