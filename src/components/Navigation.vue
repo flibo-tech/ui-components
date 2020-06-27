@@ -6,6 +6,7 @@
       <li>ProgressBar</li>
       <li>Rate</li>
       <li>RatingLabel</li>
+      <li>Logo</li>
     </ul>
     <br />
     <h1>Atoms</h1>
@@ -21,14 +22,20 @@
     <h4 class="nav-item" @click="store.component = 'JsonAnimation'">
       JSON Animation
     </h4>
+    <h4 class="nav-item" @click="store.component = 'LogoTest'">
+      Logo Test
+    </h4>
     
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">
-      Swipe Test Preview
+      Swipe Preview
     </h4>
     <h4 class="nav-item" @click="store.component = 'ButtonTestPreview'">
-      Button Test Preview
+      Button Preview
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'LogoTestPreview'">
+      Logo Preview
     </h4>
   </nav>
 </template>

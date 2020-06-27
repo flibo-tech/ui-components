@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .bar {
-  width: 300px;
+  width: 100%;
 }
 .progress-bar {
   background-color: #363340;

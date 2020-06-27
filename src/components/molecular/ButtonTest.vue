@@ -20,7 +20,7 @@ export default {
             return {
                   text: "Start Rating",
                   icon: "",
-                  buttonType: "textOnly",
+                  buttonType: "primary",
                   loading: false,
                   disabled: false,   
             }

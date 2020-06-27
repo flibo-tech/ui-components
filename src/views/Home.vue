@@ -12,6 +12,8 @@
     <ButtonTestPreview v-if="store.component == 'ButtonTestPreview'" />
     <RateProgress v-if="store.component == 'RateProgress'" />
     <JsonAnimation v-if="store.component == 'JsonAnimation'" />
+    <LogoTest v-if="store.component == 'LogoTest'" />
+    <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
   </div>
 </template>
 
@@ -23,11 +25,24 @@ import SwipeTest from "./../components/molecular/SwipeTest";
 import SwipeTestPreview from "./../components/molecular/SwipeTestPreview";
 import ButtonTestPreview from "./../components/molecular/ButtonTestPreview";
 import RateProgress from "./../components/molecular/RateProgress";
-import JsonAnimation from "../components/atomic/JsonAnimation"
+import JsonAnimation from "../components/atomic/JsonAnimation";
+import LogoTest from "./../components/molecular/LogoTest";
+import LogoTestPreview from "./../components/molecular/LogoTestPreview"
 
 export default {
   name: "Home",
-  components: { Button, ButtonTest, RatingLabel, SwipeTest, SwipeTestPreview, ButtonTestPreview, RateProgress, JsonAnimation },
+  components: {
+    Button,
+    ButtonTest,
+    RatingLabel,
+    SwipeTest,
+    SwipeTestPreview,
+    ButtonTestPreview,
+    RateProgress,
+    JsonAnimation,
+    LogoTest,
+    LogoTestPreview
+  },
   data() {
     return {
       store: this.$store.state
