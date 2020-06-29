@@ -5,7 +5,7 @@
             buttonType="primary"
             v-on:clicked="buttonClicked"/>
 
-            <Button class="grid-item-4"
+            <Button class="grid-item-2"
             text="Start Rating"
             buttonType="textOnly"
             v-on:clicked="buttonClicked"/>
@@ -30,7 +30,14 @@ import Button from '../atomic/Button'
 export default {
       components: {
             Button,
+      },
+
+      methods: {
+        buttonClicked() {
+          console.log("Clicked")
+        }
       }
+
 }
 </script>
 
@@ -47,31 +54,5 @@ export default {
 .grid-item-2 {
   grid-column-start: 4;
   grid-column-end: 6;
-}
-
-.grid-item-3 {
-  grid-column-start: 7;
-  grid-column-end: 9;
-}
-
-.grid-item-4 {
-  grid-row: 2;
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-.grid-item-5 {
-  grid-row: 2;
-  grid-column-start: 4;
-  grid-column-end: 6;
-}
-.grid-item-6 {
-  grid-row: 2;
-  grid-column-start: 7;
-  grid-column-end: 9;
-}
-.grid-item-7 {
-  grid-row: 3;
-  grid-column-start: 1;
-  grid-column-end: 9;
 }
 </style>
