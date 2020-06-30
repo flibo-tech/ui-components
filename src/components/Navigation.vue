@@ -25,6 +25,9 @@
     <h4 class="nav-item" @click="store.component = 'LogoTest'">
       Logo Test
     </h4>
+    <h4 class="nav-item" @click="store.component = 'CardAnimation'">
+      Card Animation
+    </h4>
     
     <br />
     <h1>Molecules</h1>
