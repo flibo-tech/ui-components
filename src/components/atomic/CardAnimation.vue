@@ -37,13 +37,13 @@ export default {};
     transform: translate(0px, 0px);
   }
   37.5% {
-    transform: rotateZ(5deg) translate(0px, -100px);
+    transform: rotateZ(-10deg) translate(-100px, 0px);
   }
   50% {
     transform: translate(0px, 0px);
   }
   62.5% {
-    transform: rotateZ(-10deg) translate(-100px, 0px);
+    transform: rotateZ(5deg) translate(0px, -100px)
   }
   75% {
     transform: translate(0px, 0px);
@@ -68,27 +68,24 @@ export default {};
   }
 }
 
-@keyframes loved {
+@keyframes disliked {
   25% {
     background-color: rgba(0, 0, 0, 0.2);
   }
   37.5% {
-    background-color:rgba(115, 82, 255, 1);
+    background-color: rgba(214, 80, 80, 1);
   }
   50% {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  100% {
     background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
-@keyframes disliked {
+@keyframes loved {
   50% {
     background-color: rgba(0, 0, 0, 0.2);
   }
   62.5% {
-    background-color: rgba(214, 80, 80, 1);
+    background-color:rgba(115, 82, 255, 1);
   }
   75% {
     background-color: rgba(0, 0, 0, 0.2);
