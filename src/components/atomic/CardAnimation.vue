@@ -24,37 +24,38 @@ export default {};
   margin-top: 100px;
   background-image: url("../../assets/images/poster.jpg");
   animation-name: tilt;
-  animation-duration: 5s;
+  animation-duration: 7s;
   animation-iteration-count: infinite;
   border-radius: 6px;
   background-size: cover;
 }
 @keyframes tilt {
   12.5% {
-    transform: rotateZ(10deg) translate(50px, 0px);
+    transform: rotateZ(10deg) translate(100px, 0px);
   }
   25% {
     transform: translate(0px, 0px);
   }
   37.5% {
-    transform: translate(0px, -50px);
+    transform: rotateZ(5deg) translate(0px, -100px);
   }
   50% {
     transform: translate(0px, 0px);
   }
   62.5% {
-    transform: rotateZ(-10deg) translate(-50px, 0px);
+    transform: rotateZ(-10deg) translate(-100px, 0px);
   }
   75% {
     transform: translate(0px, 0px);
   }
   87.5% {
-    transform: translate(0px, 50px);
+    transform: rotateZ(5deg) translate(0px, 100px);
   }
   100% {
     transform: translate(0px, 0px);
   }
 }
+
 @keyframes liked {
   12.5% {
     background-color: rgba(122, 168, 108, 1);
@@ -107,7 +108,7 @@ export default {};
 }
 .liked {
   animation-name: liked;
-  animation-duration: 5s;
+  animation-duration: 7s;
   animation-iteration-count: infinite;
   top: 50%;
   transform: translatey(-50%);
@@ -124,7 +125,7 @@ export default {};
 }
 .disliked {
   animation-name: disliked;
-  animation-duration: 5s;
+  animation-duration: 7s;
   animation-iteration-count: infinite;
   left: -30px;
   top: 50%;
@@ -141,7 +142,7 @@ export default {};
 }
 .loved {
   animation-name: loved;
-  animation-duration: 5s;
+  animation-duration: 7s;
   animation-iteration-count: infinite;
   top: -30px;
   left: 50%;
@@ -158,7 +159,7 @@ export default {};
 }
 .haventSeen {
   animation-name: haventSeen;
-  animation-duration: 5s;
+  animation-duration: 7s;
   animation-iteration-count: infinite;
   bottom: -30px;
   left: 50%;
