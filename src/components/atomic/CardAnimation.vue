@@ -4,7 +4,7 @@
     <div class="liked"></div>
     <div class="disliked"></div>
     <div class="loved"></div>
-    <div class="haventSeen">HAVEN'T WATCHED</div>
+    <div class="haventSeen">Haven't Watched</div>
   </div>
 </template>
 

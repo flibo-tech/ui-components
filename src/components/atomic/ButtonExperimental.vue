@@ -1,11 +1,10 @@
 <template>
   <button 
     :class="[checkType(buttonType), checkIcon(icon)]"
-    :disabled="disabled"
+    :disabled="buttonDisabled"
     @click="$emit('clicked'); buttonClicked();"
   >
     <p v-if="!icon && buttonType != 'iconOnly' && !buttonClickedBool">{{ buttonText }}</p>
-    <div v-if="buttonClickedBool && loading" class="loader"> </div>
   </button>
 </template>
 
@@ -29,21 +28,22 @@ export default {
       type: Boolean,
       default: false
     },
-    disabled: {
+    buttonDisabled: {
       type: Boolean,
-      default: false
+      default: false,
     }
   },
 
   data() {
     return {
       buttonClickedBool: false,
-      buttonText: ""
+      buttonText: "",
     }
   },
 
   methods: {
     checkType(buttonType) {
+      console.log("Check")
       this.buttonText = this.text;
       let buttonClass = "";
       if (buttonType === "primary") {
@@ -63,9 +63,11 @@ export default {
       if(this.loading) {
       this.buttonClickedBool = true;
       }
+      console.log("check")
     },
 
     checkIcon(icon) {
+      
       let iconClass = "";
       switch (icon) {
         case 'like':
@@ -77,8 +79,10 @@ export default {
         default:
           iconClass = '';
       }
-    },
-  }
+    }
+  },
+  
+  
 };
 </script>
 
@@ -164,24 +168,14 @@ button {
   background-position: center;
   background-size: 25px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/Icons/like-icon-white.svg");
+  background-image: url("../../assets/icons/like-icon-white.svg");
 }
 
 .dislike {
   background-position: center;
   background-size: 25px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/Icons/dislike-icon-white.svg");
-}
-
-.loader {
-  margin: auto;
-  border: 3px solid #ffffff;
-  border-top: 3px solid #000000; 
-  border-radius: 50%;
-  width: 15px;
-  height: 15px;
-  animation: spin 2s linear infinite;
+  background-image: url("../../assets/icons/dislike-icon-white.svg");
 }
 
 button:focus {

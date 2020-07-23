@@ -1,7 +1,8 @@
 <template>
   <button
-    :class="[checkType(buttonType), checkIcon(icon)]"
-    @click="$emit('clicked')"
+    :class="[checkType, checkIcon]"
+    @click="$emit('clicked'), buttonClicked($event)"
+    id="btn"
   >
     <p v-if="!icon && buttonType != 'iconOnly'">{{ buttonText }}</p>
   </button>
@@ -24,7 +25,7 @@ export default {
       required: true,
       default: "primary"
     },
-     loading: {
+    loading: {
       type: Boolean,
       default: false
     },
@@ -36,36 +37,54 @@ export default {
 
   data() {
     return {
-      buttonText: ""
+      buttonText: this.text,
+      buttons: document.getElementsByTagName("BUTTON")
     };
   },
 
   methods: {
-    checkType(buttonType) {
-      this.buttonText = this.text;
+    buttonClicked(event) {
+    if (this.buttonType === 'primary') {
+      let x = event.layerX;
+      let y = event.layerY;
+      let ripples = document.createElement("span");
+      ripples.style.left = x + "px";
+      ripples.style.top = y + "px";
+      document.getElementById("btn").appendChild(ripples);
+
+      setTimeout(() => {
+        ripples.remove()
+      }, 1000)
+    }
+    }
+  },
+
+  computed: {
+    checkType() {
       let buttonClass = "";
-      if (buttonType === "primary") {
+      if (this.buttonType === "primary") {
         buttonClass = "primary";
-        this.buttonText = this.text.toUpperCase();
-      } else if (buttonType === "textOnly") {
+        this.buttonText.toUpperCase();
+      } else if (this.buttonType === "textOnly") {
         buttonClass = "textOnly";
-      } else if (buttonType === "iconOnly") {
+      } else if (this.buttonType === "iconOnly") {
         buttonClass = "iconOnly";
       }
       return buttonClass;
     },
-  checkIcon(icon) {
-    let iconClass = "";
-    switch (icon) {
-      case "back":
-        iconClass = "back";
-        return iconClass;
-      default:
-        iconClass = "";
+    checkIcon() {
+      let iconClass = "";
+      switch (this.icon) {
+        case "back":
+          iconClass = "back";
+          return iconClass;
+        default:
+          iconClass = "";
+      }
+      return iconClass;
     }
   }
-}
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -74,9 +93,34 @@ $primary-color: #7352ff;
 $textOnly-color: #adadad;
 
 button {
+  position: relative;
   font-family: "Roboto", sans-serif;
+  overflow: hidden;
   font-weight: medium;
 }
+button ::v-deep span {
+  position: absolute;
+  background: white;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: animate 1s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.5;
+  }
+  100% {
+    width: 100vh;
+    height: 100vh;
+    opacity: 0;
+  }
+}
+
 .primary {
   border: none;
   border-radius: $border-radius;
@@ -87,12 +131,10 @@ button {
   min-width: 100px;
   background-color: $primary-color;
   cursor: pointer;
+  text-transform: uppercase;
   transition-property: background-color;
   transition-timing-function: ease-out;
   transition-duration: 0.5s;
-}
-.primary:active {
-  background-color: #3c20b8;
 }
 
 .textOnly {
