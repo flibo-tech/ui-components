@@ -7,8 +7,15 @@
 
             <Button class="grid-item-2"
             text="Start Rating"
+            buttonType="primary"
+            :disabled="true"
+            v-on:clicked="buttonClicked"/>
+
+            <Button class="grid-item-3"
+            text="Start Rating"
             buttonType="textOnly"
             v-on:clicked="buttonClicked"/>
+            
 
             <div class="grid-item-7">
             <h3>Props/Events</h3>
@@ -47,12 +54,19 @@ export default {
   grid-gap: 50px;
 }
 .grid-item-1 {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column: 1/3;
 }
 
 .grid-item-2 {
-  grid-column-start: 4;
-  grid-column-end: 6;
+  grid-column: 4/6;
+}
+
+.grid-item-3 {
+  grid-column: 1/3;
+  grid-row: 2;
+}
+.grid-item-7 {
+  grid-column: 1/6;
+  grid-row: 3;
 }
 </style>

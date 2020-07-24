@@ -3,6 +3,7 @@
     :class="[checkType, checkIcon]"
     @click="$emit('clicked'), buttonClicked($event)"
     id="btn"
+    :disabled="disabled"
   >
     <p v-if="!icon && buttonType != 'iconOnly'">{{ buttonText }}</p>
   </button>
@@ -105,7 +106,7 @@ button ::v-deep span {
   pointer-events: none;
   border-radius: 50%;
   opacity: 0.5;
-  animation: animate 1s linear infinite;
+  animation: animate 0.4s linear;
 }
 
 @keyframes animate {
@@ -135,6 +136,11 @@ button ::v-deep span {
   transition-property: background-color;
   transition-timing-function: ease-out;
   transition-duration: 0.5s;
+}
+.primary:disabled {
+  cursor: inherit;
+  background-color: rgb(220,220,220);
+  color: rgb(178,178,178);
 }
 
 .textOnly {

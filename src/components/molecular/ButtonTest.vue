@@ -9,23 +9,23 @@
       v-on:clicked="buttonClicked"
       />
 
-      <ButtonExperimental
+      <Button 
       :text="text"
       :icon="icon"
       :buttonType="buttonType"
-      :buttonDisabled="true"
+      :disabled="true"
       :loading="loading"
-      @clicked="buttonClicked"
+      v-on:clicked="buttonClicked"
       />
 </div>
 </template>
 
 <script>
 import Button from '../atomic/Button'
-import ButtonExperimental from '../atomic/ButtonExperimental'
+// import ButtonExperimental from '../atomic/ButtonExperimental'
 export default {
       components: {
-            Button, ButtonExperimental
+            Button,
       },
 
       data() {
