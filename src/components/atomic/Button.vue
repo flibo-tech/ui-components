@@ -2,7 +2,7 @@
   <button
     :class="[checkType, checkIcon]"
     @click="$emit('clicked'), buttonClicked($event)"
-    id="btn"
+    ref="btn"
     :disabled="disabled"
   >
     <p v-if="!icon && buttonType != 'iconOnly'">{{ buttonText }}</p>
@@ -39,19 +39,19 @@ export default {
   data() {
     return {
       buttonText: this.text,
-      buttons: document.getElementsByTagName("BUTTON")
+      
     };
   },
 
   methods: {
     buttonClicked(event) {
-    if (this.buttonType === 'primary') {
+    if (this.buttonType === 'textOnly' || this.buttonType === 'primary') {
       let x = event.layerX;
       let y = event.layerY;
       let ripples = document.createElement("span");
       ripples.style.left = x + "px";
       ripples.style.top = y + "px";
-      document.getElementById("btn").appendChild(ripples);
+      this.$refs.btn.appendChild(ripples);
 
       setTimeout(() => {
         ripples.remove()
@@ -106,7 +106,7 @@ button ::v-deep span {
   pointer-events: none;
   border-radius: 50%;
   opacity: 0.5;
-  animation: animate 0.4s linear;
+  animation: animate 0.8s linear;
 }
 
 @keyframes animate {
@@ -145,6 +145,7 @@ button ::v-deep span {
 
 .textOnly {
   border: none;
+  border-radius: $border-radius;
   background-color: Transparent;
   font-size: 13px;
   color: $textOnly-color;
@@ -153,8 +154,9 @@ button ::v-deep span {
   transition-timing-function: ease-out;
   transition-duration: 0.5s;
 }
-.textOnly:active {
-  color: white;
+.textOnly:disabled {
+  cursor: inherit;
+  color: rgb(54, 54, 54);
 }
 
 .iconOnly {

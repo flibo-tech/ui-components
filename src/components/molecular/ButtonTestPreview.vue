@@ -14,8 +14,14 @@
             <Button class="grid-item-3"
             text="Start Rating"
             buttonType="textOnly"
+            :disabled="false"
             v-on:clicked="buttonClicked"/>
             
+            <Button class="grid-item-4"
+            text="Start Rating"
+            buttonType="textOnly"
+            :disabled="true"
+            v-on:clicked="buttonClicked"/>
 
             <div class="grid-item-7">
             <h3>Props/Events</h3>
@@ -63,6 +69,11 @@ export default {
 
 .grid-item-3 {
   grid-column: 1/3;
+  grid-row: 2;
+}
+
+.grid-item-4 {
+  grid-column: 4/6;
   grid-row: 2;
 }
 .grid-item-7 {

@@ -17,6 +17,14 @@
       :loading="loading"
       v-on:clicked="buttonClicked"
       />
+      <Button 
+      :text="text"
+      :icon="icon"
+      buttonType="primary"
+      :disabled="false"
+      :loading="loading"
+      v-on:clicked="buttonClicked"
+      />
 </div>
 </template>
 
@@ -32,7 +40,7 @@ export default {
             return {
                   text: "Start Rating",
                   icon: "",
-                  buttonType: "primary",
+                  buttonType: "textOnly",
                   loading: false,
                   disabled: false,   
             }
