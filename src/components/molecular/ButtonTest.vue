@@ -25,6 +25,14 @@
       :loading="loading"
       v-on:clicked="buttonClicked"
       />
+      <Button 
+      :text="text"
+      icon="back"
+      buttonType="iconOnly"
+      :disabled="false"
+      :loading="loading"
+      v-on:clicked="buttonClicked"
+      />
 </div>
 </template>
 

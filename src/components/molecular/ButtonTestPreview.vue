@@ -1,31 +1,48 @@
 <template>
-      <div class="grid-container">
-            <Button class="grid-item-1"
-            text="Start Rating"
-            buttonType="primary"
-            v-on:clicked="buttonClicked"/>
+  <div class="grid-container">
+    <Button
+      class="grid-item-1"
+      text="Start Rating"
+      buttonType="primary"
+      v-on:clicked="buttonClicked"
+    />
 
-            <Button class="grid-item-2"
-            text="Start Rating"
-            buttonType="primary"
-            :disabled="true"
-            v-on:clicked="buttonClicked"/>
+    <Button
+      class="grid-item-2"
+      text="Start Rating"
+      buttonType="primary"
+      :disabled="true"
+      v-on:clicked="buttonClicked"
+    />
 
-            <Button class="grid-item-3"
-            text="Start Rating"
-            buttonType="textOnly"
-            :disabled="false"
-            v-on:clicked="buttonClicked"/>
-            
-            <Button class="grid-item-4"
-            text="Start Rating"
-            buttonType="textOnly"
-            :disabled="true"
-            v-on:clicked="buttonClicked"/>
+    <Button
+      class="grid-item-3"
+      text="Start Rating"
+      buttonType="textOnly"
+      :disabled="false"
+      v-on:clicked="buttonClicked"
+    />
 
-            <div class="grid-item-7">
-            <h3>Props/Events</h3>
-              <pre>
+    <Button
+      class="grid-item-4"
+      text="Start Rating"
+      buttonType="textOnly"
+      :disabled="true"
+      v-on:clicked="buttonClicked"
+    />
+
+    <Button
+      class="grid-item-5"
+      text="text"
+      icon="back"
+      buttonType="iconOnly"
+      :disabled="false"
+      v-on:clicked="buttonClicked"
+    />
+
+    <div class="grid-item-7">
+      <h3>Props/Events</h3>
+      <pre>
 1. text - Start Rating / Let's Discover / Skip Rating / null
 2. icon - back.svg
 3. buttonType - primary / secondary / textOnly / iconOnly
@@ -33,25 +50,24 @@
 5. disabled - true / false
 6. $emit('clicked')
               </pre>
-            </div>
-      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import Button from '../atomic/Button'
+import Button from "../atomic/Button";
 
 export default {
-      components: {
-            Button,
-      },
+  components: {
+    Button
+  },
 
-      methods: {
-        buttonClicked() {
-          console.log("Clicked")
-        }
-      }
-
-}
+  methods: {
+    buttonClicked() {
+      console.log("Clicked");
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -76,8 +92,15 @@ export default {
   grid-column: 4/6;
   grid-row: 2;
 }
+
+.grid-item-5 {
+  justify-self: center;
+  grid-column: 1/3;
+  grid-row: 3;
+}
+
 .grid-item-7 {
   grid-column: 1/6;
-  grid-row: 3;
+  grid-row: 4;
 }
 </style>

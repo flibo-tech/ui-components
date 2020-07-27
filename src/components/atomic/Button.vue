@@ -45,12 +45,19 @@ export default {
 
   methods: {
     buttonClicked(event) {
-    if (this.buttonType === 'textOnly' || this.buttonType === 'primary') {
+    if (this.buttonType === 'textOnly' || this.buttonType === 'primary' || this.buttonType === 'iconOnly') {
+      
       let x = event.layerX;
       let y = event.layerY;
       let ripples = document.createElement("span");
+      if (this.buttonType === 'iconOnly') {
+        ripples.style.left = "50%";
+        ripples.style.top = "50%";
+      }
+      else {
       ripples.style.left = x + "px";
       ripples.style.top = y + "px";
+      }
       this.$refs.btn.appendChild(ripples);
 
       setTimeout(() => {
@@ -106,7 +113,7 @@ button ::v-deep span {
   pointer-events: none;
   border-radius: 50%;
   opacity: 0.5;
-  animation: animate 0.8s linear;
+  animation: animate 0.9s linear;
 }
 
 @keyframes animate {
@@ -161,9 +168,14 @@ button ::v-deep span {
 
 .iconOnly {
   border: none;
+  padding: 20px;
+  border-radius: 50%;
   width: 16px;
   height: 16px;
   cursor: pointer;
+}
+.iconOnly:disabled {
+  cursor: auto;
 }
 
 .back {
