@@ -15,6 +15,7 @@
     <LogoTest v-if="store.component == 'LogoTest'" />
     <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
     <CardAnimation v-if="store.component == 'CardAnimation'" />
+    <ProgressTest v-if="store.component == 'ProgressTest'" />
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import JsonAnimation from "../components/atomic/JsonAnimation";
 import LogoTest from "./../components/molecular/LogoTest";
 import LogoTestPreview from "./../components/molecular/LogoTestPreview"
 import CardAnimation from "../components/atomic/CardAnimation";
+import ProgressTest from "./../components/molecular/ProgressTest"
 
 export default {
   name: "Home",
@@ -44,7 +46,8 @@ export default {
     JsonAnimation,
     LogoTest,
     LogoTestPreview,
-    CardAnimation
+    CardAnimation,
+    ProgressTest
   },
   data() {
     return {

@@ -22,7 +22,7 @@
       :icon="icon"
       buttonType="primary"
       :disabled="false"
-      :loading="loading"
+      :loading="true"
       v-on:clicked="buttonClicked"
       />
       <Button 

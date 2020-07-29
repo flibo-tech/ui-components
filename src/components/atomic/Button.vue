@@ -1,12 +1,14 @@
 <template>
-  <button
-    :class="[checkType, checkIcon]"
-    @click="$emit('clicked'), buttonClicked($event)"
-    ref="btn"
-    :disabled="disabled"
-  >
-    <p v-if="!icon && buttonType != 'iconOnly'">{{ buttonText }}</p>
-  </button>
+  <article>
+    <button
+      :class="[checkType, checkIcon]"
+      @click="$emit('clicked'), buttonClicked($event)"
+      ref="btn"
+      :disabled="disabled"
+    >
+      <p v-if="!icon && buttonType != 'iconOnly'">{{ buttonText }}</p>
+    </button>
+  </article>
 </template>
 
 <script>
@@ -38,32 +40,33 @@ export default {
 
   data() {
     return {
-      buttonText: this.text,
-      
+      buttonText: this.text
     };
   },
 
   methods: {
     buttonClicked(event) {
-    if (this.buttonType === 'textOnly' || this.buttonType === 'primary' || this.buttonType === 'iconOnly') {
-      
-      let x = event.layerX;
-      let y = event.layerY;
-      let ripples = document.createElement("span");
-      if (this.buttonType === 'iconOnly') {
-        ripples.style.left = "50%";
-        ripples.style.top = "50%";
-      }
-      else {
-      ripples.style.left = x + "px";
-      ripples.style.top = y + "px";
-      }
-      this.$refs.btn.appendChild(ripples);
+      if (
+        this.buttonType === "textOnly" ||
+        this.buttonType === "primary" ||
+        this.buttonType === "iconOnly"
+      ) {
+        let x = event.layerX;
+        let y = event.layerY;
+        let ripples = document.createElement("span");
+        if (this.buttonType === "iconOnly") {
+          ripples.style.left = "50%";
+          ripples.style.top = "50%";
+        } else {
+          ripples.style.left = x + "px";
+          ripples.style.top = y + "px";
+        }
+        this.$refs.btn.appendChild(ripples);
 
-      setTimeout(() => {
-        ripples.remove()
-      }, 1000)
-    }
+        setTimeout(() => {
+          ripples.remove();
+        }, 1000);
+      }
     }
   },
 
@@ -146,8 +149,8 @@ button ::v-deep span {
 }
 .primary:disabled {
   cursor: inherit;
-  background-color: rgb(220,220,220);
-  color: rgb(178,178,178);
+  background-color: rgb(220, 220, 220);
+  color: rgb(178, 178, 178);
 }
 
 .textOnly {
@@ -189,4 +192,46 @@ button ::v-deep span {
 button:focus {
   outline: none;
 }
+
+// $offset: 187;
+// $duration: 1.4s;
+
+// .spinner {
+//   position: absolute;
+//   width: 2.5em;
+//   height: 2.5em;
+//   animation: rotator $duration linear infinite;
+//   display: none;
+// }
+
+// @keyframes rotator {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(270deg);
+//   }
+// }
+
+// .path {
+//   stroke-dasharray: $offset;
+//   stroke-dashoffset: 0;
+//   transform-origin: center;
+//   animation: dash $duration ease-in-out infinite,
+//     colors ($duration * 4) ease-in-out infinite;
+// }
+
+// @keyframes dash {
+//   0% {
+//     stroke-dashoffset: $offset;
+//   }
+//   50% {
+//     stroke-dashoffset: $offset/4;
+//     transform: rotate(135deg);
+//   }
+//   100% {
+//     stroke-dashoffset: $offset;
+//     transform: rotate(450deg);
+//   }
+// }
 </style>

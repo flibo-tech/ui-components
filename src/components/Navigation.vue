@@ -7,6 +7,7 @@
       <li>Rate</li>
       <li>RatingLabel</li>
       <li>Logo</li>
+      <li>Progress</li>
     </ul>
     <br />
     <h1>Atoms</h1>
@@ -27,6 +28,9 @@
     </h4>
     <h4 class="nav-item" @click="store.component = 'CardAnimation'">
       Card Animation
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'ProgressTest'">
+      Progress
     </h4>
     
     <br />
