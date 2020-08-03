@@ -1,14 +1,22 @@
 <template>
+<div>
   <div id="app" class="f-container">
-    <Navigation />
-    <router-view />
+    <Navigation  v-if="store.component !== 'MovieImage'"/>
+    <router-view  />
   </div>
+</div>
 </template>
 
 <script>
+// import MovieImage from "./components/atomic/MovieImage"
 import Navigation from "./components/Navigation";
 export default {
-  components: { Navigation },
+  components: { Navigation, },
+  data() {
+    return {
+      store: this.$store.state
+    };
+  },
   computed: {
     my_store: function() {
       return this.$store.state;
@@ -26,11 +34,17 @@ export default {
 </script>
 
 <style lang="scss">
+
+body {
+  margin: 0;
+  padding: 0;
+}
 .f-container {
+  position: relative;
+  top: 0;
   display: grid;
   grid-template-columns: 300px 1fr;
   color: rgb(255, 255, 255);
-  border: 5px solid rgb(0, 0, 0);
   background-color: #272431;
 }
 </style>

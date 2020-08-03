@@ -16,6 +16,7 @@
     <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
+    <MovieImage v-if="store.component == 'MovieImage'" />
   </div>
 </template>
 
@@ -29,9 +30,10 @@ import ButtonTestPreview from "./../components/molecular/ButtonTestPreview";
 import RateProgress from "./../components/molecular/RateProgress";
 import JsonAnimation from "../components/atomic/JsonAnimation";
 import LogoTest from "./../components/molecular/LogoTest";
-import LogoTestPreview from "./../components/molecular/LogoTestPreview"
+import LogoTestPreview from "./../components/molecular/LogoTestPreview";
 import CardAnimation from "../components/atomic/CardAnimation";
-import ProgressTest from "./../components/molecular/ProgressTest"
+import ProgressTest from "./../components/molecular/ProgressTest";
+import MovieImage from "./../components/atomic/MovieImage";
 
 export default {
   name: "Home",
@@ -47,7 +49,8 @@ export default {
     LogoTest,
     LogoTestPreview,
     CardAnimation,
-    ProgressTest
+    ProgressTest,
+    MovieImage
   },
   data() {
     return {
