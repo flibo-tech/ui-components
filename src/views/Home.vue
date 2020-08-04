@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-container">
     <div v-if="store.component == null">
       This website contains all the components (atomic &amp; molecular) used in
       FLIBO.
@@ -16,7 +16,8 @@
     <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
-    <MovieImage v-if="store.component == 'MovieImage'" />
+    <MovieImage v-if="store.component == 'MovieImage'" 
+    imageUrl="poster" />
   </div>
 </template>
 
@@ -61,4 +62,7 @@ export default {
 </script>
 
 <style>
+.home-container {
+  width: 100vw;
+}
 </style>
