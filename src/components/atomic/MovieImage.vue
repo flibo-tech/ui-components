@@ -15,10 +15,11 @@ export default {
   props: {
     imageUrl: {
       type: String
-    },
+    }
   },
 
- mounted() {
+  mounted() {
+    this.imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
     window.addEventListener("scroll", this.onScroll);
   },
 
@@ -26,8 +27,8 @@ export default {
     return {
       store: this.$store.state,
       lastScrollPos: null,
-      lastPadding: null
-
+      lastPadding: null,
+      imageHeight: null
     };
   },
 
@@ -40,14 +41,13 @@ export default {
   methods: {
     onScroll() {
       let scopeScroll = window.scrollY;
-      console.log(scopeScroll)
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
-      let imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
-
+      console.log(scopeScroll);
       let screenWidth = screen.width;
       if (screenWidth + 60 < imageWidth) {
         // console.log(screenWidth, "Screen", imageWidth, "Image");
-        this.$refs.movieImage.style.height = imageHeight - scopeScroll + "px";
+        this.$refs.movieImage.style.height = this.imageHeight - scopeScroll + "px";
+        // console.log(imageHeight - scopeScroll + "px")
         // this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
         // this.lastPadding = this.$refs.movieImage.style.paddingTop;
         // this.lastScrollPos = scopeScroll;
@@ -73,8 +73,8 @@ img {
   height: 80vh;
 }
 .image-container {
-  /* padding-top: 0px; */
-  position: sticky;
+  padding-top: 0px;
+  position: fixed;
   overflow: hidden;
 }
 </style>
