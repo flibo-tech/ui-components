@@ -16,8 +16,23 @@
     <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
-    <MovieImage v-if="store.component == 'MovieImage'" 
-    imageUrl="poster" />
+    <MovieImage v-if="store.component == 'MovieImage'" imageUrl="poster" :scrollProp="scrollProp" />
+    <div v-if="store.component == 'MovieImage'" style="line-height: 2; font-size: 20px;">
+      <div @click="store.component = null">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum neque et nesciunt deserunt nam voluptate suscipit ducimus, non commodi inventore beatae quos quam ipsam expedita reprehenderit fugit autem aliquam consectetur.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dolore officiis repudiandae enim sunt quas autem omnis, neque unde praesentium distinctio deserunt ipsa reiciendis nihil veritatis quo voluptatibus a! Veritatis.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus ipsum voluptas sapiente. Deserunt quibusdam vero quo doloribus, qui ipsum, beatae omnis quaerat rem maiores reiciendis laudantium suscipit esse eius maxime?
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, nihil voluptas nostrum tempore facilis cumque repellendus asperiores harum minima, dolor fuga excepturi. Ea doloremque cumque facere quas harum deleniti ipsam.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo corporis deleniti quas obcaecati hic laboriosam nulla aperiam ut tempore unde ullam, rerum quidem ab consectetur dolore quod cum architecto sint.
+        </p>
+      </div>
+      <div>
+        <h1>Lorem ipsum dolor</h1>
+        <h1>Lorem ipsum dolor</h1>
+        <h1>Lorem ipsum dolor</h1>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -55,8 +70,19 @@ export default {
   },
   data() {
     return {
-      store: this.$store.state
+      store: this.$store.state,
+      scrollProp: null
     };
+  },
+
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
+  },
+
+  methods: {
+    onScroll() {
+      this.scrollProp = window.scrollY;
+    }
   }
 };
 </script>
