@@ -43,7 +43,7 @@ export default {
       let screenWidth = screen.width;
       if (screenWidth + 60 < imageWidth) {
       console.log(screenWidth, "Screen", imageWidth, "Image")
-        this.$refs.movieImage.style.height = imageHeight - scopeScroll / 50 + "px";
+        this.$refs.movieImage.style.height = imageHeight - scopeScroll + "px";
         // console.log(imageHeight - scopeScroll + "px")
       }
     }
