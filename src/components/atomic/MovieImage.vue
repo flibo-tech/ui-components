@@ -40,10 +40,11 @@ export default {
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
       let imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
 
-      let screenWidth = window.innerWidth;
-      if (screenWidth < imageWidth) {
-        this.$refs.movieImage.style.height = imageHeight - scopeScroll + "px";
-        console.log(imageHeight - scopeScroll + "px")
+      let screenWidth = screen.width;
+      if (screenWidth + 60 < imageWidth) {
+      console.log(screenWidth, "Screen", imageWidth, "Image")
+        this.$refs.movieImage.style.height = imageHeight - scopeScroll / 50 + "px";
+        // console.log(imageHeight - scopeScroll + "px")
       }
     }
   },
