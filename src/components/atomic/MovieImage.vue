@@ -40,6 +40,7 @@ export default {
   methods: {
     onScroll() {
       let scopeScroll = window.scrollY;
+      console.log(scopeScroll)
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
       let imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
 
@@ -47,14 +48,14 @@ export default {
       if (screenWidth + 60 < imageWidth) {
         // console.log(screenWidth, "Screen", imageWidth, "Image");
         this.$refs.movieImage.style.height = imageHeight - scopeScroll + "px";
-        this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
-        this.lastPadding = this.$refs.movieImage.style.paddingTop;
-        this.lastScrollPos = scopeScroll;
+        // this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
+        // this.lastPadding = this.$refs.movieImage.style.paddingTop;
+        // this.lastScrollPos = scopeScroll;
       }
-       else if(scopeScroll <= this.lastScrollPos && this.lastPadding ) {
-         console.log("elseIf")
-        this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
-      }
+      //  else if(scopeScroll <= this.lastScrollPos && this.lastPadding ) {
+      //    console.log("elseIf")
+      //   this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
+      // }
     }
   }
 };
@@ -72,9 +73,8 @@ img {
   height: 80vh;
 }
 .image-container {
-  padding-top: 0px;
+  /* padding-top: 0px; */
   position: sticky;
   overflow: hidden;
-  transition: padding 1s linear;
 }
 </style>
