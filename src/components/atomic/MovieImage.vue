@@ -25,7 +25,7 @@ export default {
     return {
       store: this.$store.state,
       lastScrollPos: null,
-      initialScroll: false
+      lastPadding: null
 
     };
   },
@@ -41,20 +41,16 @@ export default {
       let scopeScroll = scrollProp;
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
       let imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
-      // let lastPadding;
 
       let screenWidth = screen.width;
       if (screenWidth + 60 < imageWidth) {
         // console.log(screenWidth, "Screen", imageWidth, "Image");
         this.$refs.movieImage.style.height = imageHeight - scopeScroll + "px";
         this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
-        // lastPadding = this.$refs.movieImage.style.paddingTop;
+        this.lastPadding = this.$refs.movieImage.style.paddingTop;
         this.lastScrollPos = scopeScroll;
-        // console.log(lastPadding)
-        console.log(this.lastScrollPos);
-        this.initialScroll = true;
       }
-       else if(scopeScroll <= this.lastScrollPos && this.initialScroll) {
+       else if(scopeScroll <= this.lastScrollPos && this.lastPadding ) {
          console.log("elseIf")
         this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
       }
