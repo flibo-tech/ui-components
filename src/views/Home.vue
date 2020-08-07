@@ -16,7 +16,7 @@
     <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
-    <MovieImage v-if="store.component == 'MovieImage'" imageUrl="poster" :scrollProp="scrollProp" />
+    <MovieImage v-if="store.component == 'MovieImage'" imageUrl="poster" />
     <div v-if="store.component == 'MovieImage'" style="line-height: 2; font-size: 20px;">
       <div @click="store.component = null">
         <p>
@@ -70,19 +70,8 @@ export default {
   },
   data() {
     return {
-      store: this.$store.state,
-      scrollProp: null
+      store: this.$store.state
     };
-  },
-
-  mounted() {
-    window.addEventListener("scroll", this.onScroll);
-  },
-
-  methods: {
-    onScroll() {
-      this.scrollProp = window.scrollY;
-    }
   }
 };
 </script>

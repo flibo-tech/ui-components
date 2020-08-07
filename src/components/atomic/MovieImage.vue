@@ -16,9 +16,10 @@ export default {
     imageUrl: {
       type: String
     },
-    scrollProp: {
-      type: Number
-    }
+  },
+
+ mounted() {
+    window.addEventListener("scroll", this.onScroll);
   },
 
   data() {
@@ -36,9 +37,9 @@ export default {
     }
   },
 
-  watch: {
-    scrollProp(scrollProp) {
-      let scopeScroll = scrollProp;
+  methods: {
+    onScroll() {
+      let scopeScroll = window.scrollY;
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
       let imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
 
@@ -74,5 +75,6 @@ img {
   padding-top: 0px;
   position: sticky;
   overflow: hidden;
+  transition: padding 1s linear;
 }
 </style>
