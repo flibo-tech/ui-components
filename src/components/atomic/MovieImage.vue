@@ -74,7 +74,7 @@ img {
 }
 .image-container {
   padding-top: 0px;
-  position: fixed;
+  position: sticky;
   overflow: hidden;
 }
 </style>
