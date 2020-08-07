@@ -17,7 +17,7 @@
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
     <MovieImage v-if="store.component == 'MovieImage'" imageUrl="poster" />
-    <div v-if="store.component == 'MovieImage'" style="line-height: 2; font-size: 20px;">
+    <div v-if="store.component == 'MovieImage'" style="line-height: 2; font-size: 20px;" id="text-1">
       <div @click="store.component = null">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum neque et nesciunt deserunt nam voluptate suscipit ducimus, non commodi inventore beatae quos quam ipsam expedita reprehenderit fugit autem aliquam consectetur.

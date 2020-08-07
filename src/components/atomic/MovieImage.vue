@@ -20,6 +20,8 @@ export default {
 
   mounted() {
     this.imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
+    document.getElementById("text-1").style.paddingTop =
+      this.imageHeight + "px";
     window.addEventListener("scroll", this.onScroll);
   },
 
@@ -28,7 +30,8 @@ export default {
       store: this.$store.state,
       lastScrollPos: null,
       lastPadding: null,
-      imageHeight: null
+      imageHeight: null,
+      endConditionCheck: true
     };
   },
 
@@ -42,20 +45,20 @@ export default {
     onScroll() {
       let scopeScroll = window.scrollY;
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
-      console.log(scopeScroll);
       let screenWidth = screen.width;
-      if (screenWidth + 60 < imageWidth) {
+      if (screenWidth < imageWidth) {
         // console.log(screenWidth, "Screen", imageWidth, "Image");
-        this.$refs.movieImage.style.height = this.imageHeight - scopeScroll + "px";
-        // console.log(imageHeight - scopeScroll + "px")
-        // this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
-        // this.lastPadding = this.$refs.movieImage.style.paddingTop;
-        // this.lastScrollPos = scopeScroll;
+        this.$refs.movieImage.style.height =
+          this.imageHeight - scopeScroll + "px";
+
+        this.lastScrollPos = scopeScroll;
+      } else if (this.endConditionCheck) {
+        console.log("elseIf");
+        document.getElementById("text-1").style.paddingTop = "0px";
+        this.$refs.movieImageContainer.style.position = "relative";
+        window.scrollTo(0, 0);
+        this.endConditionCheck = false;
       }
-      //  else if(scopeScroll <= this.lastScrollPos && this.lastPadding ) {
-      //    console.log("elseIf")
-      //   this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
-      // }
     }
   }
 };
@@ -74,7 +77,7 @@ img {
 }
 .image-container {
   padding-top: 0px;
-  position: sticky;
+  position: fixed;
   overflow: hidden;
 }
 </style>
