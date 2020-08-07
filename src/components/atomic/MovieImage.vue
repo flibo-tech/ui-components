@@ -4,7 +4,6 @@
       <div ref="movieImageContainer" class="image-container">
         <img ref="movieImage" :src="getImg" />
       </div>
-      
     </div>
   </div>
 </template>
@@ -39,16 +38,20 @@ export default {
       let scopeScroll = scrollProp;
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
       let imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
+      let lastPadding;
 
       let screenWidth = screen.width;
       if (screenWidth + 60 < imageWidth) {
-      console.log(screenWidth, "Screen", imageWidth, "Image")
+        console.log(screenWidth, "Screen", imageWidth, "Image");
         this.$refs.movieImage.style.height = imageHeight - scopeScroll + "px";
-        // console.log(imageHeight - scopeScroll + "px")
+        this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
+        lastPadding = this.$refs.movieImage.style.paddingTop;
+        console.log(lastPadding)
+      } else {
+        this.$refs.movieImage.style.paddingTop = scopeScroll + "px";
       }
     }
-  },
-
+  }
 };
 </script>
 
@@ -64,6 +67,7 @@ img {
   height: 80vh;
 }
 .image-container {
+  padding-top: 0px;
   position: sticky;
   overflow: hidden;
 }
