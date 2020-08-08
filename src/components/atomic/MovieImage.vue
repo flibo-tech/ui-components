@@ -27,8 +27,9 @@ export default {
       lastScrollPos: null,
       lastPadding: null,
       imageHeight: null,
-      endConditionCheck: false,
-      isChecked: false
+      endConditionCheck: true,
+      previousScroll: 0,
+      isScrollingUp: false
     };
   },
 
@@ -43,24 +44,51 @@ export default {
       let scopeScroll = window.scrollY;
       let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
       let screenWidth = screen.width;
+      let settledImage = this.$refs.movieImage.getBoundingClientRect().height;
+
       if (screenWidth < imageWidth) {
+        console.log(1);
         // console.log(screenWidth, "Screen", imageWidth, "Image");
         this.$refs.movieImage.style.height =
           this.imageHeight - scopeScroll + "px";
         this.lastScrollPos = scopeScroll;
-        this.endConditionCheck = true;
+        this.updateScrollDirection();
+        
+        // if (this.isScrollingUp) {
+        //   document.getElementById("text-1").style.paddingTop =
+        //   settledImage + scopeScroll + "px";
+        // }
       } else if (this.endConditionCheck) {
+        console.log(2);
+
         document.getElementById("text-1").style.paddingTop = "0px";
         this.$refs.movieImageContainer.style.position = "relative";
+        this.updateScrollDirection();
+
         window.scrollTo(0, 0);
         this.endConditionCheck = false;
-      
-      } else if (window.scrollY === 0) {
+      } else if (window.scrollY === 0 && this.isScrollingUp && settledImage != this.imageHeight) {
+        console.log(3);
+
         window.scrollTo(0, this.lastScrollPos);
         this.$refs.movieImageContainer.style.position = "fixed";
-        this.$refs.movieImage.style.height =
-          this.imageHeight + scopeScroll + "px";
-        document.getElementById("text-1").style.paddingTop = this.imageHeight + "px";
+        // this.$refs.movieImage.style.height =
+        //   this.imageHeight + scopeScroll + "px";
+        document.getElementById("text-1").style.paddingTop =
+          settledImage + "px";
+        // this.updateScrollDirection();
+      } else {
+        this.updateScrollDirection();
+      }
+
+      this.previousScroll = window.scrollY;
+    },
+
+    updateScrollDirection() {
+      if (window.scrollY <= this.previousScroll) {
+        this.isScrollingUp = true;
+      } else {
+        this.isScrollingUp = false;
       }
     }
   }
