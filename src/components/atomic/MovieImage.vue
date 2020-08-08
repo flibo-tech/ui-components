@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <div>
-      <div ref="movieImageContainer" class="image-container">
-        <img ref="movieImage" :src="getImg" />
-      </div>
-    </div>
+  <div ref="movieImageContainer" class="image-container">
+    <img ref="movieImage" :src="getImg" />
   </div>
 </template>
 
@@ -31,7 +27,8 @@ export default {
       lastScrollPos: null,
       lastPadding: null,
       imageHeight: null,
-      endConditionCheck: true
+      endConditionCheck: false,
+      isChecked: false
     };
   },
 
@@ -50,14 +47,20 @@ export default {
         // console.log(screenWidth, "Screen", imageWidth, "Image");
         this.$refs.movieImage.style.height =
           this.imageHeight - scopeScroll + "px";
-
         this.lastScrollPos = scopeScroll;
+        this.endConditionCheck = true;
       } else if (this.endConditionCheck) {
-        console.log("elseIf");
         document.getElementById("text-1").style.paddingTop = "0px";
         this.$refs.movieImageContainer.style.position = "relative";
         window.scrollTo(0, 0);
         this.endConditionCheck = false;
+      
+      } else if (window.scrollY === 0) {
+        window.scrollTo(0, this.lastScrollPos);
+        this.$refs.movieImageContainer.style.position = "fixed";
+        this.$refs.movieImage.style.height =
+          this.imageHeight + scopeScroll + "px";
+        document.getElementById("text-1").style.paddingTop = this.imageHeight + "px";
       }
     }
   }
@@ -71,11 +74,12 @@ p {
 }
 img {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+
   height: 80vh;
 }
 .image-container {
+  left: 50%;
+  transform: translateX(-50%);
   padding-top: 0px;
   position: fixed;
   overflow: hidden;
