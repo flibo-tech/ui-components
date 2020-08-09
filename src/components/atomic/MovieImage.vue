@@ -51,16 +51,21 @@ export default {
         this.$refs.movieImage.style.height =
           this.imageHeight - scopeScroll + "px";
         this.lastScrollPos = scopeScroll;
-
+      this.$refs.movieImage.style.min
         this.updateScrollDirection();
         if (this.isScrollingUp) {
           this.$refs.movieImage.style.width = "auto";
           console.log(1.5);
           document.getElementById("text-1").style.paddingTop =
             settledImage + scopeScroll + "px";
-          this.$refs.movieImage.style.height =
-            this.imageHeight - scopeScroll + "px";
+          // this.$refs.movieImage.style.height =
+          //   this.imageHeight - scopeScroll + "px";
           // this.endConditionCheck = true;
+        }
+        if (this.$refs.movieImage.getBoundingClientRect().width < screenWidth * 95/100) {
+          console.log("width check")
+          this.$refs.movieImage.style.width = 100 + "vw";
+          // this.$refs.movieImage.style.height = "10px";
         }
       } else if (this.endConditionCheck) {
         console.log(2);
@@ -107,7 +112,6 @@ p {
 }
 img {
   position: relative;
-
   height: 80vh;
 }
 .image-container {
