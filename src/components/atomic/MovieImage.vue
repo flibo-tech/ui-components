@@ -60,7 +60,7 @@ export default {
           settledImage + scopeScroll + "px";
           this.$refs.movieImage.style.height =
           this.imageHeight - scopeScroll + "px";
-        this.endConditionCheck = true;
+        // this.endConditionCheck = true;
 
         }
       } else if (this.endConditionCheck) {
