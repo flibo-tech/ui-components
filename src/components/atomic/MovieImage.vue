@@ -54,14 +54,13 @@ export default {
 
         this.updateScrollDirection();
         if (this.isScrollingUp) {
-        this.$refs.movieImage.style.width = "auto";
-          console.log(1.5)
+          this.$refs.movieImage.style.width = "auto";
+          console.log(1.5);
           document.getElementById("text-1").style.paddingTop =
-          settledImage + scopeScroll + "px";
+            settledImage + scopeScroll + "px";
           this.$refs.movieImage.style.height =
-          this.imageHeight - scopeScroll + "px";
-        // this.endConditionCheck = true;
-
+            this.imageHeight - scopeScroll + "px";
+          this.endConditionCheck = true;
         }
       } else if (this.endConditionCheck) {
         console.log(2);
@@ -72,9 +71,13 @@ export default {
 
         window.scrollTo(0, 0);
         this.endConditionCheck = false;
-      } else if (window.scrollY === 0 && this.isScrollingUp && settledImage != this.imageHeight) {
+      } else if (
+        window.scrollY === 0 &&
+        this.isScrollingUp &&
+        settledImage != this.imageHeight
+      ) {
         console.log(3);
-        console.log(screenWidth, "screen width", imageWidth, "image width")
+        console.log(screenWidth, "screen width", imageWidth, "image width");
 
         window.scrollTo(0, this.lastScrollPos);
         this.$refs.movieImageContainer.style.position = "fixed";
