@@ -38,6 +38,7 @@ export default {
 body {
   margin: 0;
   padding: 0;
+  background-color: #272431;
 }
 .f-container {
   position: relative;

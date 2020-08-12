@@ -16,6 +16,7 @@
     <PlatformBar class="platform" 
     :platforms="platforms"
     :stream="stream"
+    :noOfPlat="noOfPlat"
     />
 
     <img
@@ -165,6 +166,9 @@ export default {
       type: String,
       required: false,
     },
+    noOfPlat: {
+      type: Number
+    }
   },
 
   components: {

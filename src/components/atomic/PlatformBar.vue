@@ -34,6 +34,9 @@ export default {
     stream: {
       type: Object,
       required: false
+    },
+    noOfPlat: {
+      type: Number
     }
   },
 
@@ -79,6 +82,8 @@ export default {
 
   mounted() {
     this.calcPlat();
+    console.log(this.noOfPlat)
+    this.noOfPlatforms = this.noOfPlat;
   }
 };
 </script>
