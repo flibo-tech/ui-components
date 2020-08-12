@@ -60,10 +60,10 @@ export default {
             settledImage + scopeScroll + "px";
           // this.$refs.movieImage.style.height =
           //   this.imageHeight - scopeScroll + "px";
-          // this.endConditionCheck = true;
+          
+          this.endConditionCheck = true;
         }
         if (this.$refs.movieImage.getBoundingClientRect().width < screenWidth * 95/100) {
-          console.log("width check")
           this.$refs.movieImage.style.width = 100 + "vw";
           // this.$refs.movieImage.style.height = "10px";
         }

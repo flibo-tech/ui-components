@@ -33,6 +33,7 @@
         <h1>Lorem ipsum dolor</h1>
       </div>
     </div>
+    <PosterTest v-if="store.component == 'PosterTest'" />
   </div>
 </template>
 
@@ -50,6 +51,8 @@ import LogoTestPreview from "./../components/molecular/LogoTestPreview";
 import CardAnimation from "../components/atomic/CardAnimation";
 import ProgressTest from "./../components/molecular/ProgressTest";
 import MovieImage from "./../components/atomic/MovieImage";
+import PosterTest from "./../components/molecular/PosterTest";
+
 
 export default {
   name: "Home",
@@ -66,7 +69,8 @@ export default {
     LogoTestPreview,
     CardAnimation,
     ProgressTest,
-    MovieImage
+    MovieImage,
+    PosterTest
   },
   data() {
     return {
