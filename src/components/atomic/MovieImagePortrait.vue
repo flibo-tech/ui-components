@@ -27,7 +27,7 @@ export default {
 
   mounted() {
     this.imageInitialHeight = this.$refs.movieImageContainer.getBoundingClientRect().height;
-    this.heightThreshold = this.imageInitialHeight * (3 / 8);
+    this.heightThreshold = 0.3 * window.innerHeight;
     this.widthFactor = 100 / this.imageInitialHeight;
     document.getElementById("text-1").style.paddingTop =
       this.imageInitialHeight + "px";
@@ -62,18 +62,15 @@ export default {
               Math.max(imageHeight - scroll, this.heightThreshold) + "px";
 
             this.$refs.movieImage.style.width =
-              Math.max(
-                this.widthFactor *
-                  this.$refs.movieImageContainer.getBoundingClientRect().height,
-                40
-              ) + "%";
+              this.widthFactor *
+                this.$refs.movieImageContainer.getBoundingClientRect().height +
+              "%";
             this.updateScrollDirection();
           } else {
             document.getElementById("text-1").style.paddingTop = "0px";
             this.$refs.movieImageContainer.style.position = "relative";
             this.$refs.movieImageContainer.style.height =
               this.heightThreshold + "px";
-            this.$refs.movieImage.style.width = "40%";
             this.updateScrollDirection();
             window.scrollTo(0, 0);
           }
@@ -136,7 +133,7 @@ p {
   transform: translateX(-50%);
   padding-top: 0px;
   overflow: hidden;
-  height: 80vh;
+  max-height: 80vh;
 }
 .content-image {
   position: relative;
