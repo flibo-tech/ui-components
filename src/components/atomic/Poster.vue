@@ -184,6 +184,7 @@ export default {
         'amazon_prime_video': "someUrl",
         'jio_cinema': "someUrl",
         'netflix': "someUrl",
+        'my_anime_list': "someUrl",
       }
     };
   },
