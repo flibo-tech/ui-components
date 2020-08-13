@@ -4,7 +4,10 @@
     style="position: fixed;"
     class="image-container"
   >
-    <img ref="movieImage" :src="getImg" />
+    <img
+      ref="movieImage"
+      src="https://image.tmdb.org/t/p/w1280/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+    />
   </div>
 </template>
 
@@ -32,12 +35,6 @@ export default {
       previousScroll: 0,
       isScrollingUp: false
     };
-  },
-
-  computed: {
-    getImg() {
-      return require("../../assets/" + this.imageUrl + ".jpg");
-    }
   },
 
   methods: {
