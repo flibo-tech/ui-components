@@ -16,15 +16,40 @@
     <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
-    <MovieImage v-if="store.component == 'MovieImage'" imageUrl="poster" />
-    <div v-if="store.component == 'MovieImage'" style="line-height: 2; font-size: 20px;" id="text-1">
+    <MovieImageLandscape
+      v-if="store.component == 'MovieImageLandscape'"
+      imageUrl="https://image.tmdb.org/t/p/w1280/2yubt6LkLfmuv8Z7sbhmjZUYom7.jpg"
+    />
+    <MovieImagePortrait
+      v-if="store.component == 'MovieImagePortrait'"
+      imageUrl="https://image.tmdb.org/t/p/w500/vzvKcPQ4o7TjWeGIn0aGC9FeVNu.jpg"
+    />
+    <div
+      v-if="
+        ['MovieImageLandscape', 'MovieImagePortrait'].includes(store.component)
+      "
+      style="line-height: 2; font-size: 20px;"
+      id="text-1"
+    >
       <div @click="store.component = null">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum neque et nesciunt deserunt nam voluptate suscipit ducimus, non commodi inventore beatae quos quam ipsam expedita reprehenderit fugit autem aliquam consectetur.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dolore officiis repudiandae enim sunt quas autem omnis, neque unde praesentium distinctio deserunt ipsa reiciendis nihil veritatis quo voluptatibus a! Veritatis.
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus ipsum voluptas sapiente. Deserunt quibusdam vero quo doloribus, qui ipsum, beatae omnis quaerat rem maiores reiciendis laudantium suscipit esse eius maxime?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, nihil voluptas nostrum tempore facilis cumque repellendus asperiores harum minima, dolor fuga excepturi. Ea doloremque cumque facere quas harum deleniti ipsam.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo corporis deleniti quas obcaecati hic laboriosam nulla aperiam ut tempore unde ullam, rerum quidem ab consectetur dolore quod cum architecto sint.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum neque
+          et nesciunt deserunt nam voluptate suscipit ducimus, non commodi
+          inventore beatae quos quam ipsam expedita reprehenderit fugit autem
+          aliquam consectetur. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Voluptatem dolore officiis repudiandae enim sunt
+          quas autem omnis, neque unde praesentium distinctio deserunt ipsa
+          reiciendis nihil veritatis quo voluptatibus a! Veritatis. Lorem ipsum
+          dolor, sit amet consectetur adipisicing elit. Voluptatibus ipsum
+          voluptas sapiente. Deserunt quibusdam vero quo doloribus, qui ipsum,
+          beatae omnis quaerat rem maiores reiciendis laudantium suscipit esse
+          eius maxime? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          In, nihil voluptas nostrum tempore facilis cumque repellendus
+          asperiores harum minima, dolor fuga excepturi. Ea doloremque cumque
+          facere quas harum deleniti ipsam. Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Nemo corporis deleniti quas obcaecati
+          hic laboriosam nulla aperiam ut tempore unde ullam, rerum quidem ab
+          consectetur dolore quod cum architecto sint.
         </p>
       </div>
       <div>
@@ -50,9 +75,9 @@ import LogoTest from "./../components/molecular/LogoTest";
 import LogoTestPreview from "./../components/molecular/LogoTestPreview";
 import CardAnimation from "../components/atomic/CardAnimation";
 import ProgressTest from "./../components/molecular/ProgressTest";
-import MovieImage from "./../components/atomic/MovieImage";
 import PosterTest from "./../components/molecular/PosterTest";
-
+import MovieImageLandscape from "./../components/atomic/MovieImageLandscape";
+import MovieImagePortrait from "./../components/atomic/MovieImagePortrait";
 
 export default {
   name: "Home",
@@ -69,8 +94,9 @@ export default {
     LogoTestPreview,
     CardAnimation,
     ProgressTest,
-    MovieImage,
-    PosterTest
+    PosterTest,
+    MovieImageLandscape,
+    MovieImagePortrait
   },
   data() {
     return {

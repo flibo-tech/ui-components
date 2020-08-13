@@ -1,17 +1,23 @@
 <template>
-<div>
-  <div id="app" class="f-container">
-    <Navigation  v-if="store.component !== 'MovieImage'"/>
-    <router-view  />
+  <div>
+    <div id="app" class="f-container">
+      <Navigation
+        v-if="
+          !['MovieImageLandscape', 'MovieImagePortrait'].includes(
+            store.component
+          )
+        "
+      />
+      <router-view />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 // import MovieImage from "./components/atomic/MovieImage"
 import Navigation from "./components/Navigation";
 export default {
-  components: { Navigation, },
+  components: { Navigation },
   data() {
     return {
       store: this.$store.state
@@ -34,7 +40,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 body {
   margin: 0;
   padding: 0;
@@ -51,5 +56,5 @@ body {
 </style>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 </style>

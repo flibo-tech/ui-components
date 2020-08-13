@@ -11,13 +11,13 @@
     </ul>
     <br />
     <h1>Atoms</h1>
-     <h4 class="nav-item" @click="store.component = 'SwipeTest'">
+    <h4 class="nav-item" @click="store.component = 'SwipeTest'">
       Swipe Test
     </h4>
     <h4 class="nav-item" @click="store.component = 'ButtonTest'">
       Button Test
     </h4>
-     <h4 class="nav-item" @click="store.component = 'RateProgress'">
+    <h4 class="nav-item" @click="store.component = 'RateProgress'">
       RateProgress
     </h4>
     <h4 class="nav-item" @click="store.component = 'JsonAnimation'">
@@ -32,13 +32,16 @@
     <h4 class="nav-item" @click="store.component = 'ProgressTest'">
       Progress
     </h4>
-    <h4 class="nav-item" @click="store.component = 'MovieImage'">
-      Movie Image
+    <h4 class="nav-item" @click="store.component = 'MovieImageLandscape'">
+      Movie Image (Landscape)
     </h4>
-     <h4 class="nav-item" @click="store.component = 'PosterTest'">
+    <h4 class="nav-item" @click="store.component = 'MovieImagePortrait'">
+      Movie Image (Portrait)
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'PosterTest'">
       Poster
     </h4>
-    
+
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">

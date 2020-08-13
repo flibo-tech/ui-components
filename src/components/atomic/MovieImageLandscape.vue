@@ -2,20 +2,9 @@
   <div
     ref="movieImageContainer"
     style="position: fixed;"
-    class="portrait-image-container"
+    class="image-container"
   >
-    <img
-      class="content-image"
-      style="width: 100%;"
-      ref="movieImage"
-      src="https://image.tmdb.org/t/p/w500/tU7NpwxpX3W6Vpgu2hWQfQKizMo.jpg"
-    />
-
-    <img
-      class="portrait-background-image"
-      ref="movieImageBG"
-      src="https://image.tmdb.org/t/p/w500/tU7NpwxpX3W6Vpgu2hWQfQKizMo.jpg"
-    />
+    <img ref="movieImage" :src="imageUrl" />
   </div>
 </template>
 
@@ -30,9 +19,7 @@ export default {
   },
 
   mounted() {
-    this.imageInitialHeight = this.$refs.movieImageContainer.getBoundingClientRect().height;
-    this.heightThreshold = this.imageInitialHeight * (3 / 8);
-    this.widthFactor = 100 / this.imageInitialHeight;
+    this.imageInitialHeight = this.$refs.movieImage.getBoundingClientRect().height;
     document.getElementById("text-1").style.paddingTop =
       this.imageInitialHeight + "px";
     window.addEventListener("scroll", this.onScroll);
@@ -43,9 +30,7 @@ export default {
       store: this.$store.state,
       imageInitialHeight: 0,
       previousScroll: 0,
-      isScrollingUp: false,
-      heightThreshold: 0,
-      widthFactor: 0
+      isScrollingUp: false
     };
   },
 
@@ -53,31 +38,27 @@ export default {
     onScroll() {
       let scroll_position = window.scrollY;
       let scroll = Math.abs(scroll_position - this.previousScroll);
-      let imageHeight = this.$refs.movieImageContainer.getBoundingClientRect()
-        .height;
+      let imageWidth = this.$refs.movieImage.getBoundingClientRect().width;
+      let imageHeight = this.$refs.movieImage.getBoundingClientRect().height;
       let textPaddingTop = document
         .getElementById("text-1")
         .style.paddingTop.replace("px", "");
+      let screenWidth = screen.width;
 
       if (!this.isScrollingUp) {
         if (this.$refs.movieImageContainer.style.position == "fixed") {
-          if (imageHeight > this.heightThreshold) {
-            this.$refs.movieImageContainer.style.height =
-              Math.max(imageHeight - scroll, this.heightThreshold) + "px";
-
-            this.$refs.movieImage.style.width =
+          if (screenWidth < imageWidth) {
+            this.$refs.movieImage.style.height =
               Math.max(
-                this.widthFactor *
-                  this.$refs.movieImageContainer.getBoundingClientRect().height,
-                40
-              ) + "%";
+                imageHeight - scroll,
+                (imageHeight / imageWidth) * screenWidth
+              ) + "px";
             this.updateScrollDirection();
           } else {
             document.getElementById("text-1").style.paddingTop = "0px";
             this.$refs.movieImageContainer.style.position = "relative";
-            this.$refs.movieImageContainer.style.height =
-              this.heightThreshold + "px";
-            this.$refs.movieImage.style.width = "40%";
+            this.$refs.movieImage.style.height =
+              (imageHeight / imageWidth) * screenWidth + "px";
             this.updateScrollDirection();
             window.scrollTo(0, 0);
           }
@@ -97,12 +78,7 @@ export default {
           }
         } else if (this.$refs.movieImageContainer.style.position == "fixed") {
           if (imageHeight < this.imageInitialHeight) {
-            this.$refs.movieImageContainer.style.height =
-              imageHeight + scroll + "px";
-            this.$refs.movieImage.style.width =
-              this.widthFactor *
-                this.$refs.movieImageContainer.getBoundingClientRect().height +
-              "%";
+            this.$refs.movieImage.style.height = imageHeight + scroll + "px";
             if (textPaddingTop < this.imageInitialHeight) {
               document.getElementById("text-1").style.paddingTop =
                 imageHeight + 10 + scroll + "px";
@@ -134,26 +110,15 @@ p {
   font-size: 20px;
   line-height: 2;
 }
-.portrait-image-container {
-  width: 100%;
+img {
+  position: relative;
+  display: block;
+  height: 80vh;
+}
+.image-container {
   left: 50%;
   transform: translateX(-50%);
   padding-top: 0px;
   overflow: hidden;
-  height: 80vh;
-}
-.content-image {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  display: block;
-  z-index: 2;
-}
-.portrait-background-image {
-  position: absolute;
-  width: 100%;
-  margin-top: -100%;
-  filter: blur(5px);
-  z-index: 1;
 }
 </style>
