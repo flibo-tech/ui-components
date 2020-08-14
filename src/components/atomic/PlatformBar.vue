@@ -1,14 +1,11 @@
 <template>
-  <div :class="platCalc" v-if="noOfPlatforms">
+  <div :class="platCalc" ref="container" v-if="noOfPlatforms">
     <div class="one" ref="one" v-if="noOfPlatforms === 1">
       <!-- <img src="../../assets/platforms/netflix.png" /> -->
     </div>
 
-    <div class="two" ref="two" v-if="noOfPlatforms === 2">
-    </div>
-
-    <div class="three" ref="three" v-if="noOfPlatforms >= 3">
-      <img src="../../assets/platforms/netflix.png" />
+    <div class="three" ref="three" v-if="noOfPlatforms >= 2">
+      <!-- <img src="../../assets/platforms/netflix.png" /> -->
       <div class="plus" @click="scrollable" v-if="notScrollable">+ {{ noOfPlatforms - 1 }}</div>
     </div>
   </div>
@@ -51,8 +48,6 @@ export default {
       let className = null;
       if (this.noOfPlatforms === 1) {
         className = "platform-container";
-      } else if (this.noOfPlatforms === 2) {
-        className = "two-plat";
       } else {
         className = "three-plus-plat";
       }
@@ -78,7 +73,7 @@ export default {
         path = "https://i.ibb.co/rHW1NyC/hotstar.png";
       } else if (platform === "amazon_prime_video") {
         path = "https://i.ibb.co/FwGDHZg/netflix.png";
-      } else if (platform === "jmy_anime_list") {
+      } else if (platform === "my_anime_list") {
         path = "https://i.ibb.co/rHW1NyC/hotstar.png";
       } else {
         console.log("Platform not found.");
@@ -111,9 +106,24 @@ export default {
     },
 
     scrollable() {
-      let div = document.querySelector(".three-plus-plat");
+      let div = this.$refs.three;
+      while (div.firstChild) {
+        div.removeChild(div.firstChild);
+      }
+      this.$refs.container.classList.remove("three-plus-plat");
       div.classList.add("scrollable");
       this.notScrollable = false;
+
+      for (let i = 0; i < this.moviePlatforms.length; i++) {
+        document.createElement("img");
+        let img = document.createElement("img");
+        div = this.$refs.three;
+        img.src = this.checkImage(this.finalPlatforms[i]);
+        img.style.width = "80px";
+        img.style.height = "80px";
+        img.style.padding = "0 7px";
+        div.insertBefore(img, div.firstChild);
+      }
     },
 
     addIcons() {
@@ -130,31 +140,16 @@ export default {
           img.src = this.checkImage(this.finalPlatforms[0]);
           div.appendChild(img);
         });
-      } else if (this.noOfPlatforms === 2) {
+      } else if (this.noOfPlatforms >= 2) {
         this.$nextTick(() => {
-          for (let i = 0; i < 2; i++) {
-            document.createElement("img");
-            let img = document.createElement("img");
-            div = this.$refs.two;
-            img.src = this.checkImage(this.finalPlatforms[i]);
-            img.style.width = "90px";
-            img.style.height = "90px";
-            img.style.boxSizing = "border-box";
-            div.appendChild(img);
-          }
-        });
-      } else if (this.noOfPlatforms >= 3 && this.notScrollable === false) {
-        this.$nextTick(() => {
-          for (let i = 0; i < this.moviePlatforms.length; i++) {
-            document.createElement("img");
-            let img = document.createElement("img");
-            div = this.$refs.two;
-            img.src = this.checkImage(this.finalPlatforms[i]);
-            img.style.width = "90px";
-            img.style.height = "90px";
-            img.style.boxSizing = "border-box";
-            div.appendChild(img);
-          }
+          document.createElement("img");
+          let img = document.createElement("img");
+          div = this.$refs.three;
+          img.src = this.checkImage(this.finalPlatforms[0]);
+          img.style.width = "80px";
+          img.style.height = "80px";
+          img.style.boxSizing = "border-box";
+          div.insertBefore(img, div.firstChild);
         });
       }
     }
@@ -184,35 +179,16 @@ img {
   border-radius: 50%;
 }
 
-.two-plat {
-  background-color: rgb(255, 255, 255);
-  width: 200px;
-  height: 100px;
-  border-radius: 50px;
-}
-
 .three-plus-plat {
   background-color: rgb(255, 255, 255);
   width: 180px;
-  height: 100px;
+  height: 90px;
   border-radius: 50px;
 }
 
 .one > img {
   padding: 5px;
   max-width: 100%;
-  border-radius: 50%;
-}
-
-.two {
-  display: flex;
-  justify-content: space-evenly;
-  height: 100%;
-  align-items: center;
-}
-
-.two img {
-  max-width: 45%;
   border-radius: 50%;
 }
 
@@ -231,12 +207,19 @@ img {
   border-radius: 50px;
 }
 
-.three img {
-  max-width: 50%;
-  border-radius: 50%;
-}
 
 .scrollable {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 50px;
+  background-color: rgb(255, 255, 255);
+  padding-left: 160px;
   width: 220px;
+  height: 90px;
+  overflow: scroll;
+}
+.scrollable::-webkit-scrollbar {
+  display: none;
 }
 </style>
