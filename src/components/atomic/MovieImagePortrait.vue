@@ -148,7 +148,7 @@ p {
   transform: translateX(-50%);
   display: block;
   z-index: 2;
-  transition: width 50ms linear;
+  transition: width 10ms linear;
 }
 .portrait-background-image {
   position: absolute;

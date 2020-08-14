@@ -114,7 +114,7 @@ p {
   position: relative;
   display: block;
   height: 80vh;
-  transition: height 50ms linear;
+  transition: height 10ms linear;
 }
 .landscape-image-container {
   left: 50%;
