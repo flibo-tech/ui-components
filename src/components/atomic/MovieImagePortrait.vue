@@ -1,7 +1,11 @@
 <template>
   <div
     ref="movieImageContainer"
-    style="position: fixed;"
+    :style="
+      'position: fixed; max-height: ' +
+        Math.min(1.5 * screenWidth, 0.8 * screenHeight) +
+        'px;'
+    "
     class="portrait-image-container"
   >
     <img
@@ -41,7 +45,9 @@ export default {
       previousScroll: 0,
       isScrollingUp: false,
       heightThreshold: 0,
-      widthFactor: 0
+      widthFactor: 0,
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight
     };
   },
 
@@ -129,11 +135,12 @@ p {
 }
 .portrait-image-container {
   width: 100%;
+  height: 100%;
+  background-color: #f5f4f4;
   left: 50%;
   transform: translateX(-50%);
   padding-top: 0px;
   overflow: hidden;
-  max-height: 80vh;
 }
 .content-image {
   position: relative;

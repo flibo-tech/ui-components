@@ -18,11 +18,11 @@
     <ProgressTest v-if="store.component == 'ProgressTest'" />
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
-      imageUrl="https://image.tmdb.org/t/p/w1280/2yubt6LkLfmuv8Z7sbhmjZUYom7.jpg"
+      imageUrl="https://image.tmdb.org/t/p/original/hpDQDYsR53uBj0JxRsDx1qniuA9.jpg"
     />
     <MovieImagePortrait
       v-if="store.component == 'MovieImagePortrait'"
-      imageUrl="https://image.tmdb.org/t/p/w500/vzvKcPQ4o7TjWeGIn0aGC9FeVNu.jpg"
+      imageUrl="https://image.tmdb.org/t/p/w500/yk4J4aewWYNiBhD49WD7UaBBn37.jpg"
     />
     <div
       v-if="
