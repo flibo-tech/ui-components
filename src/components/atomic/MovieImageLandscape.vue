@@ -69,10 +69,10 @@ export default {
         if (this.$refs.movieImageContainer.style.position == "relative") {
           if (scroll_position == 0) {
             document.getElementById("text-1").style.paddingTop =
-              imageHeight + 10 + "px";
+              imageHeight + 100 + "px";
             this.$refs.movieImageContainer.style.position = "fixed";
             this.updateScrollDirection();
-            window.scrollTo(0, 10);
+            window.scrollTo(0, 100);
           } else {
             this.updateScrollDirection();
           }
@@ -81,9 +81,9 @@ export default {
             this.$refs.movieImage.style.height = imageHeight + scroll + "px";
             if (textPaddingTop < this.imageInitialHeight) {
               document.getElementById("text-1").style.paddingTop =
-                imageHeight + 10 + scroll + "px";
+                imageHeight + 100 + scroll + "px";
               this.updateScrollDirection();
-              window.scrollTo(0, 10);
+              window.scrollTo(0, 100);
             } else {
               this.updateScrollDirection();
             }
