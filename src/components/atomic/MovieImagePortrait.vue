@@ -9,7 +9,7 @@
     class="portrait-image-container"
   >
     <img
-      class="content-image"
+      class="portrait-content-image"
       style="width: 100%;"
       ref="movieImage"
       :src="imageUrl"
@@ -142,12 +142,13 @@ p {
   padding-top: 0px;
   overflow: hidden;
 }
-.content-image {
+.portrait-content-image {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   display: block;
   z-index: 2;
+  transition: width 50ms linear;
 }
 .portrait-background-image {
   position: absolute;

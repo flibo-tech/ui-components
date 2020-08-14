@@ -2,9 +2,9 @@
   <div
     ref="movieImageContainer"
     style="position: fixed;"
-    class="image-container"
+    class="landscape-image-container"
   >
-    <img ref="movieImage" :src="imageUrl" />
+    <img ref="movieImage" class="landscape-content-image" :src="imageUrl" />
   </div>
 </template>
 
@@ -110,12 +110,13 @@ p {
   font-size: 20px;
   line-height: 2;
 }
-img {
+.landscape-content-image {
   position: relative;
   display: block;
   height: 80vh;
+  transition: height 50ms linear;
 }
-.image-container {
+.landscape-image-container {
   left: 50%;
   transform: translateX(-50%);
   padding-top: 0px;
