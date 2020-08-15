@@ -41,6 +41,9 @@
     <h4 class="nav-item" @click="store.component = 'PosterTest'">
       Poster
     </h4>
+    <h4 class="nav-item" @click="store.component = 'Trailer'">
+      Trailer
+    </h4>
 
     <br />
     <h1>Molecules</h1>
