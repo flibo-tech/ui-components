@@ -13,11 +13,13 @@
       @click="openContent"
     />
 
-    <PlatformBar class="platform" 
-    :platforms="platforms"
-    :stream="stream"
-    :noOfPlat="noOfPlat"
+    <PlatformBar
+      :style="{'position': 'absolute', 'bottom': -(containerWidth / 7) + 'px' }"
+      :platformArr="platforms"
+      :moviePlatformsObj="whereToWatchOptions"
+      :containerWidth="containerWidth"
     />
+    
 
     <img
       src="https://flibo-images.s3-us-west-2.amazonaws.com/other/play-white-icon.svg"
@@ -27,17 +29,14 @@
       v-if="trailerId || showPlatforms"
     />
 
-    <div class="where-to-watch-container" v-if="showPlatforms">
+    <!-- <div class="where-to-watch-container" v-if="showPlatforms">
       <div class="where-to-watch-subcontainer">
         <div
           class="poster-platforms-container"
           v-for="(link, index) in whereToWatchOptions"
           :key="index"
         >
-          <div
-            @click="goToPlatform(link, 'feed_poster')"
-            class="poster-platform-cropper"
-          >
+          <div @click="goToPlatform(link, 'feed_poster')" class="poster-platform-cropper">
             <img
               v-bind:src="
                 'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
@@ -49,27 +48,17 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
-    <transition
-      appear
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut"
-    >
+    <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <div>
-        <div
-          class="black-background"
-          v-if="play_trailer"
-          @click="play_trailer = !play_trailer"
-        />
+        <div class="black-background" v-if="play_trailer" @click="play_trailer = !play_trailer" />
 
         <div
           class="youtube-player-header"
           :style="is_mobile ? '' : 'top: 75px;left: calc(50vw - 500px);'"
           v-if="play_trailer & (trailerId != null)"
-        >
-          Trailer
-        </div>
+        >Trailer</div>
 
         <div
           v-if="play_trailer & (trailerId != null)"
@@ -99,9 +88,10 @@
           :style="trailerId ? (is_mobile ? '' : 'top: 650px;') : 'top: 40vh;'"
           v-if="play_trailer && showPlatforms"
         >
-          <div class="tap-to-watch-text" v-if="showPlatforms">
-            {{ is_mobile ? "Tap to watch on" : "Click to watch on" }}
-          </div>
+          <div
+            class="tap-to-watch-text"
+            v-if="showPlatforms"
+          >{{ is_mobile ? "Tap to watch on" : "Click to watch on" }}</div>
 
           <div class="youtube-player-platforms">
             <!-- <div
@@ -121,7 +111,7 @@
                   class="youtube-player-platform-icon"
                 />
               </div>
-            </div> -->
+            </div>-->
           </div>
         </div>
       </div>
@@ -130,44 +120,44 @@
 </template>
 
 <script>
-import PlatformBar from './PlatformBar';
+import PlatformBar from "./PlatformBar";
 export default {
   name: "App",
   props: {
     containerWidth: {
       type: Number,
-      required: true,
+      required: true
     },
     contentId: {
       type: Number,
-      required: true,
+      required: true
     },
     title: {
       type: String,
-      required: true,
+      required: true
     },
     image: {
       type: String,
-      required: true,
+      required: true
     },
     trailerId: {
       type: String,
-      required: false,
+      required: false
     },
     whereToWatch: {
       type: Object,
-      required: false,
+      required: false
     },
     parent: {
       type: String,
-      required: true,
+      required: true
     },
     feedType: {
       type: String,
-      required: false,
+      required: false
     },
-    noOfPlat: {
-      type: Number
+    platforms: {
+      type: Array
     }
   },
 
@@ -178,14 +168,7 @@ export default {
   data() {
     return {
       is_mobile: window.screen.height > window.screen.width,
-      play_trailer: false,
-      platforms: ['Netflix', 'Amazon Prime Video', 'Jio Cinema', 'Hotstar'],
-      stream: {
-        'amazon_prime_video': "someUrl",
-        'jio_cinema': "someUrl",
-        'netflix': "someUrl",
-        'my_anime_list': "someUrl",
-      }
+      play_trailer: false
     };
   },
   computed: {
@@ -210,7 +193,7 @@ export default {
       } else {
         return [];
       }
-    },
+    }
   },
   methods: {
     goToPlatform(link, traffic_origin) {
@@ -222,7 +205,7 @@ export default {
         traffic_origin:
           (this.parent == "search_results" ? "search_filter" : this.parent) +
           "__" +
-          traffic_origin,
+          traffic_origin
       };
       this.$emit("update-api-counter", activity);
     },
@@ -237,7 +220,7 @@ export default {
             this.feedType
           : this.parent == "search_results"
           ? "search_filter"
-          : this.parent,
+          : this.parent
       };
       this.$emit("update-api-counter", activity);
     },
@@ -247,21 +230,15 @@ export default {
         origin: this.parent,
         sub_origin: this.feedType,
         content_id: this.contentId,
-        title: this.title,
+        title: this.title
       };
       this.$emit("open-content-page", info);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.platform {
-  position: absolute;
-  bottom: -35px;
-}
-
-
 
 .feed-poster-container {
   position: relative;

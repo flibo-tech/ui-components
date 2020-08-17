@@ -100,7 +100,7 @@ export default {
   },
   data() {
     return {
-      store: this.$store.state
+      store: this.$store.state,
     };
   }
 };
