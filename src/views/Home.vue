@@ -59,6 +59,16 @@
       </div>
     </div>
     <PosterTest v-if="store.component == 'PosterTest'" />
+    <Trailer
+      style="margin-top: 100px;"
+      v-if="store.component == 'Trailer'"
+      :contentId="114538"
+      trailerId="yoLFk4JK_RM"
+      :whereToWatch="whereToWatch"
+      parent="home"
+      feedType="flibo"
+      :size="100"
+    />
   </div>
 </template>
 
@@ -78,6 +88,7 @@ import ProgressTest from "./../components/molecular/ProgressTest";
 import PosterTest from "./../components/molecular/PosterTest";
 import MovieImageLandscape from "./../components/atomic/MovieImageLandscape";
 import MovieImagePortrait from "./../components/atomic/MovieImagePortrait";
+import Trailer from "./../components/atomic/Trailer";
 
 export default {
   name: "Home",
@@ -96,11 +107,29 @@ export default {
     ProgressTest,
     PosterTest,
     MovieImageLandscape,
-    MovieImagePortrait
+    MovieImagePortrait,
+    Trailer
   },
   data() {
     return {
       store: this.$store.state,
+      whereToWatch: {
+        buy: {
+          google_play_movies:
+            "https://play.google.com/store/movies/details/Lone_Survivor?gl=IN&hl=en&id=bsJcOdjWH98",
+          youtube: "https://www.youtube.com/watch?v=bsJcOdjWH98"
+        },
+        rent: {
+          google_play_movies:
+            "https://play.google.com/store/movies/details/Lone_Survivor?gl=IN&hl=en&id=bsJcOdjWH98",
+          youtube: "https://www.youtube.com/watch?v=bsJcOdjWH98"
+        },
+        stream: {
+          amazon_prime_video:
+            "https://www.primevideo.com/detail/amzn1.dv.gti.4ab8d950-cc3f-9dc9-7131-e2aef4abc9b9?ie=UTF8&linkCode=xm2",
+          netflix: "http://www.netflix.com/title/70259795"
+        }
+      }
     };
   }
 };
