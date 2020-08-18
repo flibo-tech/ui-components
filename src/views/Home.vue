@@ -1,5 +1,7 @@
 <template>
-  <div class="home-container">
+  <div
+    :style="[store.component == 'MovieImagePortrait' || store.component == 'MovieImageLandscape' ? {'width': '100vw'} : {}]"
+  >
     <div v-if="store.component == null">
       This website contains all the components (atomic &amp; molecular) used in
       FLIBO.
@@ -112,31 +114,11 @@ export default {
   },
   data() {
     return {
-      store: this.$store.state,
-      whereToWatch: {
-        buy: {
-          google_play_movies:
-            "https://play.google.com/store/movies/details/Lone_Survivor?gl=IN&hl=en&id=bsJcOdjWH98",
-          youtube: "https://www.youtube.com/watch?v=bsJcOdjWH98"
-        },
-        rent: {
-          google_play_movies:
-            "https://play.google.com/store/movies/details/Lone_Survivor?gl=IN&hl=en&id=bsJcOdjWH98",
-          youtube: "https://www.youtube.com/watch?v=bsJcOdjWH98"
-        },
-        stream: {
-          amazon_prime_video:
-            "https://www.primevideo.com/detail/amzn1.dv.gti.4ab8d950-cc3f-9dc9-7131-e2aef4abc9b9?ie=UTF8&linkCode=xm2",
-          netflix: "http://www.netflix.com/title/70259795"
-        }
-      }
+      store: this.$store.state
     };
   }
 };
 </script>
 
 <style>
-.home-container {
-  width: 100vw;
-}
 </style>

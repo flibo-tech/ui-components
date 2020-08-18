@@ -6,7 +6,6 @@
       :contentId="321"
       title="Title"
       parent="Something"
-      :noOfPlat="1"
       :platforms="platforms"
       :whereToWatch="where_to_watch_1"
     />
@@ -17,7 +16,6 @@
       :contentId="321"
       title="Title"
       parent="Something"
-      :noOfPlat="1"
       :platforms="platforms"
       :whereToWatch="where_to_watch_2"
     />

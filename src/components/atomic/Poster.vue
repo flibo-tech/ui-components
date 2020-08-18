@@ -13,114 +13,25 @@
       @click="openContent"
     />
 
-    <PlatformBar
-      :style="{'position': 'absolute', 'bottom': -(containerWidth / 7) + 'px' }"
+     <Trailer class="trailer"
+    :contentId="contentId"
+    trailerId="32"
+    :whereToWatch="whereToWatch"
+    :parent="parent"
+    :size="30"
+     />
+
+    <PlatformBar class="platform-bar"
       :platformArr="platforms"
       :moviePlatformsObj="whereToWatchOptions"
       :containerWidth="containerWidth"
     />
-    
-
-    <img
-      src="https://flibo-images.s3-us-west-2.amazonaws.com/other/play-white-icon.svg"
-      alt="play-trailer"
-      class="play-trailer"
-      @click="playTrailer"
-      v-if="trailerId || showPlatforms"
-    />
-
-    <!-- <div class="where-to-watch-container" v-if="showPlatforms">
-      <div class="where-to-watch-subcontainer">
-        <div
-          class="poster-platforms-container"
-          v-for="(link, index) in whereToWatchOptions"
-          :key="index"
-        >
-          <div @click="goToPlatform(link, 'feed_poster')" class="poster-platform-cropper">
-            <img
-              v-bind:src="
-                'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
-                index +
-                '.jpg'
-              "
-              class="poster-platform-icon"
-            />
-          </div>
-        </div>
-      </div>
-    </div>-->
-
-    <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <div>
-        <div class="black-background" v-if="play_trailer" @click="play_trailer = !play_trailer" />
-
-        <div
-          class="youtube-player-header"
-          :style="is_mobile ? '' : 'top: 75px;left: calc(50vw - 500px);'"
-          v-if="play_trailer & (trailerId != null)"
-        >Trailer</div>
-
-        <div
-          v-if="play_trailer & (trailerId != null)"
-          :class="
-            is_mobile
-              ? 'youtube-player-loader'
-              : 'desktop-youtube-player-loader'
-          "
-        />
-
-        <iframe
-          class="youtube-player"
-          :style="
-            is_mobile
-              ? ''
-              : 'width: 1000px;left: calc(50vw - 500px);top: 100px;height: 500px;'
-          "
-          v-if="play_trailer & (trailerId != null)"
-          type="text/html"
-          :src="'https://www.youtube.com/embed/' + trailerId + '?autoplay=1'"
-          frameborder="0"
-          allowfullscreen
-        />
-
-        <div
-          class="youtube-player-streaming-box"
-          :style="trailerId ? (is_mobile ? '' : 'top: 650px;') : 'top: 40vh;'"
-          v-if="play_trailer && showPlatforms"
-        >
-          <div
-            class="tap-to-watch-text"
-            v-if="showPlatforms"
-          >{{ is_mobile ? "Tap to watch on" : "Click to watch on" }}</div>
-
-          <div class="youtube-player-platforms">
-            <!-- <div
-              class="youtube-player-platforms-container"
-              v-for="(item, index) in whereToWatchOptions"
-            >
-              <div
-                @click="goToPlatform(item, 'trailer_popup')"
-                class="youtube-player-platform-cropper"
-              >
-                <img
-                  v-bind:src="
-                    'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
-                    index +
-                    '.jpg'
-                  "
-                  class="youtube-player-platform-icon"
-                />
-              </div>
-            </div>-->
-          </div>
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
 import PlatformBar from "./PlatformBar";
+import Trailer from "./Trailer";
 export default {
   name: "App",
   props: {
@@ -162,7 +73,7 @@ export default {
   },
 
   components: {
-    PlatformBar
+    PlatformBar, Trailer
   },
 
   data() {
@@ -239,7 +150,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.trailer {
+  position: absolute;
+  top: 50%;
+}
 
+.platform-bar {
+  position: absolute;
+  grid-row-start: 3;
+  transform: translateY(-50%);
+}
 .feed-poster-container {
   position: relative;
   display: grid;
