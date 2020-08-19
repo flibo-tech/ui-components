@@ -10,27 +10,32 @@
     'transition': 'width 0.1s linear'},
     plusClicked ?  {'width': containerWidth * (90/100) + 'px'} : {}]"
   >
-    <img
-      @click="goToPlatform(link, 'feed_poster')"
-      v-if="plusClicked === false"
-      :src="
+      <div class="image-sub-container">
+      <img
+        @click="goToPlatform(link, 'feed_poster')"
+        v-if="plusClicked === false"
+        :src="
                 'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
                 finalPlatforms[0] +
                 '.jpg'
               "
-    />
+      />
+    </div>
     <div class="image-container" v-if="plusClicked">
-      <img
-        
-        @click="goToPlatform(link, 'feed_poster')"
+      <div
+        class="image-sub-container"
         v-for="platform in finalPlatforms"
         v-bind:key="platform.id"
-        :src="
+        @click="goToPlatform(link, 'feed_poster')"
+      >
+        <img
+          :src="
                 'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
                 platform +
                 '.jpg'
               "
-      />
+        />
+      </div>
     </div>
     <div
       v-if="noOfPlatforms > 1 && plusClicked === false"
@@ -147,9 +152,13 @@ export default {
   color: black;
   font-size: 30px;
 }
+.image-sub-container {
+  height: 100%;
+}
 img {
   padding: 5px;
   border-radius: 50%;
-  height: inherit;
+  height: 100%;
+  width: auto;
 }
 </style>
