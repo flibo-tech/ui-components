@@ -13,19 +13,27 @@
       @click="openContent"
     />
 
-     <Trailer class="trailer"
-    :contentId="contentId"
-    trailerId="32"
-    :whereToWatch="whereToWatch"
-    :parent="parent"
-    :size="30"
-     />
+    <Trailer
+      class="trailer"
+      :contentId="contentId"
+      trailerId="32"
+      :whereToWatch="whereToWatch"
+      :parent="parent"
+      :size="30"
+    />
 
-    <PlatformBar class="platform-bar"
+    <PlatformBar
+      class="platform-bar"
       :platformArr="platforms"
       :moviePlatformsObj="whereToWatchOptions"
       :containerWidth="containerWidth"
     />
+    <div
+      v-if="showName"
+      class="title"
+      :style="[
+Object.keys(whereToWatchOptions).length >= 1  ? {'padding-top': containerWidth / 4 + 'px' } : {'padding-top': '20px'}]"
+    >{{ title }}</div>
   </div>
 </template>
 
@@ -69,11 +77,17 @@ export default {
     },
     platforms: {
       type: Array
+    },
+    showName: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
 
   components: {
-    PlatformBar, Trailer
+    PlatformBar,
+    Trailer
   },
 
   data() {
@@ -102,7 +116,7 @@ export default {
       } else if (Object.keys(this.whereToWatch || {}).includes("buy")) {
         return this.whereToWatch.buy;
       } else {
-        return [];
+        return {};
       }
     }
   },
@@ -150,6 +164,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title {
+  position: absolute;
+  font-family: "Roboto";
+  grid-row-start: 3;
+}
+
 .trailer {
   position: absolute;
   top: 50%;

@@ -4,20 +4,34 @@
       image="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/1800/star.jpg"
       :containerWidth="150"
       :contentId="321"
-      title="Title"
+      title="Some Movie"
       parent="Something"
       :platforms="platforms"
       :whereToWatch="where_to_watch_1"
+      :showName = false
     />
 
     <Poster
       image="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/1800/star.jpg"
       :containerWidth="200"
       :contentId="321"
-      title="Title"
+      title="Other Movie"
       parent="Something"
       :platforms="platforms"
       :whereToWatch="where_to_watch_2"
+      :showName = true
+
+    />
+     <Poster
+      image="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/1800/star.jpg"
+      :containerWidth="200"
+      :contentId="321"
+      title="Other Movie"
+      parent="Something"
+      :platforms="platforms"
+      :whereToWatch="where_to_watch_3"
+      :showName = true
+
     />
   </div>
 </template>
@@ -66,7 +80,8 @@ export default {
           netflix: "someUrl",
           hotstar: "someUrl"
         }
-      }
+      },
+      where_to_watch_3: {}
     };
   }
 };

@@ -2,7 +2,7 @@
   <article>
     <button
       :class="[checkType, checkIcon]"
-      @click="$emit('clicked'), buttonClicked($event)"
+      @click="$emit('clicked'), buttonClicked($event), state = !state"
       ref="btn"
       :disabled="disabled"
     >
@@ -35,6 +35,14 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    state: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: Number,
+      required: false,
     }
   },
 
@@ -88,6 +96,14 @@ export default {
       switch (this.icon) {
         case "back":
           iconClass = "back";
+          return iconClass;
+        case "star":
+          if (this.state === false) {
+          console.log("Star")
+          iconClass = "star";
+          return iconClass;
+          }
+          else iconClass = "star-active";
           return iconClass;
         default:
           iconClass = "";
@@ -189,49 +205,24 @@ button ::v-deep span {
   background-image: url("../../assets/icons/back.svg");
 }
 
+.star {
+  background-position: center;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url("../../assets/icons/star.svg");
+}
+
+.star-active {
+  background-position: center;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url("../../assets/icons/star-active.svg");
+}
+
 button:focus {
   outline: none;
 }
 
-// $offset: 187;
-// $duration: 1.4s;
-
-// .spinner {
-//   position: absolute;
-//   width: 2.5em;
-//   height: 2.5em;
-//   animation: rotator $duration linear infinite;
-//   display: none;
-// }
-
-// @keyframes rotator {
-//   0% {
-//     transform: rotate(0deg);
-//   }
-//   100% {
-//     transform: rotate(270deg);
-//   }
-// }
-
-// .path {
-//   stroke-dasharray: $offset;
-//   stroke-dashoffset: 0;
-//   transform-origin: center;
-//   animation: dash $duration ease-in-out infinite,
-//     colors ($duration * 4) ease-in-out infinite;
-// }
-
-// @keyframes dash {
-//   0% {
-//     stroke-dashoffset: $offset;
-//   }
-//   50% {
-//     stroke-dashoffset: $offset/4;
-//     transform: rotate(135deg);
-//   }
-//   100% {
-//     stroke-dashoffset: $offset;
-//     transform: rotate(450deg);
-//   }
-// }
 </style>

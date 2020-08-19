@@ -33,6 +33,25 @@
       :loading="loading"
       v-on:clicked="buttonClicked"
       />
+      <Button 
+      :text="text"
+      icon="star"
+      :state = false
+      buttonType="iconOnly"
+      :disabled="false"
+      :loading="loading"
+      v-on:clicked="buttonClicked"
+      />
+
+      <Button 
+      :text="text"
+      icon="star"
+      :state = true
+      buttonType="iconOnly"
+      :disabled="false"
+      :loading="loading"
+      v-on:clicked="buttonClicked"
+      />
 </div>
 </template>
 

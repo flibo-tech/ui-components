@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="noOfPlatforms >= 1"
     class="platform-container"
     :style="[noOfPlatforms === 1 ? {'width': containerWidth * (30/100) + 'px',
     'height': containerWidth * (30/100) + 'px'} 
@@ -10,6 +11,7 @@
     plusClicked ?  {'width': containerWidth * (90/100) + 'px'} : {}]"
   >
     <img
+      @click="goToPlatform(link, 'feed_poster')"
       v-if="plusClicked === false"
       :src="
                 'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
@@ -19,6 +21,7 @@
     />
     <div class="image-container" v-if="plusClicked">
       <img
+        @click="goToPlatform(link, 'feed_poster')"
         v-for="platform in finalPlatforms"
         v-bind:key="platform.id"
         :src="
@@ -29,9 +32,9 @@
       />
     </div>
     <div
-      @click="plusClicked = !plusClicked"
       v-if="noOfPlatforms > 1 && plusClicked === false"
       class="plus-sign"
+      @click="plusClicked = !plusClicked"
     >+ {{ noOfPlatforms - 1 }}</div>
   </div>
 </template>
@@ -92,8 +95,23 @@ export default {
         return finalPlatform.indexOf(elem) == pos;
       });
       return finalPlatform;
-    },
+    }
   },
+  methods: {
+    goToPlatform(link, traffic_origin) {
+      this.$emit("leave-feed");
+      var activity = {
+        api: "outbound_traffic",
+        content_id: this.contentId,
+        url: link,
+        traffic_origin:
+          (this.parent == "search_results" ? "search_filter" : this.parent) +
+          "__" +
+          traffic_origin
+      };
+      this.$emit("update-api-counter", activity);
+    }
+  }
 };
 </script>
 
@@ -121,7 +139,7 @@ export default {
   overflow-x: scroll;
 }
 .image-container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .plus-sign {
   font-family: "Roboto", Arial;
