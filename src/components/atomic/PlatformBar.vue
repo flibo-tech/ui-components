@@ -11,6 +11,8 @@
     plusClicked ?  {'width': containerWidth * (90/100) + 'px'} : {}]"
   >
     <img
+      :style="{'width': containerWidth * (30/100) + 'px',
+    'height': containerWidth * (30/100) + 'px',}"
       @click="goToPlatform(link, 'feed_poster')"
       v-if="plusClicked === false"
       :src="
@@ -21,6 +23,8 @@
     />
     <div class="image-container" v-if="plusClicked">
       <img
+        :style="{'width': containerWidth * (30/100) + 'px',
+    'height': containerWidth * (30/100) + 'px',}"
         @click="goToPlatform(link, 'feed_poster')"
         v-for="platform in finalPlatforms"
         v-bind:key="platform.id"
@@ -132,8 +136,6 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 50px;
-  max-width: 200px;
-  max-height: 80px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -151,8 +153,5 @@ export default {
 img {
   padding: 5px;
   border-radius: 50%;
-  max-height: 100%;
-  height: auto;
-  width: auto;
 }
 </style>
