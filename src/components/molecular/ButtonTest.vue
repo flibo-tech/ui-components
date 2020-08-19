@@ -1,39 +1,42 @@
 <template>
 <div>
       <Button 
-      :text="text"
-      :icon="icon"
-      :buttonType="buttonType"
-      :disabled="disabled"
-      :loading="loading"
+      text="Start Rating"
+      buttonType="primary"
+      :disabled=false
       v-on:clicked="buttonClicked"
       />
 
       <Button 
-      :text="text"
-      :icon="icon"
-      :buttonType="buttonType"
-      :disabled="true"
-      :loading="loading"
+      text="Text Only"
+      buttonType="textOnly"
+      :disabled=false
       v-on:clicked="buttonClicked"
       />
+
       <Button 
-      :text="text"
-      :icon="icon"
-      buttonType="primary"
-      :disabled="false"
-      :loading="false"
+      icon="star"
+      buttonType="iconOnly"
+      v-on:clicked="buttonClicked"
+      :size="30"
+      :state="state"
+      />
+
+      <Button 
+      icon="back"
+      buttonType="iconOnly"
       v-on:clicked="buttonClicked"
       />
-      <Button 
+
+      <!-- <Button 
       :text="text"
       icon="back"
       buttonType="iconOnly"
       :disabled="false"
       :loading="loading"
       v-on:clicked="buttonClicked"
-      />
-      <Button 
+      /> -->
+      <!-- <Button 
       :text="text"
       icon="star"
       :state = false
@@ -41,9 +44,9 @@
       :disabled="false"
       :loading="loading"
       v-on:clicked="buttonClicked"
-      />
+      /> -->
 
-      <Button 
+      <!-- <Button 
       :text="text"
       icon="star"
       :state = true
@@ -51,7 +54,7 @@
       :disabled="false"
       :loading="loading"
       v-on:clicked="buttonClicked"
-      />
+      /> -->
 </div>
 </template>
 
@@ -62,19 +65,16 @@ export default {
       components: {
             Button,
       },
-
+      
       data() {
             return {
-                  text: "Start Rating",
-                  icon: "",
-                  buttonType: "textOnly",
-                  loading: false,
-                  disabled: false,   
+                  state: false
             }
       },
 
       methods: {
             buttonClicked() {
+                  this.state = !this.state;
                   console.log('Button Clicked')
             }
       }

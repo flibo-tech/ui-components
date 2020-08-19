@@ -20,8 +20,7 @@
       :platforms="platforms"
       :whereToWatch="where_to_watch_2"
       :showName = true
-
-    />
+    /> 
      <Poster
       image="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/1800/star.jpg"
       :containerWidth="200"
@@ -31,8 +30,7 @@
       :platforms="platforms"
       :whereToWatch="where_to_watch_3"
       :showName = true
-
-    />
+    /> <br>
   </div>
 </template>
 

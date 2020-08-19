@@ -150,5 +150,7 @@ img {
   padding: 5px;
   border-radius: 50%;
   max-height: 100%;
+  height: auto;
+  width: auto;
 }
 </style>

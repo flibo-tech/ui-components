@@ -1,19 +1,23 @@
 <template>
-  <article>
-    <button
-      :class="[checkType, checkIcon]"
-      @click="$emit('clicked'), buttonClicked($event), state = !state"
-      ref="btn"
-      :disabled="disabled"
-    >
-      <p v-if="!icon && buttonType != 'iconOnly'">{{ buttonText }}</p>
-    </button>
-  </article>
+  <button
+    :class="checkType"
+    @click="$emit('clicked')"
+    :disabled="disabled"
+    :style="{backgroundImage: `url(../../assets/icons/${icon}.svg)`}"
+  >
+    <p v-if="buttonType != 'iconOnly'">{{ text }}</p>
+    <img
+      v-if="buttonType === 'iconOnly'"
+      :src="imageURL"
+      :style="{'width': size + 'px'}"
+    />
+  </button>
 </template>
 
 <script>
 export default {
   name: "Button",
+
   props: {
     text: {
       type: String,
@@ -43,38 +47,7 @@ export default {
     size: {
       type: Number,
       required: false,
-    }
-  },
-
-  data() {
-    return {
-      buttonText: this.text
-    };
-  },
-
-  methods: {
-    buttonClicked(event) {
-      if (
-        this.buttonType === "textOnly" ||
-        this.buttonType === "primary" ||
-        this.buttonType === "iconOnly"
-      ) {
-        let x = event.layerX;
-        let y = event.layerY;
-        let ripples = document.createElement("span");
-        if (this.buttonType === "iconOnly") {
-          ripples.style.left = "50%";
-          ripples.style.top = "50%";
-        } else {
-          ripples.style.left = x + "px";
-          ripples.style.top = y + "px";
-        }
-        this.$refs.btn.appendChild(ripples);
-
-        setTimeout(() => {
-          ripples.remove();
-        }, 1000);
-      }
+      default: 18
     }
   },
 
@@ -83,7 +56,6 @@ export default {
       let buttonClass = "";
       if (this.buttonType === "primary") {
         buttonClass = "primary";
-        this.buttonText.toUpperCase();
       } else if (this.buttonType === "textOnly") {
         buttonClass = "textOnly";
       } else if (this.buttonType === "iconOnly") {
@@ -91,62 +63,22 @@ export default {
       }
       return buttonClass;
     },
-    checkIcon() {
-      let iconClass = "";
-      switch (this.icon) {
-        case "back":
-          iconClass = "back";
-          return iconClass;
-        case "star":
-          if (this.state === false) {
-          console.log("Star")
-          iconClass = "star";
-          return iconClass;
-          }
-          else iconClass = "star-active";
-          return iconClass;
-        default:
-          iconClass = "";
+
+    imageURL() {
+      if (this.state) {
+      return require('../../assets/icons/' + this.icon + "-active" + '.svg');
       }
-      return iconClass;
+      return require('../../assets/icons/' + this.icon + '.svg');
     }
   }
 };
 </script>
 
+
 <style lang="scss" scoped>
 $border-radius: 5px;
 $primary-color: #7352ff;
 $textOnly-color: #adadad;
-
-button {
-  position: relative;
-  font-family: "Roboto", sans-serif;
-  overflow: hidden;
-  font-weight: medium;
-}
-button ::v-deep span {
-  position: absolute;
-  background: white;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  border-radius: 50%;
-  opacity: 0.5;
-  animation: animate 0.9s linear;
-}
-
-@keyframes animate {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 0.5;
-  }
-  100% {
-    width: 100vh;
-    height: 100vh;
-    opacity: 0;
-  }
-}
 
 .primary {
   border: none;
@@ -159,9 +91,9 @@ button ::v-deep span {
   background-color: $primary-color;
   cursor: pointer;
   text-transform: uppercase;
-  transition-property: background-color;
-  transition-timing-function: ease-out;
-  transition-duration: 0.5s;
+  // transition-property: background-color;
+  // transition-timing-function: ease-out;
+  // transition-duration: 0.5s;
 }
 .primary:disabled {
   cursor: inherit;
@@ -173,12 +105,13 @@ button ::v-deep span {
   border: none;
   border-radius: $border-radius;
   background-color: Transparent;
+  padding: 1em;
   font-size: 13px;
   color: $textOnly-color;
   cursor: pointer;
-  transition-property: color;
-  transition-timing-function: ease-out;
-  transition-duration: 0.5s;
+  // transition-property: color;
+  // transition-timing-function: ease-out;
+  // transition-duration: 0.5s;
 }
 .textOnly:disabled {
   cursor: inherit;
@@ -186,6 +119,7 @@ button ::v-deep span {
 }
 
 .iconOnly {
+  background-color: transparent;
   border: none;
   padding: 20px;
   border-radius: 50%;
@@ -197,32 +131,7 @@ button ::v-deep span {
   cursor: auto;
 }
 
-.back {
-  background-position: center;
-  background-size: 16px;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  background-image: url("../../assets/icons/back.svg");
-}
-
-.star {
-  background-position: center;
-  background-size: 16px;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  background-image: url("../../assets/icons/star.svg");
-}
-
-.star-active {
-  background-position: center;
-  background-size: 16px;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  background-image: url("../../assets/icons/star-active.svg");
-}
-
 button:focus {
   outline: none;
 }
-
 </style>
