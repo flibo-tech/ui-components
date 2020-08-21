@@ -10,28 +10,24 @@
     'transition': 'width 0.1s linear'},
     plusClicked ?  {'width': containerWidth * (90/100) + 'px'} : {}]"
   >
-      <div class="image-sub-container">
+    <div class="image-sub-container">
       <img
-        @click="goToPlatform(link, 'feed_poster')"
+        @click="goToPlatform(finalPlatforms[Object.getOwnPropertyNames(finalPlatforms)[0]], 'feed_poster')"
         v-if="plusClicked === false"
         :src="
                 'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
-                finalPlatforms[0] +
+                Object.getOwnPropertyNames(finalPlatforms)[0] +
                 '.jpg'
               "
       />
     </div>
     <div class="image-container" v-if="plusClicked">
-      <div
-        class="image-sub-container"
-        v-for="platform in finalPlatforms"
-        v-bind:key="platform.id"
-        @click="goToPlatform(link, 'feed_poster')"
-      >
+      <div class="image-sub-container" v-for="(link, key) in finalPlatforms" :key="key">
         <img
+          @click="goToPlatform(link, 'feed_poster')"
           :src="
                 'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
-                platform +
+                key +
                 '.jpg'
               "
         />
@@ -70,10 +66,8 @@ export default {
 
   computed: {
     noOfPlatforms() {
-      return this.moviePlatforms.length;
-    },
-    moviePlatforms() {
-      return Object.keys(this.moviePlatformsObj);
+      console.log();
+      return Object.keys(this.moviePlatformsObj).length;
     },
     userPlatforms() {
       let lowerCased = this.platformArr.map(el => {
@@ -85,26 +79,45 @@ export default {
       return replaceSpace;
     },
     finalPlatforms() {
-      let finalPlatform = [];
-      this.moviePlatforms.forEach(element => {
-        this.userPlatforms.forEach(userPlat => {
-          if (element === userPlat) {
-            finalPlatform.push(element);
+      // let finalPlatform = [];
+      // this.moviePlatforms.forEach(element => {
+      //   this.userPlatforms.forEach(userPlat => {
+      //     if (element === userPlat) {
+      //       finalPlatform.push(element);
+      //     }
+      //   });
+      // });
+      // this.moviePlatforms.forEach(el => {
+      //   finalPlatform.push(el);
+      // });
+
+      // finalPlatform = finalPlatform.filter(function(elem, pos) {
+      //   return finalPlatform.indexOf(elem) == pos;
+      // });
+      // return finalPlatform;
+
+      let finalPlatform = {};
+      for (let k in this.moviePlatformsObj) {
+        this.userPlatforms.forEach(userPlatform => {
+          if (k === userPlatform) {
+            finalPlatform[k] = this.moviePlatformsObj[k];
           }
         });
-      });
-      this.moviePlatforms.forEach(el => {
-        finalPlatform.push(el);
-      });
+      }
 
-      finalPlatform = finalPlatform.filter(function(elem, pos) {
-        return finalPlatform.indexOf(elem) == pos;
-      });
+      for (let k in this.moviePlatformsObj) {
+        this.userPlatforms.forEach(userPlatform => {
+          if (k != userPlatform) {
+            finalPlatform[k] = this.moviePlatformsObj[k];
+          }
+        });
+      }
       return finalPlatform;
     }
   },
   methods: {
     goToPlatform(link, traffic_origin) {
+      console.log(link)
       this.$emit("leave-feed");
       var activity = {
         api: "outbound_traffic",
@@ -148,8 +161,10 @@ export default {
   display: none;
 }
 .plus-sign {
+  position: relative;
+  right: 7px;
   font-family: "Roboto", Arial;
-  color: black;
+  color: #222222;
   font-size: 30px;
 }
 .image-sub-container {

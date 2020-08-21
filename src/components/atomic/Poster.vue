@@ -32,7 +32,7 @@
       v-if="showName"
       class="title"
       :style="[
-Object.keys(whereToWatchOptions).length >= 1  ? {'padding-top': containerWidth / 4 + 'px' } : {'padding-top': '20px'}]"
+Object.keys(whereToWatchOptions).length >= 1  ? {'top': containerWidth / 4 + 'px' } : {'top': '20px'}]"
     >{{ title }}</div>
   </div>
 </template>

@@ -44,25 +44,25 @@ export default {
       platforms: ["Netflix", "Amazon Prime Video", "Jio Cinema", "Hotstar"],
       where_to_watch_1: {
         buy: {
-          amazon_prime_video: "someUrl",
-          jio_cinema: "someUrl",
-          netflix: "someUrl",
+          amazon_prime_video: "https://www.primevideo.com/",
+          jio_cinema: "https://www.jiocinema.com/",
+          netflix: "https://www.netflix.com/",
           my_anime_list: "someUrl"
         },
         rent: {
-          amazon_prime_video: "someUrl",
+          amazon_prime_video: "https://www.primevideo.com/",
           jio_cinema: "someUrl",
           netflix: "someUrl",
           my_anime_list: "someUrl"
         },
         stream: {
-          netflix: "someUrl"
+          netflix: "https://www.netflix.com/"
         }
       },
       where_to_watch_2: {
         buy: {
           amazon_prime_video: "someUrl",
-          jio_cinema: "someUrl",
+          jio_cinema: "https://www.jiocinema.com/",
           netflix: "someUrl",
           my_anime_list: "someUrl"
         },
@@ -73,10 +73,10 @@ export default {
           my_anime_list: "someUrl"
         },
         stream: {
-          amazon_prime_video: "someUrl",
-          jio_cinema: "someUrl",
-          netflix: "someUrl",
-          hotstar: "someUrl"
+          amazon_prime_video: "https://www.primevideo.com/",
+          jio_cinema: "https://www.jiocinema.com/",
+          netflix: "https://www.netflix.com/",
+          hotstar: "someUrl",
         }
       },
       where_to_watch_3: {}
