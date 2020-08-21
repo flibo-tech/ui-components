@@ -15,7 +15,7 @@
       />
 
       <Button 
-      icon="star"
+      icon="thumbs_up"
       buttonType="iconOnly"
       v-on:clicked="buttonClicked"
       :size="30"

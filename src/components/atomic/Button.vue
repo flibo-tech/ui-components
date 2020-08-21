@@ -3,7 +3,6 @@
     :class="checkType"
     @click="$emit('clicked')"
     :disabled="disabled"
-    :style="{backgroundImage: `url(../../assets/icons/${icon}.svg)`}"
   >
     <p v-if="buttonType != 'iconOnly'">{{ text }}</p>
     <img
@@ -66,7 +65,7 @@ export default {
 
     imageURL() {
       if (this.state) {
-      return require('../../assets/icons/' + this.icon + "-active" + '.svg');
+      return require('../../assets/icons/' + this.icon + "_true" + '.svg');
       }
       return require('../../assets/icons/' + this.icon + '.svg');
     }

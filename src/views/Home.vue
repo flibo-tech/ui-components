@@ -18,6 +18,8 @@
     <LogoTestPreview v-if="store.component == 'LogoTestPreview'" />
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
+    <UserRating v-if="store.component == 'UserRating'" />
+    
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
       imageUrl="https://image.tmdb.org/t/p/original/hpDQDYsR53uBj0JxRsDx1qniuA9.jpg"
@@ -88,6 +90,7 @@ import LogoTestPreview from "./../components/molecular/LogoTestPreview";
 import CardAnimation from "../components/atomic/CardAnimation";
 import ProgressTest from "./../components/molecular/ProgressTest";
 import PosterTest from "./../components/molecular/PosterTest";
+import UserRating from "./../components/molecular/UserRating";
 import MovieImageLandscape from "./../components/atomic/MovieImageLandscape";
 import MovieImagePortrait from "./../components/atomic/MovieImagePortrait";
 import Trailer from "./../components/atomic/Trailer";
@@ -110,7 +113,8 @@ export default {
     PosterTest,
     MovieImageLandscape,
     MovieImagePortrait,
-    Trailer
+    Trailer,
+    UserRating
   },
   data() {
     return {

@@ -56,6 +56,9 @@
     <h4 class="nav-item" @click="store.component = 'LogoTestPreview'">
       Logo Preview
     </h4>
+    <h4 class="nav-item" @click="store.component = 'UserRating'">
+      User Rating
+    </h4>
   </nav>
 </template>
 
