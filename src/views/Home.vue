@@ -19,6 +19,7 @@
     <CardAnimation v-if="store.component == 'CardAnimation'" />
     <ProgressTest v-if="store.component == 'ProgressTest'" />
     <UserRating v-if="store.component == 'UserRating'" />
+    <ContentMetaBlockTest v-if="store.component == 'ContentMetaBlockTest'" />
     
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
@@ -94,6 +95,7 @@ import UserRating from "./../components/molecular/UserRating";
 import MovieImageLandscape from "./../components/atomic/MovieImageLandscape";
 import MovieImagePortrait from "./../components/atomic/MovieImagePortrait";
 import Trailer from "./../components/atomic/Trailer";
+import ContentMetaBlockTest from "./../components/molecular/ContentMetaBlockTest";
 
 export default {
   name: "Home",
@@ -114,7 +116,8 @@ export default {
     MovieImageLandscape,
     MovieImagePortrait,
     Trailer,
-    UserRating
+    UserRating,
+    ContentMetaBlockTest
   },
   data() {
     return {

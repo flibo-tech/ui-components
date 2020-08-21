@@ -8,6 +8,7 @@
       <li>RatingLabel</li>
       <li>Logo</li>
       <li>Progress</li>
+      <li>ContentMetaBlock</li>
     </ul>
     <br />
     <h1>Atoms</h1>
@@ -43,6 +44,9 @@
     </h4>
     <h4 class="nav-item" @click="store.component = 'Trailer'">
       Trailer
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'ContentMetaBlockTest'">
+      ContentMetaBlock Test
     </h4>
 
     <br />
