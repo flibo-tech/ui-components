@@ -76,6 +76,7 @@ export default {
 div {
   display: flex;
   width: 200px;
+  align-items: center;
 }
 
 img {
@@ -85,7 +86,6 @@ img {
 
 p {
   position: relative;
-  text-align: center;
   font-family: "Roboto";
 }
 </style>
