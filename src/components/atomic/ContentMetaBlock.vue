@@ -1,7 +1,7 @@
 <template>
   <div class="outer">
     <div class="inner">
-        {{ text }}
+      {{ text }} <span class="highlight">{{ highlight }}</span>
     </div>
   </div>
 </template>
@@ -11,10 +11,14 @@ export default {
   name: "ContentMetaBlock",
   props: {
     text: {
-      type: String
+      type: String,
+      required: true,
+      default: ""
     },
     highlight: {
-      type: String
+      type: String,
+      required: false,
+      default: null
     }
   }
 };
@@ -22,22 +26,22 @@ export default {
 
 <style scoped>
 .outer { 
-    width: 75px;
-    height: 14px;
-    background: #F4F4F4;
-    border-radius: 4px;
-    padding: 5px;
+  width: 75px;
+  height: 14px;
+  background: #F4F4F4;
+  border-radius: 4px;
+  padding: 5px;
 }
 .inner {
-    
-    text-align: center;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    
-    color: #222222;
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #222222;
 }
-
+.highlight {
+  font-weight: bold;
+}
 </style>
