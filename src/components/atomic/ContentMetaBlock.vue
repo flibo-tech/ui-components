@@ -13,7 +13,7 @@ export default {
     text: {
       type: String,
       required: true,
-      default: ""
+      default: "COMEDY"
     },
     highlight: {
       type: String,
