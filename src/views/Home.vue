@@ -20,7 +20,8 @@
     <ProgressTest v-if="store.component == 'ProgressTest'" />
     <UserRating v-if="store.component == 'UserRating'" />
     <ContentMetaBlockTest v-if="store.component == 'ContentMetaBlockTest'" />
-    
+    <Person v-if="store.component == 'Person'" />
+
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
       imageUrl="https://image.tmdb.org/t/p/original/hpDQDYsR53uBj0JxRsDx1qniuA9.jpg"
@@ -95,6 +96,7 @@ import UserRating from "./../components/molecular/UserRating";
 import MovieImageLandscape from "./../components/atomic/MovieImageLandscape";
 import MovieImagePortrait from "./../components/atomic/MovieImagePortrait";
 import Trailer from "./../components/atomic/Trailer";
+import Person from "./../components/atomic/Person";
 import ContentMetaBlockTest from "./../components/molecular/ContentMetaBlockTest";
 
 export default {
@@ -117,7 +119,8 @@ export default {
     MovieImagePortrait,
     Trailer,
     UserRating,
-    ContentMetaBlockTest
+    ContentMetaBlockTest,
+    Person
   },
   data() {
     return {

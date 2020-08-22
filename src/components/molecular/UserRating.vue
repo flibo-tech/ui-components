@@ -1,10 +1,9 @@
 <template>
   <div>
+    <Button icon="love" buttonType="iconOnly" :size="iconSize" :state="loveState" />
     <Button icon="thumbs_up" buttonType="iconOnly" :size="iconSize" :state="likeState" />
 
     <Button icon="thumbs_down" buttonType="iconOnly" :size="iconSize" :state="dislikeState" />
-
-    <Button icon="love" buttonType="iconOnly" :size="iconSize" :state="loveState" />
   </div>
 </template>
 
@@ -25,7 +24,7 @@ export default {
   data() {
     return {
       rating: 1,
-      iconSize: 30,
+      iconSize: 30
     };
   },
   components: {

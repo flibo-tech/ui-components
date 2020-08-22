@@ -37,7 +37,7 @@
       v-if="noOfPlatforms > 1 && plusClicked === false"
       class="plus-sign"
       @click="plusClicked = !plusClicked"
-    >+ {{ noOfPlatforms - 1 }}</div>
+    >+{{ noOfPlatforms - 1 }}</div>
   </div>
 </template>
 
@@ -161,6 +161,11 @@ export default {
   display: none;
 }
 .plus-sign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
   position: relative;
   right: 7px;
   font-family: "Roboto", Arial;
