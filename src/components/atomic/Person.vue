@@ -10,14 +10,6 @@ export default {
   name: "Person",
 
   // props: {
-  //   id: {
-  //     type: Number,
-  //     required: true
-  //   },
-  //   type: {
-  //     type: String,
-  //     required: true
-  //   },
   //   name: {
   //     type: String,
   //     required: true
@@ -43,7 +35,7 @@ export default {
         "https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/1800/star.jpg",
       name: "Some name",
       spacing: 0,
-      position: "bottom"
+      position: "right"
     };
   },
 

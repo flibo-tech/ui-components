@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Button icon="love" buttonType="iconOnly" :size="iconSize" :state="loveState" />
-    <Button icon="thumbs_up" buttonType="iconOnly" :size="iconSize" :state="likeState" />
+    <Button icon="love" buttonType="iconOnly" :size="iconSize" :state="rating === 3" />
+    <Button icon="thumbs_up" buttonType="iconOnly" :size="iconSize" :state="rating === 1" />
 
-    <Button icon="thumbs_down" buttonType="iconOnly" :size="iconSize" :state="dislikeState" />
+    <Button icon="thumbs_down" buttonType="iconOnly" :size="iconSize" :state="rating === 2" />
   </div>
 </template>
 
@@ -23,35 +23,13 @@ export default {
   // },
   data() {
     return {
+      // remove data when using prop
       rating: 1,
       iconSize: 30
     };
   },
   components: {
     Button
-  },
-  computed: {
-    likeState() {
-      if (this.rating === 1) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    dislikeState() {
-      if (this.rating === 2) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    loveState() {
-      if (this.rating === 3) {
-        return true;
-      } else {
-        return false;
-      }
-    }
   }
 };
 </script>
