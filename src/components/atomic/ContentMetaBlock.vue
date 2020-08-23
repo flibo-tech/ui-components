@@ -1,7 +1,7 @@
 <template>
   <div class="outer">
     <div class="inner">
-      {{ text }} <span class="highlight">{{ highlight }}</span>
+      {{ text }} <span v-bind:class="{ highlight: this.highlight }">{{ highlight }}</span>
     </div>
   </div>
 </template>
@@ -12,8 +12,7 @@ export default {
   props: {
     text: {
       type: String,
-      required: true,
-      default: "COMEDY"
+      required: true
     },
     highlight: {
       type: String,
