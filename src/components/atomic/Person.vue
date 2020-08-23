@@ -1,7 +1,9 @@
 <template>
-  <div :style="adjustPosition">
-    <img :src="image" />
-    <p :style="{'top': spacing + 'px'}">{{ name }}</p>
+  <div class="main-container" :style="adjustPosition">
+    <div class="image-container" :style="{'width': width + 'px', 'height': height + 'px'}">
+      <img :src="image" />
+    </div>
+    <p :style="{'top': spacing + 'px', 'width': width + 'px'}">{{ name }}</p>
   </div>
 </template>
 
@@ -12,6 +14,14 @@ export default {
   // props: {
   //   name: {
   //     type: String,
+  //     required: true
+  //   },
+  //   height: {
+  //     type: Number,
+  //     required: true
+  //   },
+  //   width: {
+  //     type: Number,
   //     required: true
   //   },
   //   image: {
@@ -27,15 +37,17 @@ export default {
   //     type: String,
   //     default: "bottom"
   //   }
-  // }
+  // },
 
   data() {
     return {
-      image:
-        "https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/1800/star.jpg",
+      // remove data when using prop
+      image: "https://image.tmdb.org/t/p/w500/qCpZn2e3dimwbryLnqxZuI88PTi.jpg",
       name: "Some name",
       spacing: 0,
-      position: "right"
+      position: "bottom",
+      width: 200,
+      height: 250
     };
   },
 
@@ -65,18 +77,23 @@ export default {
 </script>
 
 <style scoped>
-div {
+.main-container {
   display: flex;
-  width: 200px;
+  justify-content: center;
   align-items: center;
+}
+
+.image-container {
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 img {
   width: 100%;
-  border-radius: 5px;
 }
 
 p {
+  text-align: center;
   position: relative;
   font-family: "Roboto";
 }
