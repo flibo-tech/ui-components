@@ -1,5 +1,5 @@
 <template>
-  <Person :image="image" :width="200" :height="250" name="Some name" />
+  <Person :image="image" :width="width" :height="height" :name="name" />
 </template>
 
 <script>
