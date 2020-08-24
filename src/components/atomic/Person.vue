@@ -11,44 +11,32 @@
 export default {
   name: "Person",
 
-  // props: {
-  //   name: {
-  //     type: String,
-  //     required: true
-  //   },
-  //   height: {
-  //     type: Number,
-  //     required: true
-  //   },
-  //   width: {
-  //     type: Number,
-  //     required: true
-  //   },
-  //   image: {
-  //     type: String,
-  //     required: true
-  //   },
-  //   spacing: {
-  //     type: Number,
-  //     default: 0,
-  //     require: false
-  //   },
-  //   position: {
-  //     type: String,
-  //     default: "bottom"
-  //   }
-  // },
-
-  data() {
-    return {
-      // remove data when using prop
-      image: "https://image.tmdb.org/t/p/w500/qCpZn2e3dimwbryLnqxZuI88PTi.jpg",
-      name: "Some name",
-      spacing: 0,
-      position: "bottom",
-      width: 200,
-      height: 250
-    };
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    height: {
+      type: Number,
+      required: true
+    },
+    width: {
+      type: Number,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    },
+    spacing: {
+      type: Number,
+      default: 0,
+      require: false
+    },
+    position: {
+      type: String,
+      default: "bottom"
+    }
   },
 
   computed: {

@@ -21,6 +21,7 @@
     <UserRating v-if="store.component == 'UserRating'" />
     <ContentMetaBlockTest v-if="store.component == 'ContentMetaBlockTest'" />
     <Person v-if="store.component == 'Person'" />
+    <Artist v-if="store.component == 'Artist'" />
 
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
@@ -96,8 +97,8 @@ import UserRating from "./../components/molecular/UserRating";
 import MovieImageLandscape from "./../components/atomic/MovieImageLandscape";
 import MovieImagePortrait from "./../components/atomic/MovieImagePortrait";
 import Trailer from "./../components/atomic/Trailer";
-import Person from "./../components/atomic/Person";
 import ContentMetaBlockTest from "./../components/molecular/ContentMetaBlockTest";
+import Artist from "./../components/molecular/Artist";
 
 export default {
   name: "Home",
@@ -120,7 +121,7 @@ export default {
     Trailer,
     UserRating,
     ContentMetaBlockTest,
-    Person
+    Artist
   },
   data() {
     return {

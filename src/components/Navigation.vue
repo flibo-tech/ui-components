@@ -8,6 +8,7 @@
       <li>RatingLabel</li>
       <li>Logo</li>
       <li>Progress</li>
+      <li>Person</li>
       <li>ContentMetaBlock</li>
     </ul>
     <br />
@@ -24,15 +25,13 @@
     <h4 class="nav-item" @click="store.component = 'PosterTest'">Poster</h4>
     <h4 class="nav-item" @click="store.component = 'Trailer'">Trailer</h4>
     <h4 class="nav-item" @click="store.component = 'ContentMetaBlockTest'">ContentMetaBlock Test</h4>
-
-    <h4 class="nav-item" @click="store.component = 'Person'">Person</h4>
-
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">Swipe Preview</h4>
     <h4 class="nav-item" @click="store.component = 'ButtonTestPreview'">Button Preview</h4>
     <h4 class="nav-item" @click="store.component = 'LogoTestPreview'">Logo Preview</h4>
     <h4 class="nav-item" @click="store.component = 'UserRating'">User Rating</h4>
+    <h4 class="nav-item" @click="store.component = 'Artist'">Artist</h4>
   </nav>
 </template>
 
