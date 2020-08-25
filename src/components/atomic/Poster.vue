@@ -2,8 +2,7 @@
   <div
     class="feed-poster-container"
     :style="
-      'width: ' + containerWidth + 'px; height: ' + 1.5 * containerWidth + 'px;'
-    "
+      'width: ' + containerWidth + 'px;'"
   >
     <img
       :src="image"
@@ -76,7 +75,9 @@ export default {
       required: false
     },
     platforms: {
-      type: Array
+      type: Array,
+      required: false,
+      dafault: []
     },
     showName: {
       type: Boolean,
@@ -127,6 +128,7 @@ export default {
 <style lang="scss" scoped>
 .title {
   position: absolute;
+  text-align: center;
   font-family: "Roboto";
   grid-row-start: 3;
 }

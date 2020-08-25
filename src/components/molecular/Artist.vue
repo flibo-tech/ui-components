@@ -1,13 +1,29 @@
 <template>
-<div style="display: inline-block" @click="quickViewEnabled = true" >
-  <Person  :image="image" :width="width" :height="height" :name="name" />
-  <QuickView v-if="quickViewEnabled" :artistId="artistId" :skipContentId="skipContentId" />
-</div>
+  <div>
+    <div @click="quickView">
+      <Person :image="image" :width="width" :height="height" :name="name" />
+    </div>
+    <div v-if="quickViewEnabled && artistData" class="quickview">
+      <Poster
+        v-for="movie in filteredMovies"
+        :key="movie.index"
+        class="poster"
+        :containerWidth="180"
+        :contentId="movie.content_id"
+        :image="movie.poster"
+        :title="movie.title"
+        :whereToWatch="movie.where_to_watch"
+        :platforms="['Netflix']"
+        parent="artist"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
 import Person from "../atomic/Person";
-import QuickView from "../atomic/QuickView";
+import Poster from "../atomic/Poster";
 export default {
   name: "Artist",
   // props: {
@@ -28,7 +44,7 @@ export default {
   //     required: true
   //   }
   // },
-  components: { Person, QuickView },
+  components: { Person, Poster },
   data() {
     return {
       // remove data when using props
@@ -37,12 +53,61 @@ export default {
       height: 250,
       name: "Some Name",
       artistId: 288143,
+      skipContentId: 122356,
       quickViewEnabled: false,
-      skipContentId: 122356
+      artistData: null
     };
   },
+
+  methods: {
+    quickView() {
+      this.quickViewEnabled = !this.quickViewEnabled;
+      axios
+        .post("https://app.flibo.ai/more_by_artist", {
+          session_id: "1591181440dfmMXlLBw1NhObTx",
+          artist_id: this.artistId,
+          credit_category: "cast",
+          country: "India",
+          guest_id: null
+        })
+        .then(
+          response => (
+            (this.artistData = response.data.contents),
+            (self.fetching_more = false),
+            console.log(this.artistData)
+          )
+        )
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  },
+  computed: {
+    filteredMovies() {
+      return this.artistData.filter(el => el.content_id != this.skipContentId);
+    }
+  }
 };
 </script>
 
 <style scoped>
+.quickview {
+  padding: 2em 2em 6em 2em;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  background-color: white;
+  color: black;
+  width: 100vw;
+  overflow: scroll;
+  z-index: 1;
+}
+.quickview::-webkit-scrollbar {
+  display: none;
+}
+.quickview .poster {
+  padding: 0 1em;
+  flex-shrink: 0;
+}
 </style>

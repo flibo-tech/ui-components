@@ -69,7 +69,7 @@ export default {
       console.log();
       return Object.keys(this.moviePlatformsObj).length;
     },
-    userPlatforms() {
+    userPlatforms() { 
       let lowerCased = this.platformArr.map(el => {
         return el.toLowerCase();
       });
@@ -79,23 +79,6 @@ export default {
       return replaceSpace;
     },
     finalPlatforms() {
-      // let finalPlatform = [];
-      // this.moviePlatforms.forEach(element => {
-      //   this.userPlatforms.forEach(userPlat => {
-      //     if (element === userPlat) {
-      //       finalPlatform.push(element);
-      //     }
-      //   });
-      // });
-      // this.moviePlatforms.forEach(el => {
-      //   finalPlatform.push(el);
-      // });
-
-      // finalPlatform = finalPlatform.filter(function(elem, pos) {
-      //   return finalPlatform.indexOf(elem) == pos;
-      // });
-      // return finalPlatform;
-
       let finalPlatform = {};
       for (let k in this.moviePlatformsObj) {
         this.userPlatforms.forEach(userPlatform => {
@@ -146,6 +129,7 @@ export default {
   background-color: white;
   max-width: 200px;
   max-height: 80px;
+  box-shadow: 0 0 5px 0px rgba(0,0,0,0.2);
 }
 .image-container {
   width: 100%;
