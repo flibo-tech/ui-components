@@ -1,7 +1,10 @@
 <template>
   <div class="outer">
     <div class="inner">
-      {{ text }} <span v-bind:class="{ highlight: this.highlight }">{{ highlight }}</span>
+      {{ text }}
+      <span v-if="this.highlight !== null" class="highlight">{{
+        highlight
+      }}</span>
     </div>
   </div>
 </template>
@@ -24,10 +27,10 @@ export default {
 </script>
 
 <style scoped>
-.outer { 
+.outer {
   width: 75px;
   height: 14px;
-  background: #F4F4F4;
+  background: #f4f4f4;
   border-radius: 4px;
   padding: 5px;
 }
