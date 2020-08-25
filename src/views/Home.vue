@@ -22,6 +22,7 @@
     <ContentMetaBlockTest v-if="store.component == 'ContentMetaBlockTest'" />
     <Person v-if="store.component == 'Person'" />
     <Artist v-if="store.component == 'Artist'" />
+    <PlaceholderTest v-if="store.component == 'PlaceholderTest'" />
 
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
@@ -98,6 +99,7 @@ import MovieImageLandscape from "./../components/atomic/MovieImageLandscape";
 import MovieImagePortrait from "./../components/atomic/MovieImagePortrait";
 import Trailer from "./../components/atomic/Trailer";
 import ContentMetaBlockTest from "./../components/molecular/ContentMetaBlockTest";
+import PlaceholderTest from "./../components/molecular/PlaceholderTest";
 import Artist from "./../components/molecular/Artist";
 
 export default {
@@ -121,7 +123,8 @@ export default {
     Trailer,
     UserRating,
     ContentMetaBlockTest,
-    Artist
+    Artist,
+    PlaceholderTest
   },
   data() {
     return {

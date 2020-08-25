@@ -10,6 +10,7 @@
       <li>Progress</li>
       <li>Person</li>
       <li>ContentMetaBlock</li>
+      <li>Placeholder</li>
     </ul>
     <br />
     <h1>Atoms</h1>
@@ -25,6 +26,7 @@
     <h4 class="nav-item" @click="store.component = 'PosterTest'">Poster</h4>
     <h4 class="nav-item" @click="store.component = 'Trailer'">Trailer</h4>
     <h4 class="nav-item" @click="store.component = 'ContentMetaBlockTest'">ContentMetaBlock Test</h4>
+    <h4 class="nav-item" @click="store.component = 'PlaceholderTest'">Placeholder Test</h4>
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">Swipe Preview</h4>
