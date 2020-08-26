@@ -76,8 +76,7 @@ export default {
     },
     platforms: {
       type: Array,
-      required: false,
-      dafault: []
+      required: false
     },
     showName: {
       type: Boolean,

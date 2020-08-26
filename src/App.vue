@@ -3,7 +3,7 @@
     <div id="app" class="f-container">
       <Navigation
         v-if="
-          !['MovieImageLandscape', 'MovieImagePortrait'].includes(
+          !['MovieImageLandscape', 'MovieImagePortrait', 'Artist'].includes(
             store.component
           )
         "

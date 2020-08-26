@@ -8,7 +8,7 @@
     {'width': containerWidth * (60/100) + 'px',
     'height': containerWidth * (30/100) + 'px',
     'transition': 'width 0.1s linear'},
-    plusClicked ?  {'width': containerWidth * (90/100) + 'px'} : {}]"
+    plusClicked ? noOfPlatforms === 2 ? {'width': containerWidth * (60/100) + 'px'} : {'width': containerWidth * (90/100) + 'px'} : {}]"
   >
     <div class="image-sub-container">
       <img
@@ -37,7 +37,7 @@
       v-if="noOfPlatforms > 1 && plusClicked === false"
       class="plus-sign"
       @click="plusClicked = !plusClicked"
-    >+{{ noOfPlatforms - 1 }}</div>
+    ><p>+{{ noOfPlatforms - 1 }}</p></div>
   </div>
 </template>
 
@@ -50,7 +50,8 @@ export default {
     },
     platformArr: {
       type: Array,
-      required: false
+      required: false,
+      default: () => [""]
     },
     moviePlatformsObj: {
       type: Object,
@@ -66,10 +67,9 @@ export default {
 
   computed: {
     noOfPlatforms() {
-      console.log();
       return Object.keys(this.moviePlatformsObj).length;
     },
-    userPlatforms() { 
+    userPlatforms() {
       let lowerCased = this.platformArr.map(el => {
         return el.toLowerCase();
       });
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     goToPlatform(link, traffic_origin) {
-      console.log(link)
+      console.log(link);
       this.$emit("leave-feed");
       var activity = {
         api: "outbound_traffic",
@@ -129,7 +129,7 @@ export default {
   background-color: white;
   max-width: 200px;
   max-height: 80px;
-  box-shadow: 0 0 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2);
 }
 .image-container {
   width: 100%;
@@ -164,5 +164,8 @@ img {
   border-radius: 50%;
   height: 100%;
   width: auto;
+}
+p {
+  font-size: 20px;
 }
 </style>
