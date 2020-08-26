@@ -1,14 +1,10 @@
 <template>
-  <button
-    :class="checkType"
-    @click="$emit('clicked')"
-    :disabled="disabled"
-  >
+  <button :class="checkType" @click="$emit('clicked')" :disabled="disabled">
     <p v-if="buttonType != 'iconOnly'">{{ text }}</p>
     <img
       v-if="buttonType === 'iconOnly'"
       :src="imageURL"
-      :style="{'width': size + 'px'}"
+      :style="{ width: size + 'px' }"
     />
   </button>
 </template>
@@ -65,14 +61,13 @@ export default {
 
     imageURL() {
       if (this.state) {
-      return require('../../assets/icons/' + this.icon + "_true" + '.svg');
+        return require("../../assets/icons/" + this.icon + "_true" + ".svg");
       }
-      return require('../../assets/icons/' + this.icon + '.svg');
+      return require("../../assets/icons/" + this.icon + ".svg");
     }
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 $border-radius: 5px;

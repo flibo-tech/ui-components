@@ -1,25 +1,50 @@
 <template>
-  <div class="container">
-    <div class="placeload">
-      <div class="img loads" :style="{'width': width + 'px', 'height': height + 'px'}"></div>
-    </div>
+  <div class="placeload">
+    <div
+      v-if="this.circle === false"
+      class="image-placeholder loads"
+      :style="
+        'border-radius: ' +
+          this.borderRadius +
+          'px; height: ' +
+          this.height +
+          'px;'
+      "
+    ></div>
+    <div
+      v-if="this.circle === true"
+      class="image-placeholder loads"
+      :style="'border-radius: 50%;' + ' height: ' + this.height + 'px;'"
+    ></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "CirclePlaceholder",
+  name: "Placeholder",
   props: {
+    circle: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     height: {
       type: Number,
-      required: true
+      required: false,
+      default: 16
     },
-    width: {
+    borderRadius: {
       type: Number,
-      required: true
+      required: false,
+      default: 8
+    },
+    dark: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -28,18 +53,10 @@ $grey-nuance-lighter: #eeeeee;
 $grey-nuance-darker: #dddddd;
 $fade-grey: #e8e8e8;
 
-.container {
-  .placeload {
-    padding: 5px;
-    .img {
-      width: 50px;
-      min-width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-    }   
+.placeload {
+  padding: 10px;
+  .image-placeholder {
+    width: 100%;
   }
 }
 
@@ -70,7 +87,12 @@ $fade-grey: #e8e8e8;
     #dddddd 18%,
     #eeeeee 33%
   );
-  background: linear-gradient(to right, $grey-nuance-lighter 8%, $grey-nuance-darker 18%, $grey-nuance-lighter 33%);
+  background: linear-gradient(
+    to right,
+    $grey-nuance-lighter 8%,
+    $grey-nuance-darker 18%,
+    $grey-nuance-lighter 33%
+  );
   -webkit-background-size: 800px 104px;
   background-size: 1200px 104px;
   position: relative;

@@ -2,7 +2,7 @@
   <article>
     <button
       :class="[checkType, checkIcon]"
-      @click="$emit('clicked'), buttonClicked($event), state = !state"
+      @click="$emit('clicked'), buttonClicked($event), (state = !state)"
       ref="btn"
       :disabled="disabled"
     >
@@ -42,7 +42,7 @@ export default {
     },
     size: {
       type: Number,
-      required: false,
+      required: false
     }
   },
 
@@ -98,11 +98,10 @@ export default {
           return iconClass;
         case "star":
           if (this.state === false) {
-          console.log("Star")
-          iconClass = "star";
-          return iconClass;
-          }
-          else iconClass = "star-active";
+            console.log("Star");
+            iconClass = "star";
+            return iconClass;
+          } else iconClass = "star-active";
           return iconClass;
         default:
           iconClass = "";
@@ -223,5 +222,4 @@ button ::v-deep span {
 button:focus {
   outline: none;
 }
-
 </style>

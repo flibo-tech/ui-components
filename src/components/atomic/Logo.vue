@@ -1,5 +1,5 @@
 <template>
-  <img :src="LogoSrc()" :alt="logoColor" :height="height+'px'" />
+  <img :src="LogoSrc()" :alt="logoColor" :height="height + 'px'" />
 </template>
 
 <script>
@@ -17,8 +17,8 @@ export default {
   },
   data() {
     return {
-      darkLogoPath: require('../../assets/logo/logo-black.svg'),
-      lightLogoPath: require('../../assets/logo/logo-white.svg'),
+      darkLogoPath: require("../../assets/logo/logo-black.svg"),
+      lightLogoPath: require("../../assets/logo/logo-white.svg")
     };
   },
 
@@ -26,8 +26,7 @@ export default {
     LogoSrc() {
       if (this.logoColor === "dark") {
         return this.darkLogoPath;
-      }
-      else if (this.logoColor === "light") {
+      } else if (this.logoColor === "light") {
         return this.lightLogoPath;
       }
     }
@@ -35,5 +34,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
