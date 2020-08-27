@@ -123,7 +123,7 @@ export default {
 }
 .platform-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   border-radius: 50px;
   background-color: white;

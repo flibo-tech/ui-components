@@ -9,7 +9,12 @@
           More by
           <span>{{ name }}</span>
         </h2>
-        <Button buttonType="iconOnly" icon="cross" v-on:clicked="quickViewEnabled = false" />
+        <Button
+          buttonType="iconOnly"
+          icon="cross"
+          v-on:clicked="quickViewEnabled = false"
+          :size="28"
+        />
       </div>
       <div class="poster-container">
         <Poster
@@ -83,8 +88,7 @@ export default {
         .then(
           response => (
             (this.artistData = response.data.contents),
-            (self.fetching_more = false),
-            console.log(this.artistData)
+            (self.fetching_more = false)
           )
         )
         .catch(function(error) {
@@ -115,36 +119,54 @@ export default {
   flex-direction: row;
   width: 100%;
   height: 100%;
-  padding-bottom: 8em;
   overflow: scroll;
 }
+.poster-container::-webkit-scrollbar {
+  display: none;
+}
 .quickview {
-  padding: 1em 0em 1em 1em;
+  padding: 0em 0em 1em 1em;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%);
   position: absolute;
-  top: 0;
   background-color: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
   color: black;
   width: 90vw;
   z-index: 1;
+  animation: 0.2s ease-out 0s 1 load;
 }
-.poster-container::-webkit-scrollbar {
-  display: none;
+@keyframes load {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .quickview .poster {
   padding: 0 1em;
   flex-shrink: 0;
 }
 .modal-bg {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  animation: 0.2s ease-out 0s 1 load;
+}
+
+h2 {
+  font-weight:300;
+}
+span {
+  font-weight: 900;
 }
 </style>
