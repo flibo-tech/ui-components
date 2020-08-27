@@ -5,7 +5,7 @@
     :style="[noOfPlatforms === 1 ? {'width': containerWidth * (30/100) + 'px',
     'height': containerWidth * (30/100) + 'px'} 
     :
-    {'width': containerWidth * (60/100) + 'px',
+    {'width': containerWidth * (50/100) + 'px',
     'height': containerWidth * (30/100) + 'px',
     'transition': 'width 0.1s linear'},
     plusClicked ? noOfPlatforms === 2 ? {'width': containerWidth * (60/100) + 'px'} : {'width': containerWidth * (90/100) + 'px'} : {}]"

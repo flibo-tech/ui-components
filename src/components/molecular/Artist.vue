@@ -3,7 +3,7 @@
     <div @click="quickView">
       <Person :image="image" :width="width" :height="height" :name="name" />
     </div>
-    <div v-if="quickViewEnabled && artistData" class="quickview">
+    <div v-if="quickViewEnabled" class="quickview">
       <div class="view-header">
         <h2>
           More by
@@ -16,7 +16,8 @@
           :size="28"
         />
       </div>
-      <div class="poster-container">
+      <h2 v-if="!artistData">Loading...</h2>
+      <div class="poster-container" v-if="artistData">
         <Poster
           v-for="movie in filteredMovies"
           :key="movie.index"
@@ -168,5 +169,8 @@ h2 {
 }
 span {
   font-weight: 900;
+}
+.quickview > h2 {
+  padding-left: 1em;
 }
 </style>
