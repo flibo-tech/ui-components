@@ -1,7 +1,7 @@
 <template>
   <div class="placeload">
     <div
-      v-if="this.circle === false"
+      v-if="!this.circle"
       class="image-placeholder loads"
       :style="
         'border-radius: ' +
@@ -12,7 +12,7 @@
       "
     ></div>
     <div
-      v-if="this.circle === true"
+      v-if="this.circle"
       class="image-placeholder loads"
       :style="'border-radius: 50%;' + ' height: ' + this.height + 'px;'"
     ></div>

@@ -1,22 +1,26 @@
 <template>
   <div class="container">
     <div>
-      <Placeholder :height="200" :circle="true" />
+      <Placeholder :height="130" :circle="true" />
       <Placeholder :height="50" :borderRadius="10" />
       <Placeholder :height="50" :borderRadius="50" />
     </div>
     <div>
+      <Placeholder :height="100" :borderRadius="10" />
       <Placeholder :height="200" :borderRadius="10" />
-      <Placeholder :height="100" :circle="true" />
+      <Placeholder :height="180" :circle="true" />
     </div>
     <div>
-      <Placeholder :height="200" :circle="true" />
-      <Placeholder :height="50" :borderRadius="10" />
-      <Placeholder :height="50" :borderRadius="50" />
+      <Placeholder :height="80" :circle="true" />
+      <Placeholder :height="30" :borderRadius="10" />
+      <Placeholder :height="30" :borderRadius="50" />
+      <Placeholder :height="80" :circle="true" />
+      <Placeholder :height="80" :borderRadius="10" />
+      <Placeholder :height="30" :borderRadius="50" />
     </div>
     <div>
-      <Placeholder :height="200" :borderRadius="10" />
-      <Placeholder :height="100" :circle="true" />
+      <Placeholder :height="130" :borderRadius="10" />
+      <Placeholder :height="280" :circle="true" />
     </div>
   </div>
 </template>
@@ -40,7 +44,7 @@ $fade-grey: #e8e8e8;
 
 .container {
   display: grid;
-  grid-template-columns: 200px 200px 200px 200px;
+  grid-template-columns: 150px 200px 100px 300px;
   background: #fff;
   max-width: 800px;
   /* border: 1px solid $fade-grey;
