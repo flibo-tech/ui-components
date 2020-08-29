@@ -1,38 +1,40 @@
 <template>
-  <div
-    class="feed-poster-container"
-    :style="
-      'width: ' + containerWidth + 'px;'"
-  >
-    <img
-      :src="image"
-      class="poster"
-      :style="'height: ' + 1.5 * containerWidth + 'px;'"
-      alt="poster"
-      @click="openContent"
-    />
+  <div :style="{'width': containerWidth + 'px'}">
+    <div>
+      <div class="feed-poster-container" :style="
+      'width: ' + containerWidth + 'px;'">
+        <img
+          :src="image"
+          class="poster"
+          :style="'height: ' + 1.5 * containerWidth + 'px;'"
+          alt="poster"
+          @click="openContent"
+        />
 
-    <Trailer
-      class="trailer"
-      :contentId="contentId"
-      trailerId="32"
-      :whereToWatch="whereToWatch"
-      :parent="parent"
-      :size="30"
-    />
+        <Trailer
+          v-if="trailerId"
+          class="trailer"
+          :contentId="contentId"
+          trailerId="32"
+          :whereToWatch="whereToWatch"
+          :parent="parent"
+          :size="30"
+        />
 
-    <PlatformBar
-      class="platform-bar"
-      :platformArr="platforms"
-      :moviePlatformsObj="whereToWatchOptions"
-      :containerWidth="containerWidth"
-    />
-    <div
-      v-if="showName"
-      class="title"
-      :style="[
-Object.keys(whereToWatchOptions).length >= 1  ? {'top': containerWidth / 4 + 'px' } : {'top': '20px'}]"
-    >{{ title }}</div>
+        <PlatformBar
+          class="platform-bar"
+          :platformArr="platforms"
+          :moviePlatformsObj="whereToWatchOptions"
+          :containerWidth="containerWidth"
+        />
+      </div>
+      <div
+        v-if="showName"
+        class="title"
+        :style="[
+Object.keys(whereToWatchOptions).length >= 1  ? {'margin-top': containerWidth / 4 + 'px' } : {'margin-top': '20px'}]"
+      >{{ title }}</div>
+    </div>
   </div>
 </template>
 
@@ -60,7 +62,8 @@ export default {
     },
     trailerId: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     whereToWatch: {
       type: Object,
@@ -126,7 +129,6 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  position: absolute;
   text-align: center;
   font-family: "Roboto";
   grid-row-start: 3;
@@ -155,6 +157,5 @@ export default {
   grid-column-start: 1;
   width: 100%;
   border-radius: 8px;
-  background-color: #f8f8f8;
 }
 </style>

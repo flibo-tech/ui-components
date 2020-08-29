@@ -9,7 +9,7 @@
             height: containerWidth * (30 / 100) + 'px'
           }
         : {
-            width: containerWidth * (60 / 100) + 'px',
+            width: containerWidth * (50 / 100) + 'px',
             height: containerWidth * (30 / 100) + 'px',
             transition: 'width 0.1s linear'
           },
@@ -144,7 +144,7 @@ export default {
 }
 .platform-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   border-radius: 50px;
   background-color: white;
