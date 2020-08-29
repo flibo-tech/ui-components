@@ -1,9 +1,12 @@
 <template>
   <div class="main-container" :style="adjustPosition">
-    <div class="image-container" :style="{'width': width + 'px', 'height': height + 'px'}">
+    <div
+      class="image-container"
+      :style="{ width: width + 'px', height: height + 'px' }"
+    >
       <img :src="image" />
     </div>
-    <p :style="{'top': spacing + 'px', 'width': width + 'px'}">{{ name }}</p>
+    <p :style="{ top: spacing + 'px', width: width + 'px' }">{{ name }}</p>
   </div>
 </template>
 

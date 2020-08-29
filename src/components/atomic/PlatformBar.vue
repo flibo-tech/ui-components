@@ -2,34 +2,53 @@
   <div
     v-if="noOfPlatforms >= 1"
     class="platform-container"
-    :style="[noOfPlatforms === 1 ? {'width': containerWidth * (30/100) + 'px',
-    'height': containerWidth * (30/100) + 'px'} 
-    :
-    {'width': containerWidth * (60/100) + 'px',
-    'height': containerWidth * (30/100) + 'px',
-    'transition': 'width 0.1s linear'},
-    plusClicked ? noOfPlatforms === 2 ? {'width': containerWidth * (60/100) + 'px'} : {'width': containerWidth * (90/100) + 'px'} : {}]"
+    :style="[
+      noOfPlatforms === 1
+        ? {
+            width: containerWidth * (30 / 100) + 'px',
+            height: containerWidth * (30 / 100) + 'px'
+          }
+        : {
+            width: containerWidth * (60 / 100) + 'px',
+            height: containerWidth * (30 / 100) + 'px',
+            transition: 'width 0.1s linear'
+          },
+      plusClicked
+        ? noOfPlatforms === 2
+          ? { width: containerWidth * (60 / 100) + 'px' }
+          : { width: containerWidth * (90 / 100) + 'px' }
+        : {}
+    ]"
   >
     <div class="image-sub-container">
       <img
-        @click="goToPlatform(finalPlatforms[Object.getOwnPropertyNames(finalPlatforms)[0]], 'feed_poster')"
+        @click="
+          goToPlatform(
+            finalPlatforms[Object.getOwnPropertyNames(finalPlatforms)[0]],
+            'feed_poster'
+          )
+        "
         v-if="plusClicked === false"
         :src="
-                'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
-                Object.getOwnPropertyNames(finalPlatforms)[0] +
-                '.jpg'
-              "
+          'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
+            Object.getOwnPropertyNames(finalPlatforms)[0] +
+            '.jpg'
+        "
       />
     </div>
     <div class="image-container" v-if="plusClicked">
-      <div class="image-sub-container" v-for="(link, key) in finalPlatforms" :key="key">
+      <div
+        class="image-sub-container"
+        v-for="(link, key) in finalPlatforms"
+        :key="key"
+      >
         <img
           @click="goToPlatform(link, 'feed_poster')"
           :src="
-                'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
-                key +
-                '.jpg'
-              "
+            'https://flibo-images.s3-us-west-2.amazonaws.com/logos/platforms/' +
+              key +
+              '.jpg'
+          "
         />
       </div>
     </div>
@@ -37,7 +56,9 @@
       v-if="noOfPlatforms > 1 && plusClicked === false"
       class="plus-sign"
       @click="plusClicked = !plusClicked"
-    ><p>+{{ noOfPlatforms - 1 }}</p></div>
+    >
+      <p>+{{ noOfPlatforms - 1 }}</p>
+    </div>
   </div>
 </template>
 

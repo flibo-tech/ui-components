@@ -1,21 +1,6 @@
 <template>
   <div class="placeload">
-    <div
-      v-if="!this.circle"
-      class="image-placeholder loads"
-      :style="
-        'border-radius: ' +
-          this.borderRadius +
-          'px; height: ' +
-          this.height +
-          'px;'
-      "
-    ></div>
-    <div
-      v-if="this.circle"
-      class="image-placeholder loads"
-      :style="'border-radius: 50%;' + ' height: ' + this.height + 'px;'"
-    ></div>
+    <div class="image-placeholder loads" :style="customStyle"></div>
   </div>
 </template>
 
@@ -43,26 +28,45 @@ export default {
       required: true,
       default: false
     }
+  },
+  computed: {
+    customStyle() {
+      if (!this.circle)
+        return (
+          "border-radius: " +
+          this.borderRadius +
+          "px; width: 100%; height: " +
+          this.height +
+          "px;"
+        );
+      else
+        return (
+          "border-radius: 50%;" +
+          " width: " +
+          this.height +
+          "px;" +
+          " height: " +
+          this.height +
+          "px;"
+        );
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 $background: #f6f7f8;
-$grey-nuance-lighter: #eeeeee;
-$grey-nuance-darker: #dddddd;
+$grey-nuance-darker: #efefef;
+$grey-nuance-lighter: #f8f8f8;
 $fade-grey: #e8e8e8;
 
 .placeload {
   padding: 10px;
-  .image-placeholder {
-    width: 100%;
-  }
 }
 
 .loads {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
+  -webkit-animation-duration: 1.25s;
+  animation-duration: 1.25s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-iteration-count: infinite;
@@ -77,21 +81,21 @@ $fade-grey: #e8e8e8;
     linear,
     left top,
     right top,
-    color-stop(8%, $grey-nuance-lighter),
-    color-stop(18%, $grey-nuance-darker),
-    color-stop(33%, $grey-nuance-lighter)
+    color-stop(8%, $grey-nuance-darker),
+    color-stop(18%, $grey-nuance-lighter),
+    color-stop(33%, $grey-nuance-darker)
   );
   background: -webkit-linear-gradient(
     left,
-    #eeeeee 8%,
-    #dddddd 18%,
-    #eeeeee 33%
+    #efefef 8%,
+    #f8f8f8 18%,
+    #efefef 33%
   );
   background: linear-gradient(
     to right,
-    $grey-nuance-lighter 8%,
-    $grey-nuance-darker 18%,
-    $grey-nuance-lighter 33%
+    $grey-nuance-darker 8%,
+    $grey-nuance-lighter 18%,
+    $grey-nuance-darker 33%
   );
   -webkit-background-size: 800px 104px;
   background-size: 1200px 104px;
