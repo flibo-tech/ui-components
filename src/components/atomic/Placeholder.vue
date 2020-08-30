@@ -37,7 +37,9 @@ export default {
           this.borderRadius +
           "px; width: 100%; height: " +
           this.height +
-          "px;"
+          "px; --bg-color: " +
+          this.bgColor +
+          ";"
         );
       else
         return (
@@ -47,16 +49,21 @@ export default {
           "px;" +
           " height: " +
           this.height +
-          "px;"
+          "px; --bg-color: " +
+          this.bgColor +
+          ";"
         );
+    },
+    bgColor() {
+      return this.dark ? "#dbdbdb" : "#efefef";
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-$background: #f6f7f8;
-$grey-nuance-darker: #efefef;
+$background: #f6f8f6;
+$grey-nuance-darker: #dbdbdb;
 $grey-nuance-lighter: #f8f8f8;
 $fade-grey: #e8e8e8;
 
@@ -81,9 +88,9 @@ $fade-grey: #e8e8e8;
     linear,
     left top,
     right top,
-    color-stop(8%, $grey-nuance-darker),
+    color-stop(8%, var(--bg-color)),
     color-stop(18%, $grey-nuance-lighter),
-    color-stop(33%, $grey-nuance-darker)
+    color-stop(33%, var(--bg-color))
   );
   background: -webkit-linear-gradient(
     left,
@@ -93,9 +100,9 @@ $fade-grey: #e8e8e8;
   );
   background: linear-gradient(
     to right,
-    $grey-nuance-darker 8%,
+    var(--bg-color) 8%,
     $grey-nuance-lighter 18%,
-    $grey-nuance-darker 33%
+    var(--bg-color) 33%
   );
   -webkit-background-size: 800px 104px;
   background-size: 1200px 104px;
