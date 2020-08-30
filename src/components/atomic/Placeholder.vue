@@ -68,7 +68,7 @@ $grey-nuance-lighter: #f8f8f8;
 $fade-grey: #e8e8e8;
 
 .placeload {
-  padding: 10px;
+  padding: 5px;
 }
 
 .loads {
