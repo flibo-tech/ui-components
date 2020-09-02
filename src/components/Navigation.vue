@@ -27,6 +27,7 @@
     <h4 class="nav-item" @click="store.component = 'Trailer'">Trailer</h4>
     <h4 class="nav-item" @click="store.component = 'ContentMetaBlockTest'">ContentMetaBlock Test</h4>
     <h4 class="nav-item" @click="store.component = 'PlaceholderTest'">Placeholder Test</h4>
+    <h4 class="nav-item" @click="store.component = 'TextField'">Text Field</h4>
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">Swipe Preview</h4>

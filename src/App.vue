@@ -49,7 +49,7 @@ body {
   top: 0;
   display: grid;
   grid-template-columns: 300px 1fr;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   background-color: #272431;
 }
 </style>
