@@ -66,11 +66,9 @@ $background: #f6f8f6;
 $grey-nuance-darker: #dbdbdb;
 $grey-nuance-lighter: #f8f8f8;
 $fade-grey: #e8e8e8;
-
 .placeload {
   padding: 5px;
 }
-
 .loads {
   -webkit-animation-duration: 1.25s;
   animation-duration: 1.25s;
@@ -108,7 +106,6 @@ $fade-grey: #e8e8e8;
   background-size: 1200px 104px;
   position: relative;
 }
-
 @-webkit-keyframes placeload {
   0% {
     background-position: -468px 0;
@@ -117,7 +114,6 @@ $fade-grey: #e8e8e8;
     background-position: 468px 0;
   }
 }
-
 @keyframes placeload {
   0% {
     background-position: -468px 0;

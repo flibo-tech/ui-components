@@ -8,15 +8,12 @@
       <Placeholder :height="35" :dark="true" />
       <Placeholder :height="30" :dark="false" />
       <Placeholder :height="30" :dark="false" />
-      <Placeholder :height="30" :dark="false" />
-      <Placeholder :height="30" :dark="false" />
     </div>
   </div>
 </template>
 
 <script>
-import Placeholder from "../atomic/Placeholder";
-
+import Placeholder from "../../atomic/Placeholder";
 export default {
   name: "FeedCard",
   components: {
