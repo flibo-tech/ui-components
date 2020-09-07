@@ -1,7 +1,7 @@
 <template>
   <div class="container content">
     <Placeholder :height="35" :dark="true" style="width: 75%;" />
-    <Placeholder :height="70" :dark="false" />
+    <Placeholder v-for="index in 3" :key="index" :height="15" :dark="false" />
     <Placeholder :height="25" :dark="false" style="width: 50%;" />
     <div class="artists">
       <Placeholder v-for="index in 5" :key="index" :height="85" :dark="false" />
@@ -39,7 +39,7 @@ export default {
 .content {
   display: grid;
   grid-gap: 10px;
-  grid-template-rows: 35px 75px 25px 85px 185px;
+  grid-template-rows: 35px 15px 15px 15px 25px 85px 185px;
 }
 .artists {
   display: grid;
