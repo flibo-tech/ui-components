@@ -1,19 +1,42 @@
 <template>
   <div>
-    <textarea v-model="content" placeholder="Enter text"></textarea>
-    {{processedContent}}
+    <div class="search-div" v-if="searchDiv" @click="searchDiv = false">
+      <ul>
+        <li v-for="movie in movies" :key="movie" @click="selectedWord = movie">{{ movie }}</li>
+      </ul>
+    </div>
+    <textarea @keyup.key.@="searchDiv = true" v-model="content" placeholder="Enter text"></textarea>
+    <button @click="submit">Submit</button>
   </div>
 </template>
 
 <script>
 import Emoji from "../../assets/emoji";
+// import axios from "axios";
 export default {
   name: "TextField",
   data() {
     return {
       content: "",
-      processedContent: ""
+      selectedWord: "",
+      searchDiv: false,
+      movies: ["Inception", "The Dark Knight"],
+      highlightWords: {}
     };
+  },
+  computed: {
+    processedContent() {
+      let text = this.content;
+      Object.keys(this.highlightWords).forEach(key => {
+        if (this.content.match(key)) {
+          text = text.replace(
+            `@${key}`,
+            `[${this.highlightWords[key].text}](${this.highlightWords[key].type},${this.highlightWords[key].id})`
+          );
+        }
+      });
+      return text;
+    }
   },
   methods: {
     addEmoji(val) {
@@ -26,22 +49,54 @@ export default {
       }
     },
     addHighlight() {
-      let word = this.content.substring(
+      let processedWord = null;
+      let word = null;
+      word = this.content.substring(
         this.content.lastIndexOf("@") + 1,
-        this.content.lastIndexOf(" ")
+        this.content.indexOf(" ", this.content.lastIndexOf("@"))
       );
-      console.log(`[${word}]()`);
-      this.processedContent = this.content.replace(`@${word}`, `[${word}]()`);
-    }
+      // const fetchData = function(word) {
+      //   axios
+      //     .post("https://app.flibo.ai/live_search", {
+      //       session_id: "1591181440dfmMXlLBw1NhObTx",
+      //       string: word,
+      //       search_type: "content",
+      //       guest_id: null
+      //     })
+      //     .then(response => {
+      //       console.log(response)
+      //     });
+      // };
+      // fetchData(word);
+      processedWord = word.toLowerCase().replace(" ", "_");
+      this.highlightWords[processedWord] = {
+        type: "content",
+        id: 123,
+        text: word
+      };
+      this.content = this.content.replace(word, processedWord);
+    },
+    submit() {
+      console.log(this.processedContent);
+    },
+    // {
+    //   'the_dark_knight': {
+    //     'type': 'content'/'artist'/'user',
+    //     'id': 123,
+    //     'text': 'The Dark Knight'
+    //   }
+    //   [The Dark Knight](content, 123)
+    // }
   },
   watch: {
     content: function(val) {
-      console.log(typeof "😁")
-      this.processedContent = val;
       if (this.content) {
         this.addEmoji(val);
       }
-      if (this.content.match("@")) {
+      if (
+        this.content.lastIndexOf("@") != -1 &&
+        this.content.indexOf(" ", this.content.lastIndexOf("@")) != -1
+      ) {
         this.addHighlight();
       }
     }
@@ -52,5 +107,15 @@ export default {
 <style scoped>
 * {
   color: black;
+}
+.search-div {
+  width: 100%;
+  height: 50vh;
+  background-color: white;
+}
+
+textarea {
+  width: 100%;
+  height: 20vh;
 }
 </style>
