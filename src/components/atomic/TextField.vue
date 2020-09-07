@@ -29,8 +29,9 @@ export default {
       let text = this.content;
       Object.keys(this.highlightWords).forEach(key => {
         if (this.content.match(key)) {
+          let regex = new RegExp(`@${key}`,"g")
           text = text.replace(
-            `@${key}`,
+            regex,
             `[${this.highlightWords[key].text}](${this.highlightWords[key].type},${this.highlightWords[key].id})`
           );
         }
@@ -48,13 +49,17 @@ export default {
         }
       }
     },
+    
     addHighlight() {
       let processedWord = null;
       let word = null;
-      word = this.content.substring(
-        this.content.lastIndexOf("@") + 1,
-        this.content.indexOf(" ", this.content.lastIndexOf("@"))
-      );
+      // word = this.content.substring(
+      //   this.content.lastIndexOf("@") + 1,
+      //   this.content.indexOf(" ", this.content.lastIndexOf("@"))
+      // );
+      if (this.selectedWord) {
+        word = this.selectedWord;
+      }
       // const fetchData = function(word) {
       //   axios
       //     .post("https://app.flibo.ai/live_search", {
@@ -68,7 +73,7 @@ export default {
       //     });
       // };
       // fetchData(word);
-      processedWord = word.toLowerCase().replace(" ", "_");
+      processedWord = word.toLowerCase().replace(/ /g, "_");
       this.highlightWords[processedWord] = {
         type: "content",
         id: 123,
@@ -78,15 +83,7 @@ export default {
     },
     submit() {
       console.log(this.processedContent);
-    },
-    // {
-    //   'the_dark_knight': {
-    //     'type': 'content'/'artist'/'user',
-    //     'id': 123,
-    //     'text': 'The Dark Knight'
-    //   }
-    //   [The Dark Knight](content, 123)
-    // }
+    }
   },
   watch: {
     content: function(val) {
@@ -99,6 +96,11 @@ export default {
       ) {
         this.addHighlight();
       }
+      // let some = this.content.substring(this.content.lastIndexOf("@"), this.content.length);
+      // console.log(some);
+    },
+    selectedWord: function() {
+      this.content = this.content + this.selectedWord;
     }
   }
 };
