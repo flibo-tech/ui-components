@@ -1,6 +1,6 @@
 <template>
-  <div class="placeload">
-    <div class="image-placeholder loads" :style="customStyle"></div>
+  <div>
+    <div class="loads" :style="customStyle"></div>
   </div>
 </template>
 
@@ -66,9 +66,7 @@ $background: #f6f8f6;
 $grey-nuance-darker: #dbdbdb;
 $grey-nuance-lighter: #f8f8f8;
 $fade-grey: #e8e8e8;
-.placeload {
-  padding: 5px;
-}
+
 .loads {
   -webkit-animation-duration: 1.25s;
   animation-duration: 1.25s;

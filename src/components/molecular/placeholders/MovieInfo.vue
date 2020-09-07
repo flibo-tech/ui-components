@@ -1,21 +1,18 @@
 <template>
-  <div class="container">
-    <Placeholder :height="35" :dark="true" style="width: 75%" />
+  <div class="container content">
+    <Placeholder :height="35" :dark="true" style="width: 75%;" />
     <Placeholder :height="70" :dark="false" />
-    <Placeholder :height="25" :dark="false" style="width: 50%" />
+    <Placeholder :height="25" :dark="false" style="width: 50%;" />
     <div class="artists">
-      <Placeholder :height="115" :dark="false" />
-      <Placeholder :height="115" :dark="false" />
-      <Placeholder :height="115" :dark="false" />
-      <Placeholder :height="115" :dark="false" />
-      <Placeholder :height="115" :dark="false" />
+      <Placeholder v-for="index in 5" :key="index" :height="85" :dark="false" />
     </div>
     <div class="movies">
-      <Placeholder :height="150" :dark="false" />
-      <Placeholder :height="150" :dark="false" />
-      <Placeholder :height="150" :dark="false" />
-      <Placeholder :height="150" :dark="false" />
-      <Placeholder :height="150" :dark="false" />
+      <Placeholder
+        v-for="index in 5"
+        :key="index"
+        :height="185"
+        :dark="false"
+      />
     </div>
   </div>
 </template>
@@ -32,7 +29,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #fff;
   max-width: 1000px;
   /* border: 1px solid $fade-grey;
   border-radius: 3px; */
@@ -40,12 +36,19 @@ export default {
   margin-top: 20px;
   padding: 10px;
 }
+.content {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 35px 75px 25px 85px 185px;
+}
 .artists {
   display: grid;
-  grid-template-columns: 80px 80px 80px 80px 80px;
+  grid-gap: 10px;
+  grid-template-columns: 55px 55px 55px 55px 55px;
 }
 .movies {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  grid-template-columns: 125px 125px 125px 125px 125px;
 }
 </style>

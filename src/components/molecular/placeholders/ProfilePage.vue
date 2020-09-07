@@ -1,18 +1,33 @@
 <template>
   <div class="container">
-    <Placeholder :height="500" :dark="false" />
+    <Placeholder :height="400" :dark="false" />
     <div class="profilepic" style="transform: translateY(-50%);">
       <Placeholder
-        :height="130"
+        :height="85"
         :dark="true"
         :circle="true"
         style=" grid-column-start: 2;"
-        
+      />
+      <Placeholder
+        :height="25"
+        :dark="true"
+        :circle="false"
+        style=" grid-column-start: 2;"
       />
     </div>
 
-    <Placeholder :height="30" :dark="false" style="width: 75%" />
-    <Placeholder :height="30" :dark="false" style="width: 50%" />
+    <Placeholder :height="20" :dark="true" style="width: 30%" />
+    <Placeholder :height="20" :dark="false" style="width: 45%" />
+    <Placeholder :height="20" :dark="false" style="width: 50%" />
+
+    <div class="movies">
+      <Placeholder
+        v-for="index in 5"
+        :key="index"
+        :height="160"
+        :dark="false"
+      />
+    </div>
   </div>
 </template>
 
@@ -28,17 +43,24 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #fff;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 400px 110px 20px 20px 20px 160px;
   max-width: 1000px;
   /* border: 1px solid $fade-grey;
   border-radius: 3px; */
-
   position: relative;
   margin-top: 20px;
   padding: 10px;
 }
 .profilepic {
   display: grid;
-  grid-template-columns: 1fr 130px 1fr;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 85px 1fr;
+}
+.movies {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 105px 105px 105px 105px 105px;
 }
 </style>

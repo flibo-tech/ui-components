@@ -18,7 +18,9 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #fff;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 500px 35px 30px;
   max-width: 1000px;
   /* border: 1px solid $fade-grey;
   border-radius: 3px; */

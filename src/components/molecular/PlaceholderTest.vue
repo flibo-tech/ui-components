@@ -1,17 +1,17 @@
 <template>
   <div>
     <h1 style="color: white">FeedCard</h1>
-    <FeedCard />
+    <FeedCard style="background: #fff;" />
     <h1 style="color: white">SearchContent</h1>
-    <SearchContent />
+    <SearchContent style="background: #fff;" />
     <h1 style="color: white">SearchUser</h1>
-    <SearchUser />
+    <SearchUser style="background: #fff;" />
     <h1 style="color: white">MovieInfo</h1>
-    <MovieInfo />
+    <MovieInfo style="background: #fff;" />
     <h1 style="color: white">MoviePage</h1>
-    <MoviePage />
+    <MoviePage style="background: #fff;" />
     <h1 style="color: white">ProfilePage</h1>
-    <ProfilePage />
+    <ProfilePage style="background: #fff;" />
   </div>
 </template>
 
