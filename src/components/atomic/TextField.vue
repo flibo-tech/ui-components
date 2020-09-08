@@ -1,12 +1,17 @@
 <template>
   <div>
-    <div class="search-div" v-if="searchDiv" @click="searchDiv = false">
+    <div class="search-div" v-if="searchDiv">
       <ul>
-        <li v-for="movie in movies" :key="movie" @click="selectedWord = movie">{{ movie }}</li>
+        <li
+          v-for="movie in movies"
+          :key="movie"
+          @click="[selectedWord = movie, searchDiv = false]"
+        >{{ movie }}</li>
       </ul>
     </div>
     <textarea @keyup.key.@="searchDiv = true" v-model="content" placeholder="Enter text"></textarea>
     <button @click="submit">Submit</button>
+    &#x1f62b;
   </div>
 </template>
 
@@ -27,9 +32,21 @@ export default {
   computed: {
     processedContent() {
       let text = this.content;
+      let matchedEmojis = null;
+      
+      const count = str => {
+        const re = /[\u{1f300}-\u{1f5ff}\u{1f900}-\u{1f9ff}\u{1f600}-\u{1f64f}\u{1f680}-\u{1f6ff}\u{2600}-\u{26ff}\u{2700}-\u{27bf}\u{1f1e6}-\u{1f1ff}\u{1f191}-\u{1f251}\u{1f004}\u{1f0cf}\u{1f170}-\u{1f171}\u{1f17e}-\u{1f17f}\u{1f18e}\u{3030}\u{2b50}\u{2b55}\u{2934}-\u{2935}\u{2b05}-\u{2b07}\u{2b1b}-\u{2b1c}\u{3297}\u{3299}\u{303d}\u{00a9}\u{00ae}\u{2122}\u{23f3}\u{24c2}\u{23e9}-\u{23ef}\u{25b6}\u{23f8}-\u{23fa}]/ug;
+        return ((str || "").match(re) || []);
+      };
+      matchedEmojis = count(this.content);
+
+      matchedEmojis.forEach((el) => {
+        let code = this.emojiUnicode(el);
+        text = text.replace(el, `e[&#x${code}]`);
+      })
       Object.keys(this.highlightWords).forEach(key => {
         if (this.content.match(key)) {
-          let regex = new RegExp(`@${key}`,"g")
+          let regex = new RegExp(`@${key}`, "g");
           text = text.replace(
             regex,
             `[${this.highlightWords[key].text}](${this.highlightWords[key].type},${this.highlightWords[key].id})`
@@ -40,6 +57,20 @@ export default {
     }
   },
   methods: {
+    emojiUnicode(emoji) {
+      var comp;
+      if (emoji.length === 1) {
+        comp = emoji.charCodeAt(0);
+      }
+      comp =
+        (emoji.charCodeAt(0) - 0xd800) * 0x400 +
+        (emoji.charCodeAt(1) - 0xdc00) +
+        0x10000;
+      if (comp < 0) {
+        comp = emoji.charCodeAt(0);
+      }
+      return comp.toString("16");
+    },
     addEmoji(val) {
       for (let i = 0; i < Emoji.emoji.length; i++) {
         let currentKeyName = Emoji.emoji[i].key;
@@ -49,7 +80,7 @@ export default {
         }
       }
     },
-    
+
     addHighlight() {
       let processedWord = null;
       let word = null;
@@ -95,9 +126,8 @@ export default {
         this.content.indexOf(" ", this.content.lastIndexOf("@")) != -1
       ) {
         this.addHighlight();
+        this.checkAt = this.content.lastIndexOf("@");
       }
-      // let some = this.content.substring(this.content.lastIndexOf("@"), this.content.length);
-      // console.log(some);
     },
     selectedWord: function() {
       this.content = this.content + this.selectedWord;
