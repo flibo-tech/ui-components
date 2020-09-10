@@ -64,9 +64,26 @@ export default {
   },
   methods: {
     removeSearch() {
+      let lastWord = null;
+      let highlight = Object.keys(this.highlightWords);
       if (this.content[this.content.length - 1].match("@")) {
         this.searchDiv = false;
       }
+      const getLastWord = words => {
+        let n = words.split(" ");
+        let end = n[n.length - 1];
+        for (let i = 0; i <= highlight.length; i++) {
+          console.log(end, "@" + highlight)
+          if (end === "@" + highlight[i]) {
+            end = end.slice(0, -1);
+            this.searchDiv = false;
+            return end;
+          }
+        }
+        return;
+      };
+      lastWord = getLastWord(this.content);
+      this.content = this.content.replace(lastWord, "");
     },
     emojiUnicode(emoji) {
       var comp;
@@ -127,7 +144,10 @@ export default {
           this.content.length
         );
         if (searchWord) {
-          this.content = this.content.replace(searchWord, this.selectedWord + " ");
+          this.content = this.content.replace(
+            searchWord,
+            this.selectedWord + " "
+          );
         } else {
           this.content = this.content + this.selectedWord + " ";
         }
