@@ -1,17 +1,18 @@
 <template>
   <div>
-    <div class="search-div" v-if="searchDiv">
+    <div class="search-div" v-show="searchDiv">
       <ul>
         <li
           v-for="movie in movies"
           :key="movie"
-          @click="[selectedWord = movie, searchDiv = false]"
+          @click="[selectedWord = movie, addHighlight(), searchDiv = false]"
         >{{ movie }}</li>
       </ul>
     </div>
     <textarea
+      ref="inputField"
       @keyup.key.@="searchDiv = true"
-      @keydown.delete="checkAt"
+      @keydown.delete="removeSearch"
       v-model="content"
       placeholder="Enter text"
     ></textarea>
@@ -28,6 +29,7 @@ export default {
     return {
       content: "",
       selectedWord: "",
+      selected: false,
       searchDiv: false,
       movies: ["Inception", "The Dark Knight"],
       highlightWords: {}
@@ -61,39 +63,10 @@ export default {
     }
   },
   methods: {
-    checkAt() {
-      if (this.content[this.content.length - 1] === "@") {
+    removeSearch() {
+      if (this.content[this.content.length - 1].match("@")) {
         this.searchDiv = false;
       }
-    },
-    getInputSelection(input) {
-      var start = 0,
-        end = 0;
-      input.focus();
-      if (
-        typeof input.selectionStart == "number" &&
-        typeof input.selectionEnd == "number"
-      ) {
-        start = input.selectionStart;
-        end = input.selectionEnd;
-      } else if (document.selection && document.selection.createRange) {
-        var range = document.selection.createRange();
-        if (range) {
-          var inputRange = input.createTextRange();
-          var workingRange = inputRange.duplicate();
-          var bookmark = range.getBookmark();
-          inputRange.moveToBookmark(bookmark);
-          workingRange.setEndPoint("EndToEnd", inputRange);
-          end = workingRange.text.length;
-          workingRange.setEndPoint("EndToStart", inputRange);
-          start = workingRange.text.length;
-        }
-      }
-      return {
-        start: start,
-        end: end,
-        length: end - start
-      };
     },
     emojiUnicode(emoji) {
       var comp;
@@ -121,34 +94,15 @@ export default {
 
     addHighlight() {
       let processedWord = null;
-      let word = null;
-      // word = this.content.substring(
-      //   this.content.lastIndexOf("@") + 1,
-      //   this.content.indexOf(" ", this.content.lastIndexOf("@"))
-      // );
-      if (this.selectedWord) {
-        word = this.selectedWord;
-      }
-      // const fetchData = function(word) {
-      //   axios
-      //     .post("https://app.flibo.ai/live_search", {
-      //       session_id: "1591181440dfmMXlLBw1NhObTx",
-      //       string: word,
-      //       search_type: "content",
-      //       guest_id: null
-      //     })
-      //     .then(response => {
-      //       console.log(response)
-      //     });
-      // };
-      // fetchData(word);
+      let word = this.selectedWord;
       processedWord = word.toLowerCase().replace(/ /g, "_");
       this.highlightWords[processedWord] = {
         type: "content",
         id: 123,
         text: word
       };
-      this.content = this.content.replace(word, processedWord);
+      this.selectedWord = processedWord;
+      this.$refs.inputField.focus();
     },
     submit() {
       console.log(this.processedContent);
@@ -163,12 +117,22 @@ export default {
         this.content.lastIndexOf("@") != -1 &&
         this.content.indexOf(" ", this.content.lastIndexOf("@")) != -1
       ) {
-        this.addHighlight();
-        this.checkAt = this.content.lastIndexOf("@");
+        this.searchDiv = false;
       }
     },
     selectedWord: function() {
-      this.content = this.content + this.selectedWord;
+      if (this.content.lastIndexOf("@") != -1 && this.selectedWord != "") {
+        let searchWord = this.content.substring(
+          this.content.lastIndexOf("@") + 1,
+          this.content.length
+        );
+        if (searchWord) {
+          this.content = this.content.replace(searchWord, this.selectedWord + " ");
+        } else {
+          this.content = this.content + this.selectedWord + " ";
+        }
+      }
+      this.selectedWord = "";
     }
   }
 };
