@@ -1,9 +1,12 @@
 <template>
   <div class="bar" v-if="value <= maxValue && value >= 0">
     <div class="progress-bar">
-      <div class="progress" :style="{
-          width: value * 4 + '%',
-        }"></div>
+      <div
+        class="progress"
+        :style="{
+          width: value * 4 + '%'
+        }"
+      ></div>
     </div>
   </div>
 </template>
@@ -23,7 +26,6 @@ export default {
       default: 25
     }
   }
-
 };
 </script>
 

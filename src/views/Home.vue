@@ -1,6 +1,11 @@
 <template>
   <div
-    :style="[store.component == 'MovieImagePortrait' || store.component == 'MovieImageLandscape' ? {'width': '100vw'} : {}]"
+    :style="[
+      store.component == 'MovieImagePortrait' ||
+      store.component == 'MovieImageLandscape'
+        ? { width: '100vw' }
+        : {}
+    ]"
   >
     <div v-if="store.component == null">
       This website contains all the components (atomic &amp; molecular) used in
@@ -24,6 +29,7 @@
     <Artist v-if="store.component == 'Artist'" />
     <PlaceholderTest v-if="store.component == 'PlaceholderTest'" />
     <TextField v-if="store.component == 'TextField'" />
+    <CharacterCounterTest v-if="store.component == 'CharacterCounterTest'" />
 
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
@@ -103,6 +109,7 @@ import TextField from "./../components/atomic/TextField";
 import ContentMetaBlockTest from "./../components/molecular/ContentMetaBlockTest";
 import PlaceholderTest from "./../components/molecular/PlaceholderTest";
 import Artist from "./../components/molecular/Artist";
+import CharacterCounterTest from "./../components/molecular/CharacterCounterTest";
 
 export default {
   name: "Home",
@@ -127,7 +134,8 @@ export default {
     ContentMetaBlockTest,
     Artist,
     PlaceholderTest,
-    TextField
+    TextField,
+    CharacterCounterTest
   },
   data() {
     return {
@@ -137,5 +145,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
