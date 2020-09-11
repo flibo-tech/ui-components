@@ -57,9 +57,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-circle {
-  stroke-width: 10;
-}
 .progress-ring__circle {
   transition: 0.35s stroke-dashoffset;
   transform: rotate(-90deg);
