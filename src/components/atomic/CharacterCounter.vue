@@ -7,8 +7,8 @@
         stroke="#294ED2"
         fill="transparent"
         :r="radius"
-        cx="350"
-        cy="150"
+        cx="100"
+        cy="100"
       />
     </svg>
   </div>
