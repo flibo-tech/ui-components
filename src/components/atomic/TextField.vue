@@ -10,6 +10,7 @@
       </ul>
     </div>
     <textarea
+      :rows="type === 'comment' ? 1 : 15"
       ref="inputField"
       @keyup.key.@="searchDiv = true"
       @keydown.delete="removeSearch"
@@ -17,6 +18,7 @@
       placeholder="Enter text"
     ></textarea>
     <button @click="submit">Submit</button>
+    {{ searchString }}
   </div>
 </template>
 
@@ -29,12 +31,22 @@ export default {
     return {
       content: "",
       selectedWord: "",
+      length: null,
+      negateLength: null,
+      searchString: "",
       selected: false,
       searchDiv: false,
       movies: ["Inception", "The Dark Knight"],
-      highlightWords: {}
+      highlightWords: {},
+      type: "comment"
     };
   },
+  // props: {
+  //   type: {
+  //     type: String,
+  //     required: true
+  //   }
+  // },
   computed: {
     processedContent() {
       let text = this.content;
@@ -63,6 +75,10 @@ export default {
     }
   },
   methods: {
+    autoGrow(element) {
+      element.style.height = "auto";
+      element.style.height = element.scrollHeight + "px";
+    },
     removeSearch() {
       let lastWord = null;
       let highlight = Object.keys(this.highlightWords);
@@ -73,7 +89,6 @@ export default {
         let n = words.split(" ");
         let end = n[n.length - 1];
         for (let i = 0; i <= highlight.length; i++) {
-          console.log(end, "@" + highlight)
           if (end === "@" + highlight[i]) {
             end = end.slice(0, -1);
             this.searchDiv = false;
@@ -108,10 +123,10 @@ export default {
         }
       }
     },
-
     addHighlight() {
       let processedWord = null;
       let word = this.selectedWord;
+      this.searchString = "";
       processedWord = word.toLowerCase().replace(/ /g, "_");
       this.highlightWords[processedWord] = {
         type: "content",
@@ -119,6 +134,7 @@ export default {
         text: word
       };
       this.selectedWord = processedWord;
+      this.negateLength = this.negateLength + (processedWord.length + 1);
       this.$refs.inputField.focus();
     },
     submit() {
@@ -135,7 +151,17 @@ export default {
         this.content.indexOf(" ", this.content.lastIndexOf("@")) != -1
       ) {
         this.searchDiv = false;
+        this.searchString = "";
       }
+      if (this.content.lastIndexOf("@") != -1) {
+        this.searchString = this.content.substring(
+          this.content.lastIndexOf("@"),
+          this.content.length
+        );
+      }
+      this.autoGrow(this.$refs.inputField);
+      this.length = this.content.length - this.negateLength;
+      console.log(this.length);
     },
     selectedWord: function() {
       if (this.content.lastIndexOf("@") != -1 && this.selectedWord != "") {
@@ -170,6 +196,5 @@ export default {
 
 textarea {
   width: 100%;
-  height: 20vh;
 }
 </style>
