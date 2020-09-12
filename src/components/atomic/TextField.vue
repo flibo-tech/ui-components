@@ -10,6 +10,7 @@
       </ul>
     </div>
     <textarea
+      :maxlength="maxLimit"
       :rows="type === 'comment' ? 1 : 15"
       ref="inputField"
       @keyup.key.@="searchDiv = true"
@@ -31,6 +32,7 @@ export default {
     return {
       content: "",
       selectedWord: "",
+      maxLimit: null,
       length: null,
       negateLength: null,
       searchString: "",
@@ -161,6 +163,9 @@ export default {
       }
       this.autoGrow(this.$refs.inputField);
       this.length = this.content.length - this.negateLength;
+      if (this.length === 500) {
+        this.maxLimit = this.content.length;
+      }
       console.log(this.length);
     },
     selectedWord: function() {
