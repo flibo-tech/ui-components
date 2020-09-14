@@ -1,14 +1,18 @@
 <template>
   <div>
-    <svg class="progress-ring" width="300" height="300">
+    <svg
+      class="progress-ring"
+      :width="2 * (radius + width)"
+      :height="2 * (radius + width)"
+    >
       <circle
         :style="customStyle"
         class="progress-ring__circle"
         stroke="#294ED2"
         fill="transparent"
         :r="radius"
-        cx="100"
-        cy="100"
+        :cx="radius + width"
+        :cy="radius + width"
       />
     </svg>
   </div>
