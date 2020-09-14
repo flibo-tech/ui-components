@@ -12,6 +12,7 @@
       <li>ContentMetaBlock</li>
       <li>Placeholder</li>
       <li>CharacterCounter</li>
+      <li>TagSuggestions</li>
     </ul>
     <br />
     <h1>Atoms</h1>
@@ -47,6 +48,9 @@
     <h4 class="nav-item" @click="store.component = 'TextField'">Text Field</h4>
     <h4 class="nav-item" @click="store.component = 'CharacterCounterTest'">
       CharacterCounter Test
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'TagSuggestionsTest'">
+      TagSuggestions Test
     </h4>
     <br />
     <h1>Molecules</h1>

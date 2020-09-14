@@ -30,6 +30,7 @@
     <PlaceholderTest v-if="store.component == 'PlaceholderTest'" />
     <TextField v-if="store.component == 'TextField'" />
     <CharacterCounterTest v-if="store.component == 'CharacterCounterTest'" />
+    <TagSuggestionsTest v-if="store.component == 'TagSuggestionsTest'" />
 
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
@@ -110,6 +111,7 @@ import ContentMetaBlockTest from "./../components/molecular/ContentMetaBlockTest
 import PlaceholderTest from "./../components/molecular/PlaceholderTest";
 import Artist from "./../components/molecular/Artist";
 import CharacterCounterTest from "./../components/molecular/CharacterCounterTest";
+import TagSuggestionsTest from "./../components/molecular/TagSuggestionsTest";
 
 export default {
   name: "Home",
@@ -135,7 +137,8 @@ export default {
     Artist,
     PlaceholderTest,
     TextField,
-    CharacterCounterTest
+    CharacterCounterTest,
+    TagSuggestionsTest
   },
   data() {
     return {
