@@ -31,7 +31,11 @@
         />
       </div>
     </div>
-    <div class="modal-bg" v-if="quickViewEnabled && artistData" @click="quickViewEnabled = false"></div>
+    <div
+      class="modal-bg"
+      v-if="quickViewEnabled && artistData"
+      @click="quickViewEnabled = false"
+    ></div>
   </div>
 </template>
 
@@ -165,7 +169,7 @@ export default {
 }
 
 h2 {
-  font-weight:300;
+  font-weight: 300;
 }
 span {
   font-weight: 900;

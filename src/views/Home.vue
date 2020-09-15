@@ -31,6 +31,7 @@
     <TextField v-if="store.component == 'TextField'" />
     <CharacterCounterTest v-if="store.component == 'CharacterCounterTest'" />
     <ImageSlider v-if="store.component == 'ImageSlider'" />
+    <TagSuggestionsTest v-if="store.component == 'TagSuggestionsTest'" />
 
     <MovieImageLandscape
       v-if="store.component == 'MovieImageLandscape'"
@@ -112,6 +113,7 @@ import PlaceholderTest from "./../components/molecular/PlaceholderTest";
 import Artist from "./../components/molecular/Artist";
 import CharacterCounterTest from "./../components/molecular/CharacterCounterTest";
 import ImageSlider from "./../components/atomic/ImageSlider";
+import TagSuggestionsTest from "./../components/molecular/TagSuggestionsTest";
 
 export default {
   name: "Home",
@@ -138,7 +140,8 @@ export default {
     PlaceholderTest,
     TextField,
     CharacterCounterTest,
-    ImageSlider
+    ImageSlider,
+    TagSuggestionsTest
   },
   data() {
     return {
