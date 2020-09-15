@@ -12,7 +12,8 @@
       </div>
 
       <textarea
-        @paste.prevent=""
+        :style="type === 'post' ? {'width': '100%'}: { 'width': '90%' } "
+        @paste.prevent
         @focus="showCounter = true"
         :maxlength="maxLimit"
         :rows="type === 'comment' ? 1 : 15"
@@ -25,9 +26,10 @@
 
       <transition name="counter-animation">
         <Counter
+          :style="type === 'post' ? { 'right': '10px', 'bottom': '-40px' }:{'right': '0px', 'bottom': '0px'}"
           v-if="showCounter"
           class="counter"
-          :limit="10"
+          :limit="500"
           :count="length"
           :radius="10"
           :width="3"
@@ -157,7 +159,7 @@ export default {
       this.selectedWord = processedWord;
       this.negateLength = this.negateLength + (processedWord.length + 1);
       this.$refs.inputField.focus();
-    },
+    }
   },
   watch: {
     isSubmitClicked: function() {
@@ -184,7 +186,7 @@ export default {
       }
       this.autoGrow(this.$refs.inputField);
       this.length = this.content.length - this.negateLength;
-      if (this.length >= 10) {
+      if (this.length >= 500) {
         this.maxLimit = this.content.length;
       }
       console.log(this.length);
@@ -226,8 +228,6 @@ export default {
 .counter {
   z-index: 10;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
 }
 textarea {
   width: 100%;
