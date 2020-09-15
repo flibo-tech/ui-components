@@ -48,6 +48,9 @@
     <h4 class="nav-item" @click="store.component = 'CharacterCounterTest'">
       CharacterCounter Test
     </h4>
+    <h4 class="nav-item" @click="store.component = 'ImageSlider'">
+      Image Slider
+    </h4>
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">

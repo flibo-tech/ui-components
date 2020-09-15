@@ -50,7 +50,7 @@ body {
   display: grid;
   grid-template-columns: 300px 1fr;
   color: rgb(0, 0, 0);
-  background-color: #272431;
+  background-color: #f7f6f9;
 }
 </style>
 
