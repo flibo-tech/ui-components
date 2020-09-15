@@ -1,31 +1,46 @@
 <template>
   <div>
-    <div class="search-div" v-show="searchDiv">
-      <ul>
-        <li
-          v-for="movie in movies"
-          :key="movie"
-          @click="[selectedWord = movie, addHighlight(), searchDiv = false]"
-        >{{ movie }}</li>
-      </ul>
+    <div class="textfield-wrapper">
+      <div class="search-div" v-show="searchDiv">
+        <ul>
+          <li
+            v-for="movie in movies"
+            :key="movie"
+            @click="[selectedWord = movie, addHighlight(), searchDiv = false]"
+          >{{ movie }}</li>
+        </ul>
+      </div>
+
+      <textarea
+        @paste.prevent=""
+        @focus="showCounter = true"
+        :maxlength="maxLimit"
+        :rows="type === 'comment' ? 1 : 15"
+        ref="inputField"
+        @keyup.key.@="searchDiv = true"
+        @keydown.delete="removeSearch"
+        v-model="content"
+        placeholder="Enter text"
+      ></textarea>
+
+      <transition name="counter-animation">
+        <Counter
+          v-if="showCounter"
+          class="counter"
+          :limit="10"
+          :count="length"
+          :radius="10"
+          :width="3"
+        />
+      </transition>
     </div>
-    <textarea
-      :maxlength="maxLimit"
-      :rows="type === 'comment' ? 1 : 15"
-      ref="inputField"
-      @keyup.key.@="searchDiv = true"
-      @keydown.delete="removeSearch"
-      v-model="content"
-      placeholder="Enter text"
-    ></textarea>
-    <button @click="submit">Submit</button>
-    {{ searchString }}
   </div>
 </template>
 
 <script>
 import Emoji from "../../assets/emoji";
-// import axios from "axios";
+import Counter from "./CharacterCounter";
+
 export default {
   name: "TextField",
   data() {
@@ -33,22 +48,26 @@ export default {
       content: "",
       selectedWord: "",
       maxLimit: null,
-      length: null,
+      length: 0,
       negateLength: null,
+      showCounter: false,
       searchString: "",
       selected: false,
       searchDiv: false,
       movies: ["Inception", "The Dark Knight"],
-      highlightWords: {},
-      type: "comment"
+      highlightWords: {}
     };
   },
-  // props: {
-  //   type: {
-  //     type: String,
-  //     required: true
-  //   }
-  // },
+  props: {
+    type: {
+      type: String,
+      required: true
+    },
+    isSubmitClicked: {
+      type: Boolean
+    }
+  },
+  components: { Counter },
   computed: {
     processedContent() {
       let text = this.content;
@@ -139,11 +158,13 @@ export default {
       this.negateLength = this.negateLength + (processedWord.length + 1);
       this.$refs.inputField.focus();
     },
-    submit() {
-      console.log(this.processedContent);
-    }
   },
   watch: {
+    isSubmitClicked: function() {
+      if (this.isSubmitClicked) {
+        console.log(this.processedContent);
+      }
+    },
     content: function(val) {
       if (this.content) {
         this.addEmoji(val);
@@ -163,7 +184,7 @@ export default {
       }
       this.autoGrow(this.$refs.inputField);
       this.length = this.content.length - this.negateLength;
-      if (this.length === 500) {
+      if (this.length >= 10) {
         this.maxLimit = this.content.length;
       }
       console.log(this.length);
@@ -199,7 +220,26 @@ export default {
   background-color: white;
 }
 
+.textfield-wrapper {
+  position: relative;
+}
+.counter {
+  z-index: 10;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
 textarea {
   width: 100%;
+}
+
+.counter-animation-enter-active,
+.counter-animation-leave-active {
+  transition: opacity 0.2s ease-out;
+}
+
+.counter-animation-enter,
+.counter-animation-leave-to {
+  opacity: 0;
 }
 </style>

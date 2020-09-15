@@ -1,11 +1,12 @@
 <template>
-  <button :class="checkType" @click="$emit('clicked')" :disabled="disabled">
+  <button
+    :class="checkType"
+    @click="$emit('clicked')"
+    :disabled="disabled"
+    :style="iconCircle ? { 'background-color': '#7352ff', 'width': size*2 + 'px', 'height': size*2 + 'px' } : {}"
+  >
     <p v-if="buttonType != 'iconOnly'">{{ text }}</p>
-    <img
-      v-if="buttonType === 'iconOnly'"
-      :src="imageURL"
-      :style="{ width: size + 'px' }"
-    />
+    <img v-if="buttonType === 'iconOnly'" :src="imageURL" :style="{ width: size + 'px' }" />
   </button>
 </template>
 
@@ -43,6 +44,11 @@ export default {
       type: Number,
       required: false,
       default: 18
+    },
+    iconCircle: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
