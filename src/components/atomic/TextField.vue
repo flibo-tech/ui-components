@@ -12,7 +12,7 @@
       </div>
 
       <textarea
-        :style="type === 'post' ? {'width': '100%'}: { 'width': '90%' } "
+        :style="type === 'post' ? {'width': '100%'}: { 'width': '85%' } "
         @paste.prevent
         @focus="showCounter = true"
         :maxlength="maxLimit"
@@ -29,7 +29,7 @@
           :style="type === 'post' ? { 'right': '10px', 'bottom': '-40px' }:{'right': '0px', 'bottom': '0px'}"
           v-if="showCounter"
           class="counter"
-          :limit="500"
+          :limit="type === 'post' ? 500 : 500"
           :count="length"
           :radius="10"
           :width="3"
@@ -230,7 +230,10 @@ export default {
   position: absolute;
 }
 textarea {
-  width: 100%;
+  color: #686868;
+  border: none;
+  outline: none;
+  resize: none;
 }
 
 .counter-animation-enter-active,
