@@ -1,6 +1,5 @@
 <template>
   <div :style="customStyle">
-    <!-- <button @click="suggestions">Suggestions</button> -->
     <div v-bind:key="index" v-for="(item, index) in searchData">
       <Person
         :name="item.subject"
@@ -40,9 +39,7 @@ export default {
   },
   data() {
     return {
-      searchData: [],
-      search_string: this.searchString,
-      search_type: this.searchType
+      searchData: []
     };
   },
   computed: {
