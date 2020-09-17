@@ -1,5 +1,5 @@
 <template>
-  <TagSuggestions />
+  <TagSuggestions searchString="in" searchType="content" :height="300" />
 </template>
 
 <script>
