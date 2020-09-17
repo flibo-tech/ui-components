@@ -31,7 +31,10 @@
     <TextField v-if="store.component == 'TextField'" />
     <CharacterCounterTest v-if="store.component == 'CharacterCounterTest'" />
     <Post v-if="store.component == 'Post'" />
-    <ImageSlider v-if="store.component == 'ImageSlider'" />
+    <ImageSlider
+      :contentIds="[11882, 127216]"
+      v-if="store.component == 'ImageSlider'"
+    />
     <TagSuggestionsTest v-if="store.component == 'TagSuggestionsTest'" />
 
     <MovieImageLandscape

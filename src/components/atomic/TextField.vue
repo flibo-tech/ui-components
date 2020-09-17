@@ -1,26 +1,25 @@
 <template>
   <div>
     <div class="textfield-wrapper">
-      <div class="search-div" v-show="searchDiv">
+      <div class="search-div" v-show="searchString">
         <ul>
           <li
             v-for="movie in movies"
             :key="movie"
-            @click="[selectedWord = movie, addHighlight(), searchDiv = false]"
+            @click="[selectedWord = movie, addHighlight()]"
           >{{ movie }}</li>
         </ul>
       </div>
 
       <textarea
-        :style="type === 'post' ? {'width': '100%'}: { 'width': '90%' } "
         @paste.prevent
         @focus="showCounter = true"
+        @keydown.delete="removeSearch"
+        :style="type === 'post' ? {'width': '100%'}: { 'width': '85%' } "
         :maxlength="maxLimit"
         :rows="type === 'comment' ? 1 : 15"
-        ref="inputField"
-        @keyup.key.@="searchDiv = true"
-        @keydown.delete="removeSearch"
         v-model="content"
+        ref="inputField"
         placeholder="Enter text"
       ></textarea>
 
@@ -29,7 +28,7 @@
           :style="type === 'post' ? { 'right': '10px', 'bottom': '-40px' }:{'right': '0px', 'bottom': '0px'}"
           v-if="showCounter"
           class="counter"
-          :limit="500"
+          :limit="type === 'post' ? 500 : 500"
           :count="length"
           :radius="10"
           :width="3"
@@ -50,12 +49,8 @@ export default {
       content: "",
       selectedWord: "",
       maxLimit: null,
-      length: 0,
       negateLength: null,
       showCounter: false,
-      searchString: "",
-      selected: false,
-      searchDiv: false,
       movies: ["Inception", "The Dark Knight"],
       highlightWords: {}
     };
@@ -95,6 +90,26 @@ export default {
         }
       });
       return text;
+    },
+    searchString() {
+      let str = "";
+      if (
+        this.content.match(/@./g) &&
+        this.content.lastIndexOf("@") > this.content.lastIndexOf(" ")
+      ) {
+        str = this.content.substring(
+          this.content.lastIndexOf("@") + 1,
+          this.content.indexOf(" ", this.content.lastIndexOf("@")) === -1
+            ? this.content.length
+            : this.content.indexOf(" ", this.content.lastIndexOf("@"))
+        );
+      }
+      return str;
+    },
+    length() {
+      let length = 0;
+      length = this.content.length - this.negateLength;
+      return length;
     }
   },
   methods: {
@@ -105,9 +120,6 @@ export default {
     removeSearch() {
       let lastWord = null;
       let highlight = Object.keys(this.highlightWords);
-      if (this.content[this.content.length - 1].match("@")) {
-        this.searchDiv = false;
-      }
       const getLastWord = words => {
         let n = words.split(" ");
         let end = n[n.length - 1];
@@ -149,7 +161,6 @@ export default {
     addHighlight() {
       let processedWord = null;
       let word = this.selectedWord;
-      this.searchString = "";
       processedWord = word.toLowerCase().replace(/ /g, "_");
       this.highlightWords[processedWord] = {
         type: "content",
@@ -176,16 +187,8 @@ export default {
         this.content.indexOf(" ", this.content.lastIndexOf("@")) != -1
       ) {
         this.searchDiv = false;
-        this.searchString = "";
-      }
-      if (this.content.lastIndexOf("@") != -1) {
-        this.searchString = this.content.substring(
-          this.content.lastIndexOf("@"),
-          this.content.length
-        );
       }
       this.autoGrow(this.$refs.inputField);
-      this.length = this.content.length - this.negateLength;
       if (this.length >= 500) {
         this.maxLimit = this.content.length;
       }
@@ -230,7 +233,10 @@ export default {
   position: absolute;
 }
 textarea {
-  width: 100%;
+  color: #686868;
+  border: none;
+  outline: none;
+  resize: none;
 }
 
 .counter-animation-enter-active,

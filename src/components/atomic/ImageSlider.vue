@@ -1,14 +1,18 @@
 <template>
-  <flickity class="gallery" ref="flickity" :options="flickityOptions">
-    <div class="gallery-cell">1</div>
-    <div class="gallery-cell">2</div>
-    <div class="gallery-cell">3</div>
-    <div class="gallery-cell">4</div>
-    <div class="gallery-cell">5</div>
+  <flickity
+    v-if="images.length"
+    class="images"
+    ref="flickity"
+    :options="flickityOptions"
+  >
+    <div v-for="(image, index) in images" :key="index" class="image">
+      <img :src="image.replace('/original/', '/w500/')" alt="cover-poster" />
+    </div>
   </flickity>
 </template>
 
 <script>
+import axios from "axios";
 import Flickity from "vue-flickity";
 
 export default {
@@ -16,48 +20,102 @@ export default {
   components: {
     Flickity
   },
+  props: {
+    contentIds: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
+      store: this.$store.state,
+      images: [],
       flickityOptions: {
-        initialIndex: 3,
+        initialIndex: 0,
         prevNextButtons: false,
         pageDots: false,
-        wrapAround: true
+        wrapAround: true,
+        percentPosition: true
       }
     };
   },
+  created() {
+    this.fetchImages();
+  },
   computed: {
-    selectedIndex() {
-      return this.$refs.flickity.selectedIndex();
+    selectedImage() {
+      return this.images.length
+        ? this.images[this.$refs.flickity.selectedIndex()]
+        : null;
+    }
+  },
+  watch: {
+    contentIds: {
+      handler() {
+        this.fetchImages();
+      }
+    }
+  },
+  methods: {
+    fetchImages() {
+      var self = this;
+      axios
+        .post(self.$store.state.api_host + "fetch_content_images", {
+          session_id: "1599211356d4w3ZodTtsPUt3E5", //self.$store.state.session_id,
+          content_ids: self.contentIds
+        })
+        .then(function(response) {
+          if (response.status == 200) {
+            if (response.data.images.includes(self.selectedImage)) {
+              self.images = [self.selectedImage];
+              self.images.push(
+                ...response.data.images.filter(
+                  image => image != self.selectedImage
+                )
+              );
+            } else {
+              self.images = response.data.images;
+            }
+          } else if (response.status == 204) {
+            self.images = [];
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+          if ([401, 419].includes(error.response.status)) {
+            window.location =
+              self.$store.state.login_host +
+              "logout?session_id=" +
+              self.$store.state.session_id;
+            self.$store.state.session_id = null;
+            self.$emit("logging-out");
+          } else {
+            // console.log(error.response.status);
+          }
+        });
     }
   }
 };
 </script>
 
 <style scoped>
-.gallery {
-  background: #eee;
-}
-
-.gallery-cell {
-  width: 28%;
-  height: 200px;
-  margin-right: 10px;
-  background: #8c8;
-  counter-increment: gallery-cell;
-}
-
-.gallery-cell.is-selected {
-  background: #ed2;
-}
-
-/* cell number */
-.gallery-cell:before {
-  display: block;
+.image {
+  height: 30vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  margin-right: 16px;
   text-align: center;
-  content: counter(gallery-cell);
-  line-height: 200px;
-  font-size: 80px;
-  color: white;
+}
+
+.image.is-selected {
+  background-color: transparent;
+}
+
+.image.is-selected img {
+  opacity: 1;
+}
+
+.image img {
+  height: inherit;
+  opacity: 0.25;
 }
 </style>
