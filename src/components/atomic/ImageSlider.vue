@@ -6,7 +6,7 @@
     :options="flickityOptions"
   >
     <div v-for="(image, index) in images" :key="index" class="image">
-      <img :src="image" alt="cover-poster" />
+      <img :src="image.replace('/original/', '/w500/')" alt="cover-poster" />
     </div>
   </flickity>
 </template>
@@ -34,7 +34,8 @@ export default {
         initialIndex: 0,
         prevNextButtons: false,
         pageDots: false,
-        wrapAround: true
+        wrapAround: true,
+        percentPosition: true
       }
     };
   },
@@ -100,18 +101,21 @@ export default {
 <style scoped>
 .image {
   height: 30vh;
+  background-color: rgba(0, 0, 0, 0.95);
   margin-right: 16px;
   text-align: center;
 }
 
+.image.is-selected {
+  background-color: transparent;
+}
+
 .image.is-selected img {
   opacity: 1;
-  filter: brightness(100%);
 }
 
 .image img {
   height: inherit;
-  opacity: 0.1;
-  filter: brightness(50%);
+  opacity: 0.25;
 }
 </style>
