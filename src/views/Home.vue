@@ -33,7 +33,7 @@
     <Post v-if="store.component == 'Post'" />
     <TypeCardTest v-if="store.component == 'TypeCardTest'" />
     <ImageSlider
-      :contentIds="[11882, 127216]"
+      :contentIds="[122104, 124270]"
       v-if="store.component == 'ImageSlider'"
     />
     <TagSuggestionsTest v-if="store.component == 'TagSuggestionsTest'" />
