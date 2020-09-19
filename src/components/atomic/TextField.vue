@@ -51,6 +51,7 @@ export default {
       maxLimit: null,
       negateLength: null,
       showCounter: false,
+      idsForMovies: [],
       movies: ["Inception", "The Dark Knight"],
       highlightWords: {}
     };
@@ -126,7 +127,6 @@ export default {
         for (let i = 0; i <= highlight.length; i++) {
           if (end === "@" + highlight[i]) {
             end = end.slice(0, -1);
-            this.searchDiv = false;
             return end;
           }
         }
@@ -182,17 +182,19 @@ export default {
       if (this.content) {
         this.addEmoji(val);
       }
-      if (
-        this.content.lastIndexOf("@") != -1 &&
-        this.content.indexOf(" ", this.content.lastIndexOf("@")) != -1
-      ) {
-        this.searchDiv = false;
-      }
       this.autoGrow(this.$refs.inputField);
       if (this.length >= 500) {
         this.maxLimit = this.content.length;
       }
-      console.log(this.length);
+      for (let content in this.highlightWords) {
+        this.idsForMovies.forEach(varId => {
+          console.log("HI")
+          if (varId != this.highlightWords[content].id) {
+            this.idsForMovies.push(this.highlightWords[content].id);
+          }
+        });
+      }
+      console.log(this.idsForMovies);
     },
     selectedWord: function() {
       if (this.content.lastIndexOf("@") != -1 && this.selectedWord != "") {

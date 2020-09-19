@@ -31,6 +31,7 @@
     <TextField v-if="store.component == 'TextField'" />
     <CharacterCounterTest v-if="store.component == 'CharacterCounterTest'" />
     <Post v-if="store.component == 'Post'" />
+    <TypeCardTest v-if="store.component == 'TypeCardTest'" />
     <ImageSlider
       :contentIds="[11882, 127216]"
       v-if="store.component == 'ImageSlider'"
@@ -118,6 +119,7 @@ import Artist from "./../components/molecular/Artist";
 import CharacterCounterTest from "./../components/molecular/CharacterCounterTest";
 import Post from "./../components/molecular/Post";
 import ImageSlider from "./../components/atomic/ImageSlider";
+import TypeCardTest from "./../components/molecular/TypeCardTest";
 import TagSuggestionsTest from "./../components/molecular/TagSuggestionsTest";
 
 export default {
@@ -147,7 +149,8 @@ export default {
     CharacterCounterTest,
     Post,
     ImageSlider,
-    TagSuggestionsTest
+    TagSuggestionsTest,
+    TypeCardTest
   },
   data() {
     return {

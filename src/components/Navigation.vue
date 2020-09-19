@@ -27,22 +27,12 @@
     <h4 class="nav-item" @click="store.component = 'MovieImagePortrait'">Movie Image (Portrait)</h4>
     <h4 class="nav-item" @click="store.component = 'PosterTest'">Poster</h4>
     <h4 class="nav-item" @click="store.component = 'Trailer'">Trailer</h4>
-    <h4 class="nav-item" @click="store.component = 'ContentMetaBlockTest'">
-      ContentMetaBlock Test
-    </h4>
-    <h4 class="nav-item" @click="store.component = 'PlaceholderTest'">
-      Placeholder Test
-    </h4>
+    <h4 class="nav-item" @click="store.component = 'ContentMetaBlockTest'">ContentMetaBlock Test</h4>
+    <h4 class="nav-item" @click="store.component = 'PlaceholderTest'">Placeholder Test</h4>
     <h4 class="nav-item" @click="store.component = 'TextField'">Text Field</h4>
-    <h4 class="nav-item" @click="store.component = 'CharacterCounterTest'">
-      CharacterCounter Test
-    </h4>
-    <h4 class="nav-item" @click="store.component = 'ImageSlider'">
-      Image Slider
-    </h4>
-    <h4 class="nav-item" @click="store.component = 'TagSuggestionsTest'">
-      TagSuggestions Test
-    </h4>
+    <h4 class="nav-item" @click="store.component = 'CharacterCounterTest'">CharacterCounter Test</h4>
+    <h4 class="nav-item" @click="store.component = 'ImageSlider'">Image Slider</h4>
+    <h4 class="nav-item" @click="store.component = 'TagSuggestionsTest'">TagSuggestions Test</h4>
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">Swipe Preview</h4>
@@ -51,6 +41,7 @@
     <h4 class="nav-item" @click="store.component = 'UserRating'">User Rating</h4>
     <h4 class="nav-item" @click="store.component = 'Artist'">Artist</h4>
     <h4 class="nav-item" @click="store.component = 'Post'">Post</h4>
+    <h4 class="nav-item" @click="store.component = 'TypeCardTest'">TypeCard</h4>
   </nav>
 </template>
 
