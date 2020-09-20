@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import TagSuggestions from "../atomic/TagSuggestions";
+import TagSuggestions from "./TagSuggestions";
 
 export default {
   name: "TagSuggestionsTest",

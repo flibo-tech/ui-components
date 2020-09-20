@@ -30,9 +30,10 @@
       v-if="contentSearchIds.length"
       @click="fetchMoreContent"
     >
-      <div class="see-more-contents">
+      <div class="see-more-contents" v-if="!fetchingIncremental">
         See More
       </div>
+      <div v-else class="loader"></div>
     </div>
 
     <div class="fetching" v-if="fetching">
@@ -48,7 +49,7 @@
 
 <script>
 import axios from "axios";
-import ImageCard from "./ImageCard";
+import ImageCard from "./../atomic/ImageCard";
 
 export default {
   name: "TagSuggestions",
@@ -69,7 +70,8 @@ export default {
     return {
       searchData: [],
       contentSearchIds: [],
-      fetching: false
+      fetching: false,
+      fetchingIncremental: false
     };
   },
   created() {
@@ -110,7 +112,7 @@ export default {
     },
     fetchMoreContent() {
       var self = this;
-      self.fetching = true;
+      self.fetchingIncremental = true;
       axios
         .post(self.$store.state.api_host + "get_searched_contents", {
           session_id: self.$store.state.session_id,
@@ -121,11 +123,11 @@ export default {
             self.searchData.push(...response.data.contents);
             self.contentSearchIds.splice(0, 10);
           }
-          self.fetching = false;
+          self.fetchingIncremental = false;
         })
         .catch(function(error) {
           console.log(error);
-          self.fetching = false;
+          self.fetchingIncremental = false;
         });
     }
   }
@@ -271,6 +273,23 @@ export default {
     -webkit-transform: perspective(140px) rotateY(180deg);
     transform: perspective(140px) rotateY(180deg);
     opacity: 0;
+  }
+}
+.loader {
+  margin: auto;
+  border: 2px solid #ffffff;
+  border-top: 2px solid #000000;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 ::-webkit-scrollbar {
