@@ -8,7 +8,7 @@
       <li>RatingLabel</li>
       <li>Logo</li>
       <li>Progress</li>
-      <li>Person</li>
+      <li>ImageCard</li>
       <li>ContentMetaBlock</li>
       <li>Placeholder</li>
       <li>CharacterCounter</li>

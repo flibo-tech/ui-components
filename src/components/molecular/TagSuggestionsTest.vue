@@ -1,5 +1,10 @@
 <template>
-  <TagSuggestions searchString="in" searchType="content" :height="300" />
+  <TagSuggestions
+    searchString="len"
+    searchType="content"
+    style="width: 250px; height: 300px; overflow: scroll;"
+    @clicked="log"
+  />
 </template>
 
 <script>
@@ -9,6 +14,11 @@ export default {
   name: "TagSuggestionsTest",
   components: {
     TagSuggestions
+  },
+  methods: {
+    log(a) {
+      console.log(a);
+    }
   }
 };
 </script>

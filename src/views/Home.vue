@@ -25,7 +25,7 @@
     <ProgressTest v-if="store.component == 'ProgressTest'" />
     <UserRating v-if="store.component == 'UserRating'" />
     <ContentMetaBlockTest v-if="store.component == 'ContentMetaBlockTest'" />
-    <Person v-if="store.component == 'Person'" />
+    <ImageCard v-if="store.component == 'ImageCard'" />
     <Artist v-if="store.component == 'Artist'" />
     <PlaceholderTest v-if="store.component == 'PlaceholderTest'" />
     <TextField v-if="store.component == 'TextField'" />
