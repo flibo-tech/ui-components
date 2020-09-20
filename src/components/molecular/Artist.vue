@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div @click="quickView">
-      <Person :image="image" :width="width" :height="height" :name="name" />
+      <ImageCard :image="image" :width="width" :height="height" :name="name" />
     </div>
     <div v-if="quickViewEnabled" class="quickview">
       <div class="view-header">
@@ -41,7 +41,7 @@
 
 <script>
 import axios from "axios";
-import Person from "../atomic/Person";
+import ImageCard from "../atomic/ImageCard";
 import Poster from "../atomic/Poster";
 import Button from "../atomic/Button";
 export default {
@@ -64,7 +64,7 @@ export default {
   //     required: true
   //   }
   // },
-  components: { Person, Poster, Button },
+  components: { ImageCard, Poster, Button },
   data() {
     return {
       // remove data when using props

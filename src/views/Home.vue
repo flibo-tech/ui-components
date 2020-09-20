@@ -25,7 +25,7 @@
     <ProgressTest v-if="store.component == 'ProgressTest'" />
     <UserRating v-if="store.component == 'UserRating'" />
     <ContentMetaBlockTest v-if="store.component == 'ContentMetaBlockTest'" />
-    <Person v-if="store.component == 'Person'" />
+    <ImageCard v-if="store.component == 'ImageCard'" />
     <Artist v-if="store.component == 'Artist'" />
     <PlaceholderTest v-if="store.component == 'PlaceholderTest'" />
     <TextField v-if="store.component == 'TextField'" />
@@ -33,7 +33,7 @@
     <Post v-if="store.component == 'Post'" />
     <TypeCardTest v-if="store.component == 'TypeCardTest'" />
     <ImageSlider
-      :contentIds="[11882, 127216]"
+      :contentIds="[122104, 124270]"
       v-if="store.component == 'ImageSlider'"
     />
     <TagSuggestionsTest v-if="store.component == 'TagSuggestionsTest'" />
