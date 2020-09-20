@@ -78,7 +78,7 @@
       </svg>
     </div>
     <strong>{{ type.charAt(0).toUpperCase() + type.slice(1) }}</strong>
-    <p>{{ text }}</p>
+    <p :style="[active ? {'color': '#d2c8ff'} : {'color': '#7c7c7c'}]"> {{ text }}</p>
   </div>
 </template>
 
@@ -107,7 +107,7 @@ export default {
 
 <style scoped>
 .typecard-container {
-  padding: 1em 0em;
+  padding-top: 1em;
   border-radius: 16px;
   background-color: #eeeeee;
   display: flex;
@@ -119,7 +119,7 @@ export default {
 }
 
 .typecard-container-active {
-  padding: 1em 0em;
+  padding-top: 1em;
   border-radius: 16px;
   background-color: #7352FF;
   display: flex;
@@ -152,12 +152,18 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.4);}
 }
 
 strong {
-  font-size: 1.5em;
+  font-size: 1em;
   margin: 0.5em 0em 0em 0em;
 }
 
 svg {
   width: 50%;
   height: 100%;
+}
+
+p {
+  text-align: center;
+  margin: 1em;
+  font-size: 0.8em;
 }
 </style>
