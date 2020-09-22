@@ -159,4 +159,7 @@ input:focus {
   height: 60vh;
   z-index: 2;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 </style>
