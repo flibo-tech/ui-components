@@ -1,51 +1,77 @@
 <template>
-  <div class="main-container">
-    <h1>What do you want to do?</h1>
-    <div class="card-container">
-      <TypeCard
-        type="request"
-        text="You can request for movies here."
-        v-on:clicked="changeState"
-        :active="selectedType==='request'"
-      />
-      <TypeCard
-        type="suggestion"
-        text="This is a suggestion box."
-        v-on:clicked="changeState"
-        :active="selectedType==='suggestion'"
-      />
-      <TypeCard
-        type="review"
-        text="You can write a review."
-        v-on:clicked="changeState"
-        :active="selectedType==='review'"
-      />
+  <div>
+    <TagSuggestions
+      class="suggestion-box"
+      v-if="searchString && !selectedShow"
+      :searchString="searchString"
+      searchType="content"
+      v-on:clicked="submit"
+    />
+    <div class="main-container">
+      <h1>What do you want to do?</h1>
+      <div class="btn-close-circle" v-on:clicked="$emit('close')">
+        <Button icon="cross" buttonType="iconOnly" :size="30" />
+      </div>
+      <div class="card-container">
+        <TypeCard
+          type="request"
+          text="You can request for movies here."
+          v-on:clicked="changeState"
+          :active="selectedType==='request'"
+        />
+        <TypeCard
+          type="suggestion"
+          text="This is a suggestion box."
+          v-on:clicked="changeState"
+          :active="selectedType==='suggestion'"
+        />
+        <TypeCard
+          type="review"
+          text="You can write a review."
+          v-on:clicked="changeState"
+          :active="selectedType==='review'"
+        />
+      </div>
+      <transition name="input">
+        <input
+          v-if="selectedType === 'review' || selectedType === 'suggestion'"
+          placeholder="Movie"
+          v-model="searchString"
+        />
+      </transition>
     </div>
-    <transition name="input">
-      <input v-if="selectedType === 'review' || selectedType === 'suggestion'" placeholder="Movie" />
-    </transition>
-    <br />
-    <transition name="input">
-      <input v-if="selectedType === 'review' || selectedType === 'suggestion'" placeholder="Title" />
-    </transition>
   </div>
 </template>
 
 <script>
 import TypeCard from "../atomic/TypeCard";
+import TagSuggestions from "./TagSuggestions";
+import Button from "../atomic/Button";
 export default {
   name: "TypeCardTest",
   components: {
-    TypeCard
+    TypeCard,
+    TagSuggestions,
+    Button
   },
   data() {
     return {
-      selectedType: ""
+      selectedType: "",
+      searchString: "",
+      selectedShow: null
     };
   },
   methods: {
     changeState(type) {
       this.selectedType = type;
+      if (this.selectedType === "request") {
+        this.$emit("clicked", this.selectedType);
+      }
+    },
+    submit(item) {
+      this.selectedShow = item;
+      this.searchString = item.subject;
+      this.$emit("clicked", this.selectedShow, this.selectedType);
     }
   }
 };
@@ -58,13 +84,10 @@ export default {
 }
 .main-container {
   position: absolute;
-  top: 50%;
-  transform: translatY(-50%);
   background-color: white;
   border-radius: 26px;
   height: auto;
-  width: 90vw;
-  margin: 2em;
+  width: 90%;
   padding-bottom: 2em;
 }
 .card-container {
@@ -100,5 +123,23 @@ input::placeholder {
 .input-enter,
 .input-leave-to {
   opacity: 0;
+}
+.suggestion-box {
+  position: absolute;
+  max-height: 50vh;
+  z-index: 2;
+}
+
+.btn-close-circle {
+  top: 12px;
+  right: 12px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #FF6060;
 }
 </style>
