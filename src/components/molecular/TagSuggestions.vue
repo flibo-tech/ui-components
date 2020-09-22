@@ -144,6 +144,7 @@ export default {
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 8px;
+  border: 1px solid rgba(155, 155, 155, 0.25);
 }
 .tag-suggestion {
   margin-bottom: 8px;
