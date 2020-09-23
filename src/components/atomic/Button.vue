@@ -11,7 +11,8 @@
         ? {
             'background-color': '#7352ff',
             width: size * 2 + 'px',
-            height: size * 2 + 'px'
+            height: size * 2 + 'px',
+            padding: '20px'
           }
         : {}
     "
