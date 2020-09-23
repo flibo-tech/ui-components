@@ -13,6 +13,7 @@
             width: size * 2 + 'px',
             height: size * 2 + 'px',
             padding: '20px',
+            'border-radius': '50%',
             display: 'initial'
           }
         : {}
