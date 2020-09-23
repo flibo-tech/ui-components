@@ -23,8 +23,8 @@
       :src="imageURL"
       :style="
         iconCircle
-          ? { width: size + 'px' }
-          : { width: size + 'px', display: 'initial', padding: '20px' }
+          ? { width: size + 'px', display: 'initial', padding: '20px' }
+          : { width: size + 'px' }
       "
     />
     <div v-if="buttonClickedBool && loading" class="loader"></div>
