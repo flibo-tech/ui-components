@@ -12,9 +12,7 @@
             'background-color': '#7352ff',
             width: size * 2 + 'px',
             height: size * 2 + 'px',
-            padding: '20px',
-            'border-radius': '50%',
-            display: 'initial'
+            'border-radius': '50%'
           }
         : {}
     "
@@ -23,7 +21,11 @@
     <img
       v-if="buttonType === 'iconOnly' && !buttonClickedBool"
       :src="imageURL"
-      :style="{ width: size + 'px' }"
+      :style="
+        iconCircle
+          ? { width: size + 'px' }
+          : { width: size + 'px', display: 'initial', padding: '20px' }
+      "
     />
     <div v-if="buttonClickedBool && loading" class="loader"></div>
   </button>
