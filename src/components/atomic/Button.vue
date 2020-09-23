@@ -6,6 +6,15 @@
       buttonClicked();
     "
     :disabled="disabled"
+    :style="
+      iconCircle
+        ? {
+            'background-color': '#7352ff',
+            width: size * 2 + 'px',
+            height: size * 2 + 'px'
+          }
+        : {}
+    "
   >
     <p v-if="buttonType != 'iconOnly' && !buttonClickedBool">{{ text }}</p>
     <img
@@ -50,6 +59,11 @@ export default {
       type: Number,
       required: false,
       default: 18
+    },
+    iconCircle: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data() {
