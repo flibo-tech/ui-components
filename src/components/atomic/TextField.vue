@@ -154,6 +154,7 @@ export default {
         let currentKeyName = Emoji.emoji[i].key;
         let currentKeyNameTrim = currentKeyName.replace("\\", "");
         if (val.match(currentKeyName) != null) {
+      console.log(currentKeyNameTrim)
           this.content = val.replace(currentKeyNameTrim, Emoji.emoji[i].value);
         }
       }
@@ -194,7 +195,6 @@ export default {
           }
         });
       }
-      console.log(this.idsForMovies);
     },
     selectedWord: function() {
       if (this.content.lastIndexOf("@") != -1 && this.selectedWord != "") {
