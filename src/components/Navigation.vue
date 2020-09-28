@@ -42,6 +42,7 @@
     <h4 class="nav-item" @click="store.component = 'Artist'">Artist</h4>
     <h4 class="nav-item" @click="store.component = 'Post'">Post</h4>
     <h4 class="nav-item" @click="store.component = 'TypeCardTest'">TypeCard</h4>
+    <h4 class="nav-item" @click="store.component = 'VoteContainer'">VoteContainer</h4>
   </nav>
 </template>
 

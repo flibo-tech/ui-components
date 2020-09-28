@@ -32,6 +32,7 @@
     <CharacterCounterTest v-if="store.component == 'CharacterCounterTest'" />
     <Post v-if="store.component == 'Post'" />
     <TypeCardTest v-if="store.component == 'TypeCardTest'" />
+    <VoteContainer v-if="store.component == 'VoteContainer'" />
     <ImageSlider
       :contentIds="[122104, 124270]"
       v-if="store.component == 'ImageSlider'"
@@ -121,6 +122,7 @@ import Post from "./../components/molecular/Post";
 import ImageSlider from "./../components/atomic/ImageSlider";
 import TypeCardTest from "./../components/molecular/TypeCardTest";
 import TagSuggestionsTest from "./../components/molecular/TagSuggestionsTest";
+import VoteContainer from "./../components/molecular/VoteContainer";
 
 export default {
   name: "Home",
@@ -150,7 +152,8 @@ export default {
     Post,
     ImageSlider,
     TagSuggestionsTest,
-    TypeCardTest
+    TypeCardTest,
+    VoteContainer
   },
   data() {
     return {
