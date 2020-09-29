@@ -6,5 +6,8 @@ export default {
   rating: ["liked", "disliked", "loved", "haventSeen"],
   //For Rate and ProgressBar components
   api_host: "https://yzal-dev-app.flibo.ai/",
-  session_id: "1593530309QNFrnnfLsAgMH2uN"
+  session_id: "1593530309QNFrnnfLsAgMH2uN",
+  user: {
+    id: 5907
+  }
 };

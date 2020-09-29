@@ -1,31 +1,26 @@
 <template>
   <div class="main-container">
-    <svg
-    :style="userScore > 0 ? {'background-color': '#bbbbbb'} : {}"
-      @click="upvoteHandler"
+    <img
+      @click="upvoteHandler()"
       class="upvote"
-      xmlns="http://www.w3.org/2000/svg"
-      height="24"
-      viewBox="0 0 24 24"
-      width="24"
-    >
-      <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
-    </svg>
+      :style="[
+        localUserScore > 0 ? { 'background-color': '#bbbbbb' } : {},
+        createrIdMatch ? { opacity: 0.6 } : {}
+      ]"
+      src="../../assets/icons/vote.svg"
+    />
 
-    {{ userScore }}
-    <svg
-    :style="userScore < 0 ? {'background-color': '#bbbbbb'} : {}"
+    {{ finalScore }}
+
+    <img
+      :style="[
+        localUserScore < 0 ? { 'background-color': '#bbbbbb' } : {},
+        createrIdMatch ? { opacity: 0.6 } : {}
+      ]"
       @click="downvoteHandler"
       class="downvote"
-      xmlns="http://www.w3.org/2000/svg"
-      height="24"
-      viewBox="0 0 24 24"
-      width="24"
-    >
-      <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
-    </svg>
+      src="../../assets/icons/vote.svg"
+    />
   </div>
 </template>
 
@@ -41,11 +36,25 @@ export default {
       type: Number,
       required: false,
       default: 0
+    },
+    createrId: {
+      type: Number,
+      required: true
     }
   },
   data() {
     return {
+      localTotalScore: this.totalScore,
+      localUserScore: this.userScore,
+      createrIdMatch: this.createrId === this.$store.state.user.id
     };
+  },
+  computed: {
+    finalScore() {
+      if (this.localTotalScore < 1000) {
+        return this.localTotalScore;
+      } else return this.kFormatter(this.localTotalScore);
+    }
   },
   methods: {
     kFormatter(num) {
@@ -54,23 +63,37 @@ export default {
         : Math.sign(num) * Math.abs(num);
     },
     upvoteHandler() {
-      if (this.userScore === 1) {
-        this.userScore--;
-      } else if (this.userScore < 0) {
-        this.userScore += 2;
-      } else {
-        this.userScore++;
+      if (this.createrIdMatch) {
+        return;
       }
-      this.$emit('userscore', this.userScore)
+      if (this.localUserScore === 1) {
+        this.localUserScore--;
+        this.localTotalScore--;
+      } else if (this.localUserScore < 0) {
+        this.localTotalScore += 2;
+        this.localUserScore += 2;
+      } else {
+        this.localTotalScore++;
+        this.localUserScore++;
+      }
+
+      this.$emit("userscore", this.localUserScore);
     },
     downvoteHandler() {
-      if (this.userScore === -1) {
-        this.userScore++;
-      } else if (this.userScore > 0) {
-        this.userScore -= 2;
-      } else {
-        this.userScore--;
+      if (this.createrIdMatch) {
+        return;
       }
+      if (this.localUserScore === -1) {
+        this.localUserScore++;
+        this.localTotalScore++;
+      } else if (this.localUserScore > 0) {
+        this.localTotalScore -= 2;
+        this.localUserScore -= 2;
+      } else {
+        this.localTotalScore--;
+        this.localUserScore--;
+      }
+      this.$emit("userscore", this.localUserScore);
     }
   }
 };
@@ -86,7 +109,7 @@ export default {
 .downvote {
   fill: #222222;
   border-radius: 50%;
-  transition: 0.4s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .downvote {
