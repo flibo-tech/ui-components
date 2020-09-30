@@ -13,10 +13,10 @@
       width="24"
     >
       <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+      <path  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
     </svg>
 
-    {{ finalScore }}
+    {{ finalScore === 0 ? "Vote" : finalScore }}
 
     <svg
       :style="[
@@ -45,6 +45,11 @@ export default {
     actionId: {
       type: Number,
       required: true
+    },
+    parentReactionId: {
+      type: Number,
+      required: false,
+      default: null
     },
     totalVote: {
       type: Number,
@@ -94,7 +99,7 @@ export default {
         this.localUserVote++;
       }
 
-      this.fetchData(this.localUserVote);
+      this.submitVote(this.localUserVote);
     },
     downvoteHandler() {
       if (this.createrIdMatch) {
@@ -110,16 +115,16 @@ export default {
         this.localTotalVote--;
         this.localUserVote--;
       }
-      this.fetchData(this.localUserVote);
+      this.submitVote(this.localUserVote);
     },
-    fetchData() {
+    submitVote() {
       this.$emit("updateUserVote", this.localUserVote);
       this.$emit("updateTotalVote", this.localTotalVote);
       axios
         .post(this.$store.state.api_host + "vote", {
           session_id: this.$store.state.session_id,
           action_id: this.actionId,
-          parent_reaction_id: null,
+          parent_reaction_id: this.parentReactionId,
           vote: this.localUserVote
         })
         .then(response => {
@@ -139,7 +144,7 @@ export default {
             window.location =
               this.$store.state.login_host +
               "logout?session_id=" +
-              self.$store.state.session_id;
+              this.$store.state.session_id;
             this.$store.state.session_id = null;
             this.$emit("logging-out");
           } else {
@@ -159,7 +164,7 @@ export default {
 
 .upvote,
 .downvote {
-  fill: #222222;
+  fill: #777777;
   border-radius: 50%;
   transition: 0.3s ease-in-out;
 }

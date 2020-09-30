@@ -26,7 +26,7 @@ export default {
         {
           actionId: 6124,
           parentReactionId: null,
-          totalVote: 32,
+          totalVote: 0,
           userVote: 0,
           creatorId: 590
         },
