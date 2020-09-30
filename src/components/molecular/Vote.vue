@@ -1,59 +1,76 @@
 <template>
   <div class="main-container">
-    <img
+    <svg
       @click="upvoteHandler()"
       class="upvote"
       :style="[
-        localUserScore > 0 ? { 'background-color': '#bbbbbb' } : {},
-        createrIdMatch ? { opacity: 0.6 } : {}
+        localUserVote > 0 ? { fill: '#2572b9' } : {},
+        createrIdMatch ? { opacity: 0.2 } : {}
       ]"
-      src="../../assets/icons/vote.svg"
-    />
+      xmlns="http://www.w3.org/2000/svg"
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M0 0h24v24H0z" fill="none" />
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+    </svg>
 
     {{ finalScore }}
 
-    <img
+    <svg
       :style="[
-        localUserScore < 0 ? { 'background-color': '#bbbbbb' } : {},
-        createrIdMatch ? { opacity: 0.6 } : {}
+        localUserVote < 0 ? { fill: '#2572b9' } : {},
+        createrIdMatch ? { opacity: 0.2 } : {}
       ]"
       @click="downvoteHandler"
       class="downvote"
-      src="../../assets/icons/vote.svg"
-    />
+      xmlns="http://www.w3.org/2000/svg"
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M0 0h24v24H0z" fill="none" />
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+    </svg>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Vote",
   props: {
-    totalScore: {
+    actionId: {
       type: Number,
       required: true
     },
-    userScore: {
+    totalVote: {
       type: Number,
-      required: false,
-      default: 0
+      required: true
     },
-    createrId: {
+    userVote: {
+      type: Number,
+      required: true
+    },
+    creatorId: {
       type: Number,
       required: true
     }
   },
   data() {
     return {
-      localTotalScore: this.totalScore,
-      localUserScore: this.userScore,
-      createrIdMatch: this.createrId === this.$store.state.user.id
+      localTotalVote: this.totalVote,
+      localUserVote: this.userVote,
+      createrIdMatch: this.creatorId === this.$store.state.user.id
     };
   },
   computed: {
     finalScore() {
-      if (this.localTotalScore < 1000) {
-        return this.localTotalScore;
-      } else return this.kFormatter(this.localTotalScore);
+      if (this.localTotalVote < 1000) {
+        return this.localTotalVote;
+      } else return this.kFormatter(this.localTotalVote);
     }
   },
   methods: {
@@ -66,34 +83,69 @@ export default {
       if (this.createrIdMatch) {
         return;
       }
-      if (this.localUserScore === 1) {
-        this.localUserScore--;
-        this.localTotalScore--;
-      } else if (this.localUserScore < 0) {
-        this.localTotalScore += 2;
-        this.localUserScore += 2;
+      if (this.localUserVote === 1) {
+        this.localUserVote--;
+        this.localTotalVote--;
+      } else if (this.localUserVote < 0) {
+        this.localTotalVote += 2;
+        this.localUserVote += 2;
       } else {
-        this.localTotalScore++;
-        this.localUserScore++;
+        this.localTotalVote++;
+        this.localUserVote++;
       }
 
-      this.$emit("userscore", this.localUserScore);
+      this.fetchData(this.localUserVote);
     },
     downvoteHandler() {
       if (this.createrIdMatch) {
         return;
       }
-      if (this.localUserScore === -1) {
-        this.localUserScore++;
-        this.localTotalScore++;
-      } else if (this.localUserScore > 0) {
-        this.localTotalScore -= 2;
-        this.localUserScore -= 2;
+      if (this.localUserVote === -1) {
+        this.localUserVote++;
+        this.localTotalVote++;
+      } else if (this.localUserVote > 0) {
+        this.localTotalVote -= 2;
+        this.localUserVote -= 2;
       } else {
-        this.localTotalScore--;
-        this.localUserScore--;
+        this.localTotalVote--;
+        this.localUserVote--;
       }
-      this.$emit("userscore", this.localUserScore);
+      this.fetchData(this.localUserVote);
+    },
+    fetchData() {
+      this.$emit("updateUserVote", this.localUserVote);
+      this.$emit("updateTotalVote", this.localTotalVote);
+      axios
+        .post(this.$store.state.api_host + "vote", {
+          session_id: this.$store.state.session_id,
+          action_id: this.actionId,
+          parent_reaction_id: null,
+          vote: this.localUserVote
+        })
+        .then(response => {
+          if (response.status == 200) {
+            console.log(response);
+          }
+          if (response.status != 200) {
+            this.$emit("updateUserVote", this.userVote);
+            this.$emit("updateTotalVote", this.totalVote);
+          }
+        })
+        .catch(error => {
+          this.$emit("updateUserVote", this.userVote);
+          this.$emit("updateTotalVote", this.totalVote);
+          // console.log(error);
+          if ([401, 419].includes(error.response.status)) {
+            window.location =
+              this.$store.state.login_host +
+              "logout?session_id=" +
+              self.$store.state.session_id;
+            this.$store.state.session_id = null;
+            this.$emit("logging-out");
+          } else {
+            // console.log(error.response.status);
+          }
+        });
     }
   }
 };
