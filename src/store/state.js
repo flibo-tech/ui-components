@@ -8,6 +8,10 @@ export default {
   api_host: "https://yzal-dev-app.flibo.ai/",
   session_id: "1593530309QNFrnnfLsAgMH2uN",
   user: {
-    id: 5907
-  }
+    id: 5907,
+    profile: {
+      country: "India",
+    },
+  },
+  guest_country: "India",
 };

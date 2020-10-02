@@ -92,6 +92,7 @@
       feedType="flibo"
       :size="100"
     />
+    <TextViewTest v-if="store.component == 'TextViewTest'" />
   </div>
 </template>
 
@@ -123,6 +124,7 @@ import ImageSlider from "./../components/atomic/ImageSlider";
 import TypeCardTest from "./../components/molecular/TypeCardTest";
 import TagSuggestionsTest from "./../components/molecular/TagSuggestionsTest";
 import VoteContainer from "./../components/molecular/VoteContainer";
+import TextViewTest from "./../components/molecular/TextViewTest";
 
 export default {
   name: "Home",
@@ -153,7 +155,8 @@ export default {
     ImageSlider,
     TagSuggestionsTest,
     TypeCardTest,
-    VoteContainer
+    VoteContainer,
+    TextViewTest
   },
   data() {
     return {
