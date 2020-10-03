@@ -4,8 +4,8 @@
       @click="upvoteHandler()"
       class="upvote"
       :style="[
-        localUserVote > 0 ? { fill: '#2572b9' } : {},
-        createrIdMatch ? { opacity: 0.2 } : {}
+        localUserVote > 0 ? { fill: '#7352FF' } : {},
+        creatorIdMatch ? { opacity: 0.2 } : {}
       ]"
       xmlns="http://www.w3.org/2000/svg"
       height="24"
@@ -20,8 +20,8 @@
 
     <svg
       :style="[
-        localUserVote < 0 ? { fill: '#2572b9' } : {},
-        createrIdMatch ? { opacity: 0.2 } : {}
+        localUserVote < 0 ? { fill: '#7352FF' } : {},
+        creatorIdMatch ? { opacity: 0.2 } : {}
       ]"
       @click="downvoteHandler"
       class="downvote"
@@ -68,7 +68,7 @@ export default {
     return {
       localTotalVote: this.totalVote,
       localUserVote: this.userVote,
-      createrIdMatch: this.creatorId === this.$store.state.user.id
+      creatorIdMatch: this.creatorId === this.$store.state.user.id
     };
   },
   computed: {
@@ -85,7 +85,7 @@ export default {
         : Math.sign(num) * Math.abs(num);
     },
     upvoteHandler() {
-      if (this.createrIdMatch) {
+      if (this.creatorIdMatch) {
         return;
       }
       if (this.localUserVote === 1) {
@@ -102,7 +102,7 @@ export default {
       this.submitVote(this.localUserVote);
     },
     downvoteHandler() {
-      if (this.createrIdMatch) {
+      if (this.creatorIdMatch) {
         return;
       }
       if (this.localUserVote === -1) {
@@ -166,7 +166,7 @@ export default {
 .downvote {
   fill: #777777;
   border-radius: 50%;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .downvote {
