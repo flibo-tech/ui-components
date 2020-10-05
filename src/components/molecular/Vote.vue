@@ -13,10 +13,10 @@
       width="24"
     >
       <path d="M0 0h24v24H0z" fill="none" />
-      <path  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
     </svg>
 
-    {{ finalScore === 0 ? "Vote" : finalScore }}
+    {{ finalScore === 0  || finalScore === null ? "Vote" : finalScore }}
 
     <svg
       :style="[
@@ -52,7 +52,6 @@ export default {
       default: null
     },
     totalVote: {
-      type: Number,
       required: true
     },
     userVote: {
@@ -129,7 +128,7 @@ export default {
         })
         .then(response => {
           if (response.status == 200) {
-            console.log(response);
+            // console.log(response);
           }
           if (response.status != 200) {
             this.$emit("updateUserVote", this.userVote);
