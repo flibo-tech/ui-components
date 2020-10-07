@@ -55,6 +55,9 @@
     <h4 class="nav-item" @click="store.component = 'TagSuggestionsTest'">
       TagSuggestions Test
     </h4>
+    <h4 class="nav-item" @click="store.component = 'TimeSinceTest'">
+      TimeSinceTest
+    </h4>
     <br />
     <h1>Molecules</h1>
     <h4 class="nav-item" @click="store.component = 'SwipeTestPreview'">
@@ -72,8 +75,12 @@
     <h4 class="nav-item" @click="store.component = 'Artist'">Artist</h4>
     <h4 class="nav-item" @click="store.component = 'Post'">Post</h4>
     <h4 class="nav-item" @click="store.component = 'TypeCardTest'">TypeCard</h4>
-    <h4 class="nav-item" @click="store.component = 'VoteContainer'">VoteContainer</h4>
-    <h4 class="nav-item" @click="store.component = 'CommentContainer'">Comment Container</h4>
+    <h4 class="nav-item" @click="store.component = 'VoteContainer'">
+      VoteContainer
+    </h4>
+    <h4 class="nav-item" @click="store.component = 'CommentContainer'">
+      Comment Container
+    </h4>
     <h4 class="nav-item" @click="store.component = 'VoteContainer'">
       VoteContainer
     </h4>

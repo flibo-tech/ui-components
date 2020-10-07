@@ -94,6 +94,7 @@
       :size="100"
     />
     <TextViewTest v-if="store.component == 'TextViewTest'" />
+    <TimeSinceTest v-if="store.component == 'TimeSinceTest'" />
   </div>
 </template>
 
@@ -127,6 +128,7 @@ import TagSuggestionsTest from "./../components/molecular/TagSuggestionsTest";
 import VoteContainer from "./../components/molecular/VoteContainer";
 import CommentContainer from "./../components/molecular/CommentContainer";
 import TextViewTest from "./../components/molecular/TextViewTest";
+import TimeSinceTest from "./../components/atomic/TimeSinceTest";
 
 export default {
   name: "Home",
@@ -159,7 +161,8 @@ export default {
     TypeCardTest,
     VoteContainer,
     CommentContainer,
-    TextViewTest
+    TextViewTest,
+    TimeSinceTest
   },
   data() {
     return {
