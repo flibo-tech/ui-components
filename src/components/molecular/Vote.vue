@@ -16,7 +16,7 @@
       <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
     </svg>
 
-    {{ finalScore === 0  || finalScore === null ? "Vote" : finalScore }}
+    {{ finalScore }}
 
     <svg
       :style="[
@@ -73,6 +73,12 @@ export default {
   computed: {
     finalScore() {
       if (this.localTotalVote < 1000) {
+        if (
+          (this.localTotalVote === 0 || this.localTotalVote === null) &&
+          this.localUserVote === 0
+        ) {
+          return "Vote";
+        }
         return this.localTotalVote;
       } else return this.kFormatter(this.localTotalVote);
     }
@@ -156,6 +162,11 @@ export default {
 </script>
 
 <style scoped>
+* {
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
 .main-container {
   display: flex;
   justify-content: space-between;
@@ -170,5 +181,8 @@ export default {
 
 .downvote {
   transform: rotateZ(180deg);
+}
+svg {
+  cursor: pointer;
 }
 </style>

@@ -110,6 +110,7 @@ export default {
 <style scoped>
 .text-view {
   font-size: 14px;
+  display: inline;
   white-space: normal;
   font-weight: normal;
   font-stretch: normal;

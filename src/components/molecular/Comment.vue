@@ -1,9 +1,6 @@
 <template>
   <div class="comment-comp-container">
-    <div
-      class="comment-comp-view"
-      :style="{ 'margin-left': depth * 40 + 'px' }"
-    >
+    <div class="comment-comp-view">
       <div class="comment-comp-current">
         <img
           class="comment-comp-profile"
@@ -11,7 +8,9 @@
         />
         <div class="comment-comp-content">
           <p>
-            <strong>{{ currentComment.creator_name }}</strong>
+            <strong @click="showPreview = true">{{
+              currentComment.creator_name
+            }}</strong>
             <TextView
               class="custom"
               v-if="currentComment.comment"
@@ -32,47 +31,122 @@
             <p>Reply</p>
           </div>
           <div
-            @click="showMore = !showMore"
+            @click="[(showMore = !showMore), fetchComments()]"
             class="comment-comp-more"
             v-if="currentComment.total_comments"
           >
-            <div class="comment-comp-horizontal-divider"></div>
-            <p v-if="showMore === false">
-              {{ currentComment.total_comments }} replies
-            </p>
-            <p v-if="showMore">Show less</p>
+            <transition name="comment">
+              <div
+                v-if="showMore === false"
+                class="comment-comp-horizontal-divider"
+              ></div>
+            </transition>
+            <transition name="comment">
+              <p v-if="showMore === false">
+                {{ currentComment.total_comments }} replies
+              </p>
+            </transition>
           </div>
         </div>
       </div>
     </div>
     <transition name="comment">
-      <div v-if="showMore" class="comment-comp-sub-comment">
+      <div
+        v-if="showMore && Object.keys(currentComment.comments).length"
+        class="comment-comp-sub-comment"
+      >
         <div class="comment-comp-vertical-divider"></div>
         <div>
           <Comment
             v-for="comment in currentComment.comments"
             :key="comment.id"
             :currentComment="comment"
-            :depth="depth + 1"
+          />
+        </div>
+      </div>
+      <div
+        v-if="
+          showMore &&
+            !Object.keys(currentComment.comments).length &&
+            subComments
+        "
+        class="comment-comp-sub-comment"
+      >
+        <div @click="showMore = false" class="comment-comp-divider-container">
+          <div class="comment-comp-vertical-divider"></div>
+        </div>
+        <div>
+          <Comment
+            v-for="comment in subComments"
+            :key="comment.id"
+            :currentComment="comment"
           />
         </div>
       </div>
     </transition>
+    <UserPreview
+      v-if="showPreview"
+      :id="currentComment.creator_id"
+      :name="currentComment.creator_name"
+      :parent="parent"
+      @close-preview="showPreview = false"
+      v-on="$listeners"
+    />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import UserPreview from "./UserPreview";
 import TextView from "./TextView";
 import Vote from "./Vote";
 export default {
   name: "Comment",
-  components: { TextView, Vote },
-  props: ["currentComment", "nodes", "depth"],
+  components: { TextView, Vote, UserPreview },
+  props: ["currentComment", "nodes"],
   data() {
     return {
       actionType: "request",
-      showMore: false
+      showMore: false,
+      parent: "comment",
+      showPreview: false,
+      subComments: null
     };
+  },
+  methods: {
+    fetchComments() {
+      if (this.subComments) {
+        return;
+      }
+      axios
+        .post(this.$store.state.api_host + "fetch_comments", {
+          session_id: this.$store.state.session_id,
+          guest_id: null,
+          action_id: 6128,
+          parent_reaction_id: 239,
+          fetched_comment_ids: [1]
+        })
+        .then(response => {
+          if (response.status == 200) {
+            this.subComments = response.data.comments;
+            console.log(response.data.comments);
+            console.log(Object.keys(this.currentComment.comments).length);
+          }
+        })
+        .catch(error => {
+          // console.log(error);
+          if ([401, 419].includes(error.response.status)) {
+            window.location =
+              this.$store.state.login_host +
+              "logout?session_id=" +
+              this.$store.state.session_id;
+            this.$store.state.session_id = null;
+            this.$emit("logging-out");
+          } else {
+            // console.log(error.response.status);
+          }
+        });
+    }
   }
 };
 </script>
@@ -80,8 +154,12 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 .comment-comp-profile {
+  cursor: pointer;
   margin-right: 0.7em;
   border-radius: 50%;
   width: 35px;
@@ -159,11 +237,19 @@ strong {
 
 .comment-comp-vertical-divider {
   width: 1px;
+  height: 90%;
   background-color: #aaaaaa;
 }
 
 .comment-comp-sub-comment {
   display: flex;
   justify-content: stretch;
+}
+
+.comment-comp-content > p > strong {
+  cursor: pointer;
+}
+.comment-comp-divider-container {
+  width: 80px;
 }
 </style>
