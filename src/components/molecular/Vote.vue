@@ -8,7 +8,7 @@
         creatorIdMatch ? { opacity: 0.2 } : {}
       ]"
       xmlns="http://www.w3.org/2000/svg"
-      height="24"
+      height="30"
       viewBox="0 0 24 24"
       width="24"
     >
@@ -171,6 +171,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 14px;
 }
 
 .upvote,

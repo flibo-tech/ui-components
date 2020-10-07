@@ -29,7 +29,7 @@
               :creatorId="currentComment.creator_id"
               :userVote="currentComment.user_vote"
             />
-            <p @click="reply">Reply</p>
+            <p class="comment-comp-reply" @click="reply">Reply</p>
           </div>
           <div
             @click="[(showMore = !showMore), fetchComments()]"
@@ -175,8 +175,8 @@ export default {
   cursor: pointer;
   margin-right: 0.7em;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
 }
 
 .comment-comp-content {
@@ -213,7 +213,7 @@ export default {
 
 .comment-comp-reaction p {
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .custom {
@@ -226,15 +226,15 @@ export default {
 }
 
 .comment-comp-more p {
-  font-size: 10px;
+  font-size: 12px;
   color: #8e8e8e;
   margin-left: 1em;
 }
 
 .comment-comp-horizontal-divider {
   height: 1px;
-  background-color: #8e8e8e;
-  width: 100px;
+  background-color: #D1D1D1;
+  width: 40px;
 }
 
 .comment-enter-active,
@@ -250,7 +250,7 @@ export default {
 .comment-comp-vertical-divider {
   width: 1px;
   height: 90%;
-  background-color: #8e8e8e;
+  background-color: #D1D1D1;
 }
 
 .comment-comp-sub-comment {
@@ -261,9 +261,14 @@ export default {
 .comment-comp-content > p > strong {
   font-size: 14px;
   cursor: pointer;
+  margin-right: 0.6em;
 }
 .comment-comp-divider-container {
-  width: 80px;
+  width: 50px;
+}
+
+.comment-comp-reply {
+  font-size: 12px;
 }
 
 </style>

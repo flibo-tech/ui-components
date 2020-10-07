@@ -94,7 +94,7 @@ export default {
   width: fit-content;
   font-family: "Roboto", sans-serif;
   font-style: normal;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: normal;
   line-height: inherit;
   color: #8e8e8e;
