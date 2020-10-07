@@ -20,6 +20,7 @@
             />
           </p>
           <div class="comment-comp-reaction">
+            <TimeSince :timestamp="currentComment.created_at" />
             <Vote
               class="comment-comp-vote"
               :actionId="currentComment.action_id"
@@ -28,28 +29,25 @@
               :creatorId="currentComment.creator_id"
               :userVote="currentComment.user_vote"
             />
-            <p>Reply</p>
+            <p @click="reply">Reply</p>
           </div>
           <div
             @click="[(showMore = !showMore), fetchComments()]"
             class="comment-comp-more"
             v-if="currentComment.total_comments"
           >
-            <transition name="comment">
-              <div
-                v-if="showMore === false"
-                class="comment-comp-horizontal-divider"
-              ></div>
-            </transition>
-            <transition name="comment">
-              <p v-if="showMore === false">
-                {{ currentComment.total_comments }} replies
-              </p>
-            </transition>
+            <div
+              v-if="showMore === false"
+              class="comment-comp-horizontal-divider"
+            ></div>
+            <p v-if="showMore === false">
+              {{ currentComment.total_comments }} replies
+            </p>
           </div>
         </div>
       </div>
     </div>
+
     <transition name="comment">
       <div
         v-if="showMore && Object.keys(currentComment.comments).length"
@@ -100,9 +98,10 @@ import axios from "axios";
 import UserPreview from "./UserPreview";
 import TextView from "./TextView";
 import Vote from "./Vote";
+import TimeSince from "../atomic/TimeSince";
 export default {
   name: "Comment",
-  components: { TextView, Vote, UserPreview },
+  components: { TextView, Vote, UserPreview, TimeSince },
   props: ["currentComment", "nodes"],
   data() {
     return {
@@ -129,8 +128,7 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.subComments = response.data.comments;
-            console.log(response.data.comments);
-            console.log(Object.keys(this.currentComment.comments).length);
+            console.log(this.subComments)
           }
         })
         .catch(error => {
@@ -146,6 +144,21 @@ export default {
             // console.log(error.response.status);
           }
         });
+    },
+    reply() {
+      this.$emit("reply", {
+        creator_id: this.currentComment.creator_id,
+        creator_name: this.currentComment.creator_name,
+        reaction_id: this.currentComment.reaction_id
+      });
+      if (this.subComments) {
+        console.log("Hi")
+        this.$emit("reply", {
+        creator_id: this.currentComment.creator_id,
+        creator_name: this.currentComment.creator_name,
+        reaction_id: this.currentComment.reaction_id
+      });
+      }
     }
   }
 };
@@ -199,15 +212,12 @@ export default {
 }
 
 .comment-comp-reaction p {
+  cursor: pointer;
   font-size: 14px;
 }
 
 .custom {
   display: inline;
-}
-
-strong {
-  font-size: 14px;
 }
 
 .comment-comp-more {
@@ -216,12 +226,14 @@ strong {
 }
 
 .comment-comp-more p {
+  font-size: 10px;
+  color: #8e8e8e;
   margin-left: 1em;
 }
 
 .comment-comp-horizontal-divider {
   height: 1px;
-  background-color: #aaaaaa;
+  background-color: #8e8e8e;
   width: 100px;
 }
 
@@ -238,7 +250,7 @@ strong {
 .comment-comp-vertical-divider {
   width: 1px;
   height: 90%;
-  background-color: #aaaaaa;
+  background-color: #8e8e8e;
 }
 
 .comment-comp-sub-comment {
@@ -247,9 +259,11 @@ strong {
 }
 
 .comment-comp-content > p > strong {
+  font-size: 14px;
   cursor: pointer;
 }
 .comment-comp-divider-container {
   width: 80px;
 }
+
 </style>

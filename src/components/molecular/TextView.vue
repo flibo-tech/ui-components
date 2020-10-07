@@ -117,7 +117,7 @@ export default {
   font-style: normal;
   line-height: 1.6;
   letter-spacing: normal;
-  color: #222222;
+  color: #565656;
   font-family: "Roboto", sans-serif;
   text-align: left;
   user-select: none;

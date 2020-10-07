@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Comment v-for="comment in totalComments" :key="comment.id" :currentComment="comment" />
+    <Comment @reply="reply" v-for="comment in totalComments" :key="comment.id" :currentComment="comment" />
   </div>
 </template>
 
@@ -47,6 +47,9 @@ export default {
             // console.log(error.response.status);
           }
         });
+    },
+    reply(a) {
+      console.log(a);
     }
   }
 };
