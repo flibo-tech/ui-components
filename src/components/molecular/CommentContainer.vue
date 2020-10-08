@@ -31,7 +31,6 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.totalComments = response.data.comments
-            console.log(this.totalComments)
           }
         })
         .catch(error => {

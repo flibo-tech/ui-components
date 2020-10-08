@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <svg
-      @click="upvoteHandler()"
+      @click="upvoteHandler"
       class="upvote"
       :style="[
         localUserVote > 0 ? { fill: '#7352FF' } : {},
@@ -16,7 +16,7 @@
       <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
     </svg>
 
-    {{ finalScore }}
+   <p> {{ finalScore }}</p>
 
     <svg
       :style="[
@@ -176,7 +176,7 @@ export default {
 
 .upvote,
 .downvote {
-  fill: #777777;
+  fill: #8e8e8e;
   border-radius: 50%;
   transition: 0.2s ease-in-out;
 }
@@ -186,5 +186,11 @@ export default {
 }
 svg {
   cursor: pointer;
+}
+
+p {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
 }
 </style>

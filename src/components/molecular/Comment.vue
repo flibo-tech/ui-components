@@ -3,6 +3,7 @@
     <div class="comment-comp-view">
       <div class="comment-comp-current">
         <img
+          @click="showPreview = true"
           class="comment-comp-profile"
           :src="currentComment.creator_picture"
         />
@@ -20,7 +21,7 @@
             />
           </p>
           <div class="comment-comp-reaction">
-            <TimeSince :timestamp="currentComment.created_at" />
+            <TimeSince :timestamp="currentComment.created_at" :short="true" />
             <Vote
               class="comment-comp-vote"
               :actionId="currentComment.action_id"
@@ -28,6 +29,8 @@
               :totalVote="currentComment.upvotes"
               :creatorId="currentComment.creator_id"
               :userVote="currentComment.user_vote"
+              v-on:updateUserVote="voteHandler"
+              v-on:updateTotalVote="totalVoteHandler"
             />
             <p class="comment-comp-reply" @click="reply">Reply</p>
           </div>
@@ -47,7 +50,7 @@
         </div>
       </div>
     </div>
-
+    <p class="comment-comp-loading" v-if="fetchingData">Loading...</p>
     <transition name="comment">
       <div
         v-if="showMore && Object.keys(currentComment.comments).length"
@@ -56,6 +59,7 @@
         <div class="comment-comp-vertical-divider"></div>
         <div>
           <Comment
+            @reply="forward"
             v-for="comment in currentComment.comments"
             :key="comment.id"
             :currentComment="comment"
@@ -75,6 +79,7 @@
         </div>
         <div>
           <Comment
+            @reply="forward"
             v-for="comment in subComments"
             :key="comment.id"
             :currentComment="comment"
@@ -109,7 +114,8 @@ export default {
       showMore: false,
       parent: "comment",
       showPreview: false,
-      subComments: null
+      subComments: null,
+      fetchingData: false
     };
   },
   methods: {
@@ -117,6 +123,7 @@ export default {
       if (this.subComments) {
         return;
       }
+      this.fetchingData = true;
       axios
         .post(this.$store.state.api_host + "fetch_comments", {
           session_id: this.$store.state.session_id,
@@ -128,7 +135,7 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.subComments = response.data.comments;
-            console.log(this.subComments)
+            this.fetchingData = false;
           }
         })
         .catch(error => {
@@ -151,14 +158,15 @@ export default {
         creator_name: this.currentComment.creator_name,
         reaction_id: this.currentComment.reaction_id
       });
-      if (this.subComments) {
-        console.log("Hi")
-        this.$emit("reply", {
-        creator_id: this.currentComment.creator_id,
-        creator_name: this.currentComment.creator_name,
-        reaction_id: this.currentComment.reaction_id
-      });
-      }
+    },
+    forward(subCommentReply) {
+      this.$emit("reply", subCommentReply);
+    },
+    voteHandler(currentUserVote) {
+      this.currentComment.user_vote = currentUserVote;
+    },
+    totalVoteHandler(currentTotalVote) {
+      this.currentComment.upvotes = currentTotalVote;
     }
   }
 };
@@ -221,6 +229,7 @@ export default {
 }
 
 .comment-comp-more {
+  cursor: pointer;
   display: flex;
   align-items: center;
 }
@@ -233,7 +242,7 @@ export default {
 
 .comment-comp-horizontal-divider {
   height: 1px;
-  background-color: #D1D1D1;
+  background-color: #d1d1d1;
   width: 40px;
 }
 
@@ -250,7 +259,7 @@ export default {
 .comment-comp-vertical-divider {
   width: 1px;
   height: 90%;
-  background-color: #D1D1D1;
+  background-color: #d1d1d1;
 }
 
 .comment-comp-sub-comment {
@@ -264,11 +273,17 @@ export default {
   margin-right: 0.6em;
 }
 .comment-comp-divider-container {
-  width: 50px;
+  flex: 0 0 51px;
 }
 
 .comment-comp-reply {
   font-size: 12px;
+  color: #8e8e8e;
 }
 
+.comment-comp-loading {
+  color: #8e8e8e;
+  font-size: 12px;
+  margin-left: 51px;
+}
 </style>
