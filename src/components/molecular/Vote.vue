@@ -13,10 +13,10 @@
       width="24"
     >
       <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+      <path d="M6.1,16.5l5.9-5.9l5.9,5.9l1.8-1.8L12,6.9l-7.7,7.7L6.1,16.5z" />
     </svg>
 
-   <p> {{ finalScore }}</p>
+    <p>{{ finalScore }}</p>
 
     <svg
       :style="[
@@ -31,7 +31,7 @@
       width="24"
     >
       <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+      <path d="M6.1,16.5l5.9-5.9l5.9,5.9l1.8-1.8L12,6.9l-7.7,7.7L6.1,16.5z" />
     </svg>
   </div>
 </template>

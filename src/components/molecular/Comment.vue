@@ -35,37 +35,49 @@
             <p class="comment-comp-reply" @click="reply">Reply</p>
           </div>
           <div
-            @click="[(showMore = !showMore), fetchComments()]"
+            @click="[(showMore = true), fetchComments()]"
             class="comment-comp-more"
-            v-if="currentComment.total_comments"
+            v-if="
+              currentComment.total_comments > fetchedCommentsIds.length &&
+                currentComment.total_comments
+            "
           >
-            <div
-              v-if="showMore === false"
-              class="comment-comp-horizontal-divider"
-            ></div>
-            <p v-if="showMore === false">
+            <div class="comment-comp-horizontal-divider"></div>
+            <p v-if="fetchedCommentsIds.length == 0 || showMore === false">
               {{ currentComment.total_comments }} replies
+            </p>
+            <p v-if="fetchedCommentsIds.length > 0">
+              previous
+              {{ currentComment.total_comments - fetchedCommentsIds.length }}
+              replies
             </p>
           </div>
         </div>
       </div>
     </div>
     <p class="comment-comp-loading" v-if="fetchingData">Loading...</p>
-    <transition name="comment">
+    <div
+      v-if="showMore && Object.keys(currentComment.comments).length"
+      class="comment-comp-sub-comment"
+    >
       <div
-        v-if="showMore && Object.keys(currentComment.comments).length"
-        class="comment-comp-sub-comment"
+        @click="
+          [(showMore = false), (subComments = []), (fetchedCommentsIds = [])]
+        "
+        class="comment-comp-divider-container"
       >
         <div class="comment-comp-vertical-divider"></div>
-        <div>
-          <Comment
-            @reply="forward"
-            v-for="comment in currentComment.comments"
-            :key="comment.id"
-            :currentComment="comment"
-          />
-        </div>
       </div>
+      <div>
+        <Comment
+          @reply="forward"
+          v-for="comment in currentComment.comments"
+          :key="comment.id"
+          :currentComment="comment"
+        />
+      </div>
+    </div>
+    <transition name="comment">
       <div
         v-if="
           showMore &&
@@ -74,7 +86,12 @@
         "
         class="comment-comp-sub-comment"
       >
-        <div @click="showMore = false" class="comment-comp-divider-container">
+        <div
+          @click="
+            [(showMore = false), (subComments = []), (fetchedCommentsIds = [])]
+          "
+          class="comment-comp-divider-container"
+        >
           <div class="comment-comp-vertical-divider"></div>
         </div>
         <div>
@@ -114,15 +131,13 @@ export default {
       showMore: false,
       parent: "comment",
       showPreview: false,
-      subComments: null,
+      subComments: [],
+      fetchedCommentsIds: [],
       fetchingData: false
     };
   },
   methods: {
     fetchComments() {
-      if (this.subComments) {
-        return;
-      }
       this.fetchingData = true;
       axios
         .post(this.$store.state.api_host + "fetch_comments", {
@@ -130,11 +145,15 @@ export default {
           guest_id: null,
           action_id: 6128,
           parent_reaction_id: 239,
-          fetched_comment_ids: [1]
+          fetched_comment_ids: this.fetchedCommentsIds
         })
         .then(response => {
           if (response.status == 200) {
-            this.subComments = response.data.comments;
+            console.log(response);
+            response.data.comments.forEach(comment => {
+              this.fetchedCommentsIds.unshift(comment.reaction_id);
+              this.subComments.unshift(comment);
+            });
             this.fetchingData = false;
           }
         })
@@ -250,8 +269,8 @@ export default {
 .comment-leave-active {
   transition: all 0.3s ease;
 }
-.comment-enter, .comment-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+.comment-enter,
+.comment-leave-to {
   transform: translateX(30px);
   opacity: 0;
 }
