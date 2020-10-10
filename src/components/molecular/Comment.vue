@@ -104,13 +104,15 @@
           <div class="comment-comp-vertical-divider"></div>
         </div>
         <div>
-          <Comment
-            @reply="forward"
-            v-for="comment in subComments"
-            :key="comment.id"
-            :currentComment="comment"
-            :isChild="true"
-          />
+          <transition-group name="solo-comments">
+            <Comment
+              @reply="forward"
+              :currentComment="comment"
+              :isChild="true"
+              v-for="(comment, index) in subComments"
+              :key="index"
+            />
+          </transition-group>
         </div>
       </div>
     </transition>
@@ -170,11 +172,10 @@ export default {
         .then(response => {
           if (response.status == 200) {
             response.data.comments.forEach(comment => {
-              this.fetchedCommentsIds.unshift(comment.reaction_id);
-              this.subComments.unshift(comment);
+              this.fetchedCommentsIds.push(comment.reaction_id);
+              this.subComments.push(comment);
             });
             this.fetchingData = false;
-            console.log(this.subComments);
           }
         })
         .catch(error => {
@@ -335,5 +336,15 @@ export default {
   color: #8e8e8e;
   font-size: 12px;
   margin-left: 51px;
+}
+
+.solo-comments-enter-active,
+.solo-comments-leave-active {
+  transition: all 0.3s ease;
+}
+.solo-comments-enter,
+.solo-comments-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
 }
 </style>
