@@ -20,12 +20,13 @@
               v-on="$listeners"
             />
           </p>
+
           <div class="comment-comp-reaction">
             <TimeSince :timestamp="currentComment.created_at" :short="true" />
             <Vote
               class="comment-comp-vote"
               :actionId="currentComment.action_id"
-              :parentReactionId="currentComment.parent_reaction_id"
+              :parentReactionId="currentComment.reaction_id"
               :totalVote="currentComment.upvotes"
               :creatorId="currentComment.creator_id"
               :userVote="currentComment.user_vote"
@@ -42,20 +43,27 @@
                 currentComment.total_comments
             "
           >
-            <div class="comment-comp-horizontal-divider"></div>
-            <p v-if="fetchedCommentsIds.length == 0 || showMore === false">
+            <div
+              v-if="!fetchingData"
+              class="comment-comp-horizontal-divider"
+            ></div>
+            <p
+              v-if="
+                (fetchedCommentsIds.length == 0 || !showMore) && !fetchingData
+              "
+            >
               {{ currentComment.total_comments }} replies
             </p>
-            <p v-if="fetchedCommentsIds.length > 0">
+            <p v-if="fetchedCommentsIds.length > 0 && !fetchingData">
               previous
               {{ currentComment.total_comments - fetchedCommentsIds.length }}
               replies
             </p>
+            <p class="comment-comp-loading" v-if="fetchingData">Loading...</p>
           </div>
         </div>
       </div>
     </div>
-    <p class="comment-comp-loading" v-if="fetchingData">Loading...</p>
     <div
       v-if="showMore && Object.keys(currentComment.comments).length"
       class="comment-comp-sub-comment"
@@ -74,6 +82,7 @@
           v-for="comment in currentComment.comments"
           :key="comment.id"
           :currentComment="comment"
+          :isChild="true"
         />
       </div>
     </div>
@@ -100,6 +109,7 @@
             v-for="comment in subComments"
             :key="comment.id"
             :currentComment="comment"
+            :isChild="true"
           />
         </div>
       </div>
@@ -124,7 +134,17 @@ import TimeSince from "../atomic/TimeSince";
 export default {
   name: "Comment",
   components: { TextView, Vote, UserPreview, TimeSince },
-  props: ["currentComment", "nodes"],
+  props: {
+    currentComment: {
+      type: Object,
+      required: true
+    },
+    isChild: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
   data() {
     return {
       actionType: "request",
@@ -149,12 +169,12 @@ export default {
         })
         .then(response => {
           if (response.status == 200) {
-            console.log(response);
             response.data.comments.forEach(comment => {
               this.fetchedCommentsIds.unshift(comment.reaction_id);
               this.subComments.unshift(comment);
             });
             this.fetchingData = false;
+            console.log(this.subComments);
           }
         })
         .catch(error => {
@@ -172,11 +192,19 @@ export default {
         });
     },
     reply() {
-      this.$emit("reply", {
-        creator_id: this.currentComment.creator_id,
-        creator_name: this.currentComment.creator_name,
-        reaction_id: this.currentComment.reaction_id
-      });
+      if (!this.isChild) {
+        this.$emit("reply", {
+          creator_id: this.currentComment.creator_id,
+          creator_name: this.currentComment.creator_name,
+          reaction_id: this.currentComment.reaction_id
+        });
+      } else {
+        this.$emit("reply", {
+          creator_id: this.currentComment.creator_id,
+          creator_name: this.currentComment.creator_name,
+          reaction_id: this.currentComment.parent_reaction_id
+        });
+      }
     },
     forward(subCommentReply) {
       this.$emit("reply", subCommentReply);
@@ -277,7 +305,7 @@ export default {
 
 .comment-comp-vertical-divider {
   width: 1px;
-  height: 90%;
+  height: calc(100% - 2em);
   background-color: #d1d1d1;
 }
 
@@ -292,7 +320,10 @@ export default {
   margin-right: 0.6em;
 }
 .comment-comp-divider-container {
-  flex: 0 0 51px;
+  display: flex;
+  justify-content: center;
+  flex: 0 0 40px;
+  margin-right: 0.6em;
 }
 
 .comment-comp-reply {

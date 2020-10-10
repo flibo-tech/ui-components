@@ -134,7 +134,7 @@ export default {
         })
         .then(response => {
           if (response.status == 200) {
-            // console.log(response);
+            console.log(this.actionId, this.parentReactionId, this.localUserVote)
           }
           if (response.status != 200) {
             this.$emit("updateUserVote", this.userVote);

@@ -1,6 +1,12 @@
 <template>
   <div>
-    <Comment @reply="reply" v-for="comment in totalComments" :key="comment.id" :currentComment="comment" />
+    <Comment
+      @reply="reply"
+      v-for="comment in totalComments"
+      :key="comment.id"
+      :currentComment="comment"
+      :isChild="false"
+    />
   </div>
 </template>
 
@@ -30,10 +36,10 @@ export default {
         })
         .then(response => {
           if (response.status == 200) {
-            this.totalComments = response.data.comments
+            this.totalComments = response.data.comments;
             console.log(this.totalComments)
             // remove this
-            this.totalComments[0].total_comments-- 
+            this.totalComments[0].total_comments--;
           }
         })
         .catch(error => {
