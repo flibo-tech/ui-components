@@ -1,12 +1,14 @@
 <template>
   <div>
-    <Comment
-      @reply="reply"
-      v-for="comment in totalComments"
-      :key="comment.id"
-      :currentComment="comment"
-      :isChild="false"
-    />
+    <transition-group name="solo-comments">
+      <Comment
+        @reply="reply"
+        v-for="comment in totalComments"
+        :key="comment.reaction_id"
+        :currentComment="comment"
+        :isChild="false"
+      />
+    </transition-group>
   </div>
 </template>
 
@@ -37,7 +39,7 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.totalComments = response.data.comments;
-            console.log(this.totalComments)
+            console.log(this.totalComments);
             // remove this
             this.totalComments[0].total_comments--;
           }
@@ -64,4 +66,7 @@ export default {
 </script>
 
 <style scoped>
+.solo-comments-move {
+  transition: all 0.1s;
+}
 </style>

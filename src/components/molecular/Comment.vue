@@ -109,8 +109,8 @@
               @reply="forward"
               :currentComment="comment"
               :isChild="true"
-              v-for="(comment, index) in subComments"
-              :key="index"
+              v-for="comment in subComments.slice().reverse()"
+              :key="comment.reaction_id"
             />
           </transition-group>
         </div>
@@ -227,6 +227,7 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
 }
+
 .comment-comp-profile {
   cursor: pointer;
   margin-right: 0.7em;
@@ -346,5 +347,9 @@ export default {
 .solo-comments-leave-to {
   transform: translateX(30px);
   opacity: 0;
+}
+
+.solo-comments-move {
+  transition: all 0.6s;
 }
 </style>
