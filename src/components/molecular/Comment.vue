@@ -40,7 +40,8 @@
             class="comment-comp-more"
             v-if="
               currentComment.total_comments > fetchedCommentsIds.length &&
-                currentComment.total_comments
+                currentComment.total_comments &&
+                statusCode != 204
             "
           >
             <div
@@ -52,7 +53,10 @@
                 (fetchedCommentsIds.length == 0 || !showMore) && !fetchingData
               "
             >
-              {{ currentComment.total_comments }} replies
+              {{
+                currentComment.total_comments
+              }}
+              replies
             </p>
             <p v-if="fetchedCommentsIds.length > 0 && !fetchingData">
               previous
@@ -64,43 +68,9 @@
         </div>
       </div>
     </div>
-    <div
-      v-if="showMore && Object.keys(currentComment.comments).length"
-      class="comment-comp-sub-comment"
-    >
-      <div
-        @click="
-          [(showMore = false), (subComments = []), (fetchedCommentsIds = [])]
-        "
-        class="comment-comp-divider-container"
-      >
-        <div class="comment-comp-vertical-divider"></div>
-      </div>
-      <div>
-        <Comment
-          @reply="forward"
-          v-for="comment in currentComment.comments"
-          :key="comment.id"
-          :currentComment="comment"
-          :isChild="true"
-        />
-      </div>
-    </div>
     <transition name="comment">
-      <div
-        v-if="
-          showMore &&
-            !Object.keys(currentComment.comments).length &&
-            subComments
-        "
-        class="comment-comp-sub-comment"
-      >
-        <div
-          @click="
-            [(showMore = false), (subComments = []), (fetchedCommentsIds = [])]
-          "
-          class="comment-comp-divider-container"
-        >
+      <div v-if="showMore && subComments" class="comment-comp-sub-comment">
+        <div @click="resetValues" class="comment-comp-divider-container">
           <div class="comment-comp-vertical-divider"></div>
         </div>
         <div>
@@ -155,8 +125,18 @@ export default {
       showPreview: false,
       subComments: [],
       fetchedCommentsIds: [],
-      fetchingData: false
+      fetchingData: false,
+      statusCode: null
     };
+  },
+  mounted() {
+    if (Object.keys(this.currentComment.comments).length) {
+      this.subComments = this.currentComment.comments;
+        this.subComments.forEach(comment => {
+          this.fetchedCommentsIds.push(comment.reaction_id);
+        });
+      this.showMore = true;
+    }
   },
   methods: {
     fetchComments() {
@@ -175,6 +155,10 @@ export default {
               this.fetchedCommentsIds.push(comment.reaction_id);
               this.subComments.push(comment);
             });
+            console.log(this.subComments);
+            this.fetchingData = false;
+          } else if (response.status == 204) {
+            this.statusCode = response.status;
             this.fetchingData = false;
           }
         })
@@ -187,6 +171,7 @@ export default {
               this.$store.state.session_id;
             this.$store.state.session_id = null;
             this.$emit("logging-out");
+            this.fetchingData = false;
           } else {
             // console.log(error.response.status);
           }
@@ -215,6 +200,13 @@ export default {
     },
     totalVoteHandler(currentTotalVote) {
       this.currentComment.upvotes = currentTotalVote;
+    },
+    resetValues() {
+      this.showMore = false;
+      this.subComments = [];
+      this.fetchedCommentsIds = [];
+      this.statusCode = null;
+      console.log(this.fetchedCommentsIds)
     }
   }
 };
@@ -322,6 +314,7 @@ export default {
   margin-right: 0.6em;
 }
 .comment-comp-divider-container {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   flex: 0 0 40px;
@@ -347,9 +340,5 @@ export default {
 .solo-comments-leave-to {
   transform: translateX(30px);
   opacity: 0;
-}
-
-.solo-comments-move {
-  transition: all 0.6s;
 }
 </style>
