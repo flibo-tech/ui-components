@@ -16,7 +16,7 @@
               class="custom"
               v-if="currentComment.comment"
               :text="currentComment.comment"
-              :parent="actionType + '_details'"
+              :parent="parent + '__comment' + (isChild ? '__child' : '')"
               v-on="$listeners"
             />
           </p>
@@ -30,6 +30,7 @@
               :totalVote="currentComment.upvotes"
               :creatorId="currentComment.creator_id"
               :userVote="currentComment.user_vote"
+              :fontSize="12"
               v-on:updateUserVote="voteHandler"
               v-on:updateTotalVote="totalVoteHandler"
             />
@@ -40,8 +41,8 @@
             class="comment-comp-more"
             v-if="
               currentComment.total_comments > fetchedCommentsIds.length &&
-                currentComment.total_comments &&
-                statusCode != 204
+              currentComment.total_comments &&
+              statusCode != 204
             "
           >
             <div
@@ -53,9 +54,7 @@
                 (fetchedCommentsIds.length == 0 || !showMore) && !fetchingData
               "
             >
-              {{
-                currentComment.total_comments
-              }}
+              {{ currentComment.total_comments }}
               replies
             </p>
             <p v-if="fetchedCommentsIds.length > 0 && !fetchingData">
@@ -79,6 +78,7 @@
               @reply="forward"
               :currentComment="comment"
               :isChild="true"
+              :parent="parent"
               v-for="comment in subComments.slice().reverse()"
               :key="comment.reaction_id"
             />
@@ -90,7 +90,7 @@
       v-if="showPreview"
       :id="currentComment.creator_id"
       :name="currentComment.creator_name"
-      :parent="parent"
+      :parent="parent + '__comment' + (isChild ? '__child' : '')"
       @close-preview="showPreview = false"
       v-on="$listeners"
     />
@@ -101,40 +101,42 @@
 import axios from "axios";
 import UserPreview from "./UserPreview";
 import TextView from "./TextView";
-import Vote from "./Vote";
-import TimeSince from "../atomic/TimeSince";
+import Vote from "./../atomic/Vote";
+import TimeSince from "./../atomic/TimeSince";
 export default {
   name: "Comment",
   components: { TextView, Vote, UserPreview, TimeSince },
   props: {
     currentComment: {
       type: Object,
-      required: true
+      required: true,
     },
     isChild: {
       type: Boolean,
       required: false,
-      default: true
-    }
+      default: true,
+    },
+    parent: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
-      actionType: "request",
       showMore: false,
-      parent: "comment",
       showPreview: false,
       subComments: [],
       fetchedCommentsIds: [],
       fetchingData: false,
-      statusCode: null
+      statusCode: null,
     };
   },
   mounted() {
     if (Object.keys(this.currentComment.comments).length) {
       this.subComments = this.currentComment.comments;
-        this.subComments.forEach(comment => {
-          this.fetchedCommentsIds.push(comment.reaction_id);
-        });
+      this.subComments.forEach((comment) => {
+        this.fetchedCommentsIds.push(comment.reaction_id);
+      });
       this.showMore = true;
     }
   },
@@ -145,24 +147,23 @@ export default {
         .post(this.$store.state.api_host + "fetch_comments", {
           session_id: this.$store.state.session_id,
           guest_id: null,
-          action_id: 6128,
-          parent_reaction_id: 239,
-          fetched_comment_ids: this.fetchedCommentsIds
+          action_id: this.currentComment.action_id,
+          parent_reaction_id: this.currentComment.reaction_id,
+          fetched_comment_ids: this.fetchedCommentsIds,
         })
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
-            response.data.comments.forEach(comment => {
+            response.data.comments.forEach((comment) => {
               this.fetchedCommentsIds.push(comment.reaction_id);
               this.subComments.push(comment);
             });
-            console.log(this.subComments);
             this.fetchingData = false;
           } else if (response.status == 204) {
             this.statusCode = response.status;
             this.fetchingData = false;
           }
         })
-        .catch(error => {
+        .catch((error) => {
           // console.log(error);
           if ([401, 419].includes(error.response.status)) {
             window.location =
@@ -182,13 +183,13 @@ export default {
         this.$emit("reply", {
           creator_id: this.currentComment.creator_id,
           creator_name: this.currentComment.creator_name,
-          reaction_id: this.currentComment.reaction_id
+          reaction_id: this.currentComment.reaction_id,
         });
       } else {
         this.$emit("reply", {
           creator_id: this.currentComment.creator_id,
           creator_name: this.currentComment.creator_name,
-          reaction_id: this.currentComment.parent_reaction_id
+          reaction_id: this.currentComment.parent_reaction_id,
         });
       }
     },
@@ -206,9 +207,8 @@ export default {
       this.subComments = [];
       this.fetchedCommentsIds = [];
       this.statusCode = null;
-      console.log(this.fetchedCommentsIds)
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -240,7 +240,7 @@ export default {
 
 .comment-comp-vote {
   margin: 0.5em;
-  width: 100px;
+  min-width: 85px;
 }
 
 .comment-comp-current {
@@ -341,5 +341,8 @@ export default {
 .solo-comments-leave-to {
   transform: translateX(30px);
   opacity: 0;
+}
+.comment-comp-container {
+  text-align: left;
 }
 </style>
