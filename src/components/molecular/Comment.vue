@@ -301,6 +301,7 @@ export default {
   width: 1px;
   height: calc(100% - 2em);
   background-color: #d1d1d1;
+  opacity: 0.5;
 }
 
 .comment-comp-sub-comment {
