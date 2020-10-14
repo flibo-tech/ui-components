@@ -8,6 +8,7 @@
         :key="comment.reaction_id"
         :currentComment="comment"
         :isChild="false"
+        v-on:commentHandler="commentHandler"
       />
     </transition-group>
   </div>
@@ -41,84 +42,7 @@ export default {
             "https://flibo-images.s3-us-west-2.amazonaws.com/profile_pictures/168-bhaskar-choudhary.jpeg",
           user_spoiler_remark: -1,
           user_vote: 1,
-          comments: [
-              {
-                reaction_id: 241,
-                parent_reaction_id: 239,
-                action_id: 6128,
-                comment:
-                  "Child comment 1 [Bhaskar Choudhary](user,171) do you have any suggestions for me? I'm talking about  the like of [Don2](content,16610) or any movie by [Quentin Tarantino](artist, 870953). Testing [Shantanu](artist, 408138)",
-                total_comments: null,
-                spoiler: false,
-                spoiler_remarks: null,
-                upvotes: 1,
-                created_at: 1601624086.749076,
-                creator_id: 168,
-                creator_name: "Bhaskar Choudhary",
-                creator_picture:
-                  "https://flibo-images.s3-us-west-2.amazonaws.com/profile_pictures/168-bhaskar-choudhary.jpeg",
-                user_spoiler_remark: -1,
-                user_vote: 1,
-                comments: []
-              },
-              {
-                reaction_id: 242,
-                parent_reaction_id: 239,
-                action_id: 6128,
-                comment:
-                  "Child comment 2 [Bhaskar Choudhary](user,171) do you have any suggestions for me? I'm talking about  the like of [Don2](content,16610) or any movie by [Quentin Tarantino](artist, 870953). Testing [Shantanu](artist, 408138)",
-                total_comments: null,
-                spoiler: false,
-                spoiler_remarks: null,
-                upvotes: 1,
-                created_at: 1601624089.224034,
-                creator_id: 168,
-                creator_name: "Bhaskar Choudhary",
-                creator_picture:
-                  "https://flibo-images.s3-us-west-2.amazonaws.com/profile_pictures/168-bhaskar-choudhary.jpeg",
-                user_spoiler_remark: -1,
-                user_vote: 1,
-                comments: []
-              },
-              {
-                reaction_id: 243,
-                parent_reaction_id: 239,
-                action_id: 6128,
-                comment:
-                  "Child comment 3 [Bhaskar Choudhary](user,171) do you have any suggestions for me? I'm talking about  the like of [Don2](content,16610) or any movie by [Quentin Tarantino](artist, 870953). Testing [Shantanu](artist, 408138)",
-                total_comments: null,
-                spoiler: false,
-                spoiler_remarks: null,
-                upvotes: 1,
-                created_at: 1601624092.748752,
-                creator_id: 168,
-                creator_name: "Bhaskar Choudhary",
-                creator_picture:
-                  "https://flibo-images.s3-us-west-2.amazonaws.com/profile_pictures/168-bhaskar-choudhary.jpeg",
-                user_spoiler_remark: -1,
-                user_vote: 1,
-                comments: []
-              },
-              {
-                reaction_id: 245,
-                parent_reaction_id: 239,
-                action_id: 6128,
-                comment:
-                  "Child comment 3 [Bhaskar Choudhary](user,171) do you have any suggestions for me? I'm talking about  the like of [Don2](content,16610) or any movie by [Quentin Tarantino](artist, 870953). Testing [Shantanu](artist, 408138)",
-                total_comments: null,
-                spoiler: false,
-                spoiler_remarks: null,
-                upvotes: 1,
-                created_at: 1601636663.164028,
-                creator_id: 168,
-                creator_name: "Bhaskar Choudhary",
-                creator_picture:
-                  "https://flibo-images.s3-us-west-2.amazonaws.com/profile_pictures/168-bhaskar-choudhary.jpeg",
-                user_spoiler_remark: -1,
-                user_vote: 1,
-                comments: []
-              }
-          ]
+          comments: []
         },
         {
           reaction_id: 237,
@@ -178,6 +102,12 @@ export default {
     },
     reply(a) {
       console.log(a);
+    },
+    commentHandler(fetchedComments) {
+      fetchedComments.forEach(comment => {
+        this.comm[0].comments.push(comment);
+      });
+      console.log(this.comm[0]);
     }
   }
 };
