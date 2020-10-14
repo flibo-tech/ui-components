@@ -16,7 +16,7 @@
               class="custom"
               v-if="currentComment.comment"
               :text="currentComment.comment"
-              :parent="actionType + '_details'"
+              :parent="parent + '__comment' + (isChild ? '__child' : '')"
               v-on="$listeners"
             />
           </p>
@@ -30,6 +30,7 @@
               :totalVote="currentComment.upvotes"
               :creatorId="currentComment.creator_id"
               :userVote="currentComment.user_vote"
+              :fontSize="12"
               v-on:updateUserVote="voteHandler"
               v-on:updateTotalVote="totalVoteHandler"
             />
@@ -38,15 +39,26 @@
           <div
             @click="[(showMore = true), fetchComments()]"
             class="comment-comp-more"
-            v-if="currentComment.total_comments && statusCode != 204"
+            v-if="
+              currentComment.total_comments > fetchedCommentsIds.length &&
+              currentComment.total_comments &&
+              statusCode != 204
+            "
           >
             <div
               v-if="!fetchingData"
               class="comment-comp-horizontal-divider"
             ></div>
-
-            <p v-if="!fetchingData">
-              <span>previous</span>
+            <p
+              v-if="
+                (fetchedCommentsIds.length == 0 || !showMore) && !fetchingData
+              "
+            >
+              {{ currentComment.total_comments }}
+              replies
+            </p>
+            <p v-if="fetchedCommentsIds.length > 0 && !fetchingData">
+              previous
               {{ currentComment.total_comments - fetchedCommentsIds.length }}
               replies
             </p>
@@ -77,7 +89,7 @@
       v-if="showPreview"
       :id="currentComment.creator_id"
       :name="currentComment.creator_name"
-      parent="comment"
+      :parent="parent + '__comment' + (isChild ? '__child' : '')"
       @close-preview="showPreview = false"
       v-on="$listeners"
     />
@@ -89,29 +101,32 @@ import axios from "axios";
 import UserPreview from "./UserPreview";
 import TextView from "./TextView";
 import Vote from "./Vote";
-import TimeSince from "../atomic/TimeSince";
+import TimeSince from "./../atomic/TimeSince";
 export default {
   name: "Comment",
   components: { TextView, Vote, UserPreview, TimeSince },
   props: {
     currentComment: {
       type: Object,
-      required: true
+      required: true,
     },
     isChild: {
       type: Boolean,
       required: false,
-      default: true
-    }
+      default: true,
+    },
+    parent: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
-      actionType: "request",
       showMore: true,
       showPreview: false,
       fetchedCommentsIds: [],
       fetchingData: false,
-      statusCode: null
+      statusCode: null,
     };
   },
   mounted() {
@@ -126,13 +141,13 @@ export default {
         .post(this.$store.state.api_host + "fetch_comments", {
           session_id: this.$store.state.session_id,
           guest_id: null,
-          action_id: 6128,
-          parent_reaction_id: 239,
-          fetched_comment_ids: this.fetchedCommentsIds
+          action_id: this.currentComment.action_id,
+          parent_reaction_id: this.currentComment.reaction_id,
+          fetched_comment_ids: this.fetchedCommentsIds,
         })
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
-            response.data.comments.forEach(comment => {
+            response.data.comments.forEach((comment) => {
               this.fetchedCommentsIds.push(comment.reaction_id);
             });
             this.$emit("commentHandler", response.data.comments);
@@ -142,7 +157,7 @@ export default {
             this.fetchingData = false;
           }
         })
-        .catch(error => {
+        .catch((error) => {
           // console.log(error);
           if ([401, 419].includes(error.response.status)) {
             window.location =
@@ -162,13 +177,13 @@ export default {
         this.$emit("reply", {
           creator_id: this.currentComment.creator_id,
           creator_name: this.currentComment.creator_name,
-          reaction_id: this.currentComment.reaction_id
+          reaction_id: this.currentComment.reaction_id,
         });
       } else {
         this.$emit("reply", {
           creator_id: this.currentComment.creator_id,
           creator_name: this.currentComment.creator_name,
-          reaction_id: this.currentComment.parent_reaction_id
+          reaction_id: this.currentComment.parent_reaction_id,
         });
       }
     },
@@ -213,7 +228,7 @@ export default {
 
 .comment-comp-vote {
   margin: 0.5em;
-  width: 100px;
+  min-width: 85px;
 }
 
 .comment-comp-current {
@@ -314,5 +329,8 @@ export default {
 .solo-comments-leave-to {
   transform: translateX(30px);
   opacity: 0;
+}
+.comment-comp-container {
+  text-align: left;
 }
 </style>
