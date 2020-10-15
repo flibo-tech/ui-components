@@ -37,47 +37,47 @@
             <p class="comment-comp-reply" @click="reply">Reply</p>
           </div>
           <div
-            @click="[(showMore = true), fetchComments()]"
+            v-if="currentComment.total_comments && !fetchedAllData"
+            @click="[(showComments = true), fetchComments()]"
             class="comment-comp-more"
-            v-if="
-              currentComment.total_comments > fetchedCommentsIds.length &&
-              currentComment.total_comments &&
-              statusCode != 204
-            "
           >
             <div
               v-if="!fetchingData"
               class="comment-comp-horizontal-divider"
             ></div>
-            <p
-              v-if="
-                (fetchedCommentsIds.length == 0 || !showMore) && !fetchingData
-              "
-            >
-              {{ currentComment.total_comments }}
+            <p v-if="!fetchingData">
+              <span v-if="subCommentsLeft < this.currentComment.total_comments"
+                >previous</span
+              >
+              {{ subCommentsLeft }}
               replies
             </p>
-            <p v-if="fetchedCommentsIds.length > 0 && !fetchingData">
-              previous
-              {{ currentComment.total_comments - fetchedCommentsIds.length }}
-              replies
-            </p>
-            <p class="comment-comp-loading" v-if="fetchingData">Loading...</p>
+            <p v-if="fetchingData" class="comment-comp-loading">Loading...</p>
           </div>
         </div>
       </div>
     </div>
     <transition name="comment">
-      <div v-if="showMore && currentComment" class="comment-comp-sub-comment">
-        <div @click="showMore = false" class="comment-comp-divider-container">
+      <div v-if="showComments" class="comment-comp-sub-comment">
+        <div
+          @click="
+            [
+              (showComments = false),
+              (fetchedAllData = false),
+              (fetchData = false)
+            ]
+          "
+          class="comment-comp-divider-container"
+        >
           <div class="comment-comp-vertical-divider"></div>
         </div>
-        <div>
+        <div ref="subcomm">
           <transition-group name="solo-comments">
             <Comment
               @reply="forward"
               :currentComment="comment"
               :isChild="true"
+              :parent="parent"
               v-for="comment in currentComment.comments.slice().reverse()"
               :key="comment.reaction_id"
             />
@@ -108,25 +108,26 @@ export default {
   props: {
     currentComment: {
       type: Object,
-      required: true,
+      required: true
     },
     isChild: {
       type: Boolean,
       required: false,
-      default: true,
+      default: true
     },
     parent: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
-      showMore: true,
+      showComments: false,
       showPreview: false,
       fetchedCommentsIds: [],
+      fetchedAllData: false,
       fetchingData: false,
-      statusCode: null,
+      fetchData: false
     };
   },
   mounted() {
@@ -134,8 +135,25 @@ export default {
       this.fetchedCommentsIds.push(comment.reaction_id);
     });
   },
+  computed: {
+    subCommentsLeft() {
+      return this.currentComment.total_comments - this.subCommentsNo;
+    },
+    subCommentsNo() {
+      if (!this.showComments) {
+        return 0;
+      }
+      return this.fetchedCommentsIds.length;
+    }
+  },
   methods: {
     fetchComments() {
+      if (this.subCommentsNo != 0) {
+        if (!this.fetchData) {
+          this.fetchData = true;
+          return;
+        }
+      }
       this.fetchingData = true;
       axios
         .post(this.$store.state.api_host + "fetch_comments", {
@@ -143,21 +161,21 @@ export default {
           guest_id: null,
           action_id: this.currentComment.action_id,
           parent_reaction_id: this.currentComment.reaction_id,
-          fetched_comment_ids: this.fetchedCommentsIds,
+          fetched_comment_ids: this.fetchedCommentsIds
         })
-        .then((response) => {
+        .then(response => {
           if (response.status == 200) {
-            response.data.comments.forEach((comment) => {
+            response.data.comments.forEach(comment => {
               this.fetchedCommentsIds.push(comment.reaction_id);
             });
             this.$emit("commentHandler", response.data.comments);
             this.fetchingData = false;
           } else if (response.status == 204) {
-            this.statusCode = response.status;
+            this.fetchedAllData = true;
             this.fetchingData = false;
           }
         })
-        .catch((error) => {
+        .catch(error => {
           // console.log(error);
           if ([401, 419].includes(error.response.status)) {
             window.location =
@@ -177,13 +195,13 @@ export default {
         this.$emit("reply", {
           creator_id: this.currentComment.creator_id,
           creator_name: this.currentComment.creator_name,
-          reaction_id: this.currentComment.reaction_id,
+          reaction_id: this.currentComment.reaction_id
         });
       } else {
         this.$emit("reply", {
           creator_id: this.currentComment.creator_id,
           creator_name: this.currentComment.creator_name,
-          reaction_id: this.currentComment.parent_reaction_id,
+          reaction_id: this.currentComment.parent_reaction_id
         });
       }
     },
