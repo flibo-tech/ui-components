@@ -22,7 +22,7 @@ export default {
   components: { Comment },
   data() {
     return {
-      totalComments: null,
+      totalComments: null
       // delete the comm variable
       // comm: [
       //   {
@@ -83,7 +83,7 @@ export default {
           if (response.status == 200) {
             this.totalComments = response.data.comments;
             // remove this
-            // this.totalComments[0].total_comments--;
+            this.totalComments[0].total_comments--;
           }
         })
         .catch(error => {
@@ -110,7 +110,14 @@ export default {
           selectedComm.comments.push(comment);
         });
       });
-    }
+    },
+    // changeTotalComments(currentCommentReactionId) {
+    //   this.totalComments.forEach(comment => {
+    //     if (comment.reaction_id === currentCommentReactionId) {
+    //       comment.comments.length = comment.total_comments;
+    //     }
+    //   });
+    // }
   }
 };
 </script>

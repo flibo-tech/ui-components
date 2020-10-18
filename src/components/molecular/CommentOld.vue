@@ -36,29 +36,20 @@
             />
             <p class="comment-comp-reply" @click="reply">Reply</p>
           </div>
-
-          <!-- hides when comments are fetched or total comments = 0 -->
           <div
-            v-if="
-              (currentComment.total_comments > currentComment.comments.length &&
-                showRepliesHeader) ||
-                (!showComments && currentComment.total_comments > 0)
-            "
-            @click="fetchComments"
+            v-if="currentComment.total_comments && !fetchedAllData"
+            @click="[(showComments = true), fetchComments()]"
             class="comment-comp-more"
           >
             <div
               v-if="!fetchingData"
               class="comment-comp-horizontal-divider"
             ></div>
-            <p v-if="!fetchingData && !showComments">
-              {{ currentComment.total_comments }} replies
-            </p>
-            <p v-if="!fetchingData && showComments">
-              previous
-              {{
-                currentComment.total_comments - currentComment.comments.length
-              }}
+            <p v-if="!fetchingData">
+              <span v-if="subCommentsLeft < this.currentComment.total_comments"
+                >previous</span
+              >
+              {{ subCommentsLeft }}
               replies
             </p>
             <p v-if="fetchingData" class="comment-comp-loading">Loading...</p>
@@ -69,7 +60,13 @@
     <transition name="comment">
       <div v-if="showComments" class="comment-comp-sub-comment">
         <div
-          @click="[(showComments = false), (showRepliesHeader = true)]"
+          @click="
+            [
+              (showComments = false),
+              (fetchedAllData = false),
+              (fetchData = false)
+            ]
+          "
           class="comment-comp-divider-container"
         >
           <div class="comment-comp-vertical-divider"></div>
@@ -125,22 +122,32 @@ export default {
   },
   data() {
     return {
-      showPreview: false,
       showComments: false,
-      showRepliesHeader: true,
-      fetchingData: false
+      showPreview: false,
+      fetchedAllData: false,
+      fetchingData: false,
+      fetchData: false
     };
+  },
+  computed: {
+    subCommentsLeft() {
+      return this.currentComment.total_comments - this.subCommentsNo;
+    },
+    subCommentsNo() {
+      if (!this.showComments) {
+        return 0;
+      }
+      return this.currentComment.comments.length;
+    }
   },
   methods: {
     fetchComments() {
-      if (
-        (!this.showComments && this.currentComment.comments.length > 0) ||
-        !this.showRepliesHeader
-      ) {
-        this.showComments = true;
-        return;
+      if (this.subCommentsNo != 0) {
+        if (!this.fetchData) {
+          this.fetchData = true;
+          return;
+        }
       }
-      this.showComments = true;
       this.fetchingData = true;
       axios
         .post(this.$store.state.api_host + "fetch_comments", {
@@ -148,18 +155,15 @@ export default {
           guest_id: null,
           action_id: this.currentComment.action_id,
           parent_reaction_id: this.currentComment.reaction_id,
-          fetched_comment_ids: this.currentComment.comments.map(
-            item => item.reaction_id
-          )
+          fetched_comment_ids: this.currentComment.comments.map((item)=>item.reaction_id)
         })
         .then(response => {
           if (response.status == 200) {
             this.$emit("commentHandler", response.data.comments);
             this.fetchingData = false;
           } else if (response.status == 204) {
-            this.showRepliesHeader = false;
+            this.fetchedAllData = true;
             this.fetchingData = false;
-            // this.$emit('dataFetched', this.currentComment.reaction_id);
           }
         })
         .catch(error => {
