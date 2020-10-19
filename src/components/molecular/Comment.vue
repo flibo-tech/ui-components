@@ -1,6 +1,6 @@
 <template>
   <div class="comment-comp-container">
-    <div class="comment-comp-view">
+    <div>
       <div class="comment-comp-current">
         <img
           @click="showPreview = true"
@@ -8,12 +8,13 @@
           :src="currentComment.creator_picture"
         />
         <div class="comment-comp-content">
+          <!-- comment content -->
           <p>
             <strong @click="showPreview = true">{{
               currentComment.creator_name
             }}</strong>
             <TextView
-              class="custom"
+              class="comment-comp-textview"
               v-if="currentComment.comment"
               :text="currentComment.comment"
               :parent="parent + '__comment' + (isChild ? '__child' : '')"
@@ -21,6 +22,7 @@
             />
           </p>
 
+          <!-- reaction section -->
           <div class="comment-comp-reaction">
             <TimeSince :timestamp="currentComment.created_at" :short="true" />
             <Vote
@@ -37,7 +39,7 @@
             <p class="comment-comp-reply" @click="reply">Reply</p>
           </div>
 
-          <!-- hides when comments are fetched or total comments = 0 -->
+          <!-- show replies section -->
           <div
             v-if="
               (currentComment.total_comments > currentComment.comments.length &&
@@ -66,6 +68,8 @@
         </div>
       </div>
     </div>
+
+    <!-- sub comments section -->
     <transition name="comment">
       <div v-if="showComments" class="comment-comp-sub-comment">
         <div
@@ -74,7 +78,7 @@
         >
           <div class="comment-comp-vertical-divider"></div>
         </div>
-        <div ref="subcomm">
+        <div>
           <transition-group name="solo-comments">
             <Comment
               @reply="forward"
@@ -131,6 +135,11 @@ export default {
       fetchingData: false
     };
   },
+  mounted() {
+    if (this.currentComment.comments) {
+      this.showComments = true;
+    }
+  },
   methods: {
     fetchComments() {
       if (
@@ -154,12 +163,12 @@ export default {
         })
         .then(response => {
           if (response.status == 200) {
+            console.log(response.data.comments);
             this.$emit("commentHandler", response.data.comments);
             this.fetchingData = false;
           } else if (response.status == 204) {
             this.showRepliesHeader = false;
             this.fetchingData = false;
-            // this.$emit('dataFetched', this.currentComment.reaction_id);
           }
         })
         .catch(error => {
@@ -258,7 +267,7 @@ export default {
   font-size: 12px;
 }
 
-.custom {
+.comment-comp-textview {
   display: inline;
 }
 
